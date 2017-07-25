@@ -21,10 +21,8 @@
     <Content Include="wwwroot\lib\**\*" CopyToPublishDirectory="Never" />
     <Content Include="bower.json" CopyToPublishDirectory="Never" />
     <Content Include="bundleconfig.json" CopyToPublishDirectory="Never" />
-    <Content Include="appsettings.dev.json" CopyToPublishDirectory="Never" />
 
     <Content Include="**\sitefiles\**\wwwroot\**" CopyToPublishDirectory="PreserveNewest" />
-    <Content Include="SharedThemes\**\wwwroot\**" CopyToPublishDirectory="PreserveNewest" />
     
   </ItemGroup>
 
@@ -48,6 +46,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.*" />
     <PackageReference Include="Microsoft.AspNetCore.Server.IISIntegration" Version="1.1.*" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="1.1.*" />
+    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel.Https" Version="1.1.*" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.*" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="1.1.*" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.*">
@@ -72,6 +71,7 @@
     <DotNetCliToolReference Include="BundlerMinifier.Core" Version="2.*" />
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.*" />
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.*" />
+    <DotNetCliToolReference Include="Microsoft.DotNet.Watcher.Tools" Version="1.0.0" />
   </ItemGroup>
 
 </Project>
