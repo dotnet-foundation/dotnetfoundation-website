@@ -1,11 +1,13 @@
 ﻿@using cloudscribe.Web.Navigation
 @using cloudscribe.Core.Models
-@inject SiteContext Tenant
+
+@inject Microsoft.AspNetCore.Hosting.IHostingEnvironment HostingEnvironment
+
 <!DOCTYPE html>
 <html class="sb-init">
 <head>
     <meta charset="utf-8" />
-    <title>@ViewData["Title"] - @(Tenant?.SiteName ?? "Sample")</title>
+    <title>.NET Foundation</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="apple-touch-icon" sizes="57x57" href="~/images/favicon/apple-icon-57x57.png">
@@ -47,14 +49,12 @@
     @RenderSection("Styles", required: false)
 </head>
 <body>
-
-
     <div class="sb-site-container">
         <div class="boxed">
             <header id="header-full-top" class="hidden-xs header-full">
                 <div class="container">
                     <div class="header-full-title">
-                        <h1 class="animated fadeInRight"><a href="index.html">.NET <span>Foundation</span></a></h1>
+                        <h1 class="animated fadeInRight"><a href="/">.NET <span>Foundation</span></a></h1>
                         <p class="animated fadeInRight">supporting open source .NET</p>
                     </div>
                     <nav class="top-nav">
@@ -92,7 +92,7 @@
                         <a id="ar-brand" class="navbar-brand hidden-lg hidden-md hidden-sm" href="index.html">Artificial <span>Reason</span></a>
                     </div> <!-- navbar-header -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav">
+                        <ul class="nav navbar-nav navbar-right">
                             <li>
                                 <a href="/">Home</a>
                             </li>
@@ -257,6 +257,24 @@
             <script src="~/theme/js/home_info.js"></script>
         </div> <!-- boxed -->
     </div> <!-- sb-site -->
+
+    @await Html.PartialAsync("_LoginPartial")
+    @if (Context.User.Identity.IsAuthenticated && Context.User.IsInRole("Administrators"))
+    {
+        <div id="sidebar">
+            <a href="/siteadmin">Site Admin</a>
+        </div>
+    }
 </body>
 
 </html>
+
+<!-- IsHttps: @Context.Request.IsHttps -->
+<!-- Host: @Context.Request.Host.Host -->
+<cache>
+<!-- ViewType: @GetType().AssemblyQualifiedName -->
+<!-- Environment: @HostingEnvironment.EnvironmentName -->
+<!-- Application: @Microsoft.Extensions.PlatformAbstractions.PlatformServices.Default.Application.ApplicationName, @Microsoft.Extensions.PlatformAbstractions.PlatformServices.Default.Application.ApplicationVersion -->
+<!-- OS: @System.Runtime.InteropServices.RuntimeInformation.OSDescription @System.Runtime.InteropServices.RuntimeInformation.OSArchitecture -->
+<!-- Machine: @Environment.MachineName -->
+</cache>
