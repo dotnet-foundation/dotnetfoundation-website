@@ -29,21 +29,18 @@
     <meta name="theme-color" content="#ffffff">
 
     @RenderSection("Meta", required: false)
-    <environment names="Development">
-        <link href="~/theme/css/preload.css" rel="stylesheet">
-        <link href="~/theme/css/vendors.css" rel="stylesheet">
-        <link href="~/theme/css/style-gray.css" rel="stylesheet" media="screen" title="default">
-        <link href="~/theme/css/width-full.css" rel="stylesheet" title="default">
 
-        <!-- move to scripts section-->
-        <script src="~/theme/js/vendors.js"></script>
-        <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/theme/css/preload.css" rel="stylesheet">
+    <link href="~/theme/css/vendors.css" rel="stylesheet">
+    <link href="~/theme/css/style-gray.css" rel="stylesheet" media="screen" title="default">
+    <link href="~/theme/css/width-full.css" rel="stylesheet" title="default">
+
+    <script src="~/theme/js/vendors.js"></script>
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <environment names="Development">
     </environment>
     <environment names="Staging,Production">
-        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
 
     @RenderSection("Styles", required: false)
