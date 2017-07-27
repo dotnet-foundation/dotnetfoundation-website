@@ -27,7 +27,7 @@ $(document).on('click','a.smooth', function(e){
 })(jQuery);
 
 // Syntax Enable
-SyntaxHighlighter.all();
+//SyntaxHighlighter.all();
 
 jQuery(document).ready(function () {
     $('.nav').on('click mousedown mouseup touchstart', 'a.has_children', function () {
