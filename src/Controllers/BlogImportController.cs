@@ -29,7 +29,7 @@ namespace DotNetFoundationWebsite.Controllers
             {
                 await blogService.Delete(a.Id);
             }
-            return Content((await blogService.GetPosts(true)).Count.ToString());
+            return Content($"Clear complete. Current post count (should be zero): {(await blogService.GetPosts(true)).Count.ToString()}");
          }
 
         public async Task<IActionResult> Index(string feedUrl)
@@ -60,7 +60,7 @@ namespace DotNetFoundationWebsite.Controllers
                 await blogService.Create(a);
             }
 
-            return Content((await blogService.GetPosts(true)).Count.ToString());
+            return Content($"Import complete. Current post count: {(await blogService.GetPosts(true)).Count.ToString()}");
         }
 
         private string CleanSlug(string slug)
