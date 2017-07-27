@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = ".NET Community";
+    ViewData["Description"] = "Get involved in the .NET community. Attent a meetup in your local area, join us on GitHub, ask a question on StackOverflow, or follow us on Twitter or Facebook.";
+}
+
+@section styles {
+		<style>table img { max-width: 66px; } </style>
+}
+
+@section scripts {
+    <script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.3.0.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+    <script src="/js/community.js"></script>
+    
+}
+
+<div class="container">
+    <div id="full" class="other-downloads">
+        <div id="communityContainer">
+            <div id="ugResults">
+                <!-- ko if: !loaded -->
+                <div id="ugLoader">Loading...</div>
+                <!-- /ko -->
+                <div id="meetup-table" data-bind="visible: true" style="display:none;">
+                    <table class="community-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Source</th>
+                                <th>Event</th>
+                                <th>Group</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach: events">
+                            <tr>
+                                <td data-bind="text: dateTime"></td>
+                                <td><img data-bind="attr: { src: source().image }" alt="Logo for the event" class="ug-badge" /></td>
+                                <td><a data-bind="attr: { href: url }, text: name"></a></td>
+                                <td><a data-bind="attr: { href: orgGroup().url }, text: orgGroup().name"></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

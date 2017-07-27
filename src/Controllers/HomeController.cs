@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Diagnostics;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace DotNetFoundationWebsite.Controllers
 {
@@ -22,20 +24,31 @@ namespace DotNetFoundationWebsite.Controllers
             return View();
         }
 
-        //public IActionResult About()
-        //{
-        //    ViewData["Message"] = "Your application description page.";
+        [Route("events")]
+        public IActionResult Events()
+        {
+            return View();
+        }
 
-        //    return View();
-        //}
-
-        //public IActionResult Contact()
-        //{
-        //    ViewData["Message"] = "Your contact page.";
-
-        //    return View();
-        //}
-
-
+                [HttpGet]
+        [Route("api/meetup/")]
+        public async Task<IActionResult> Meetups(int count = 10, int expiry = 60)
+        {
+            dynamic result;
+            try
+            {
+				using (var client = new HttpClient())
+				{
+					var url = String.Format("http://dotnetsocial.cloudapp.net/api/meetup?count={0}&expiry={1}", count, expiry);
+					var response = await client.GetStringAsync(url);
+					result = JsonConvert.DeserializeObject(response);
+				}
+            }
+			catch (Exception e)
+            {
+                return Content(e.Message);
+            }
+            return Ok(result);
+        }
     }
 }
