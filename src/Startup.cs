@@ -1,51 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.DataProtection;
-using cloudscribe.SimpleContent.Models;
+using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using cloudscribe.Core.SimpleContent.Integration;
+using System.IO;
+using Microsoft.AspNetCore.DataProtection;
 
 namespace DotNetFoundationWebsite
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                ;
-
-            // add this file name to your .gitignore file
-            // so you can create it and use on your local dev machine
-            // remember last config source added wins if it has the same settings
-            builder.AddJsonFile("appsettings.dev.json", optional: true, reloadOnChange: true);
-            
-            builder.AddEnvironmentVariables();
-            Configuration = builder.Build();
-            environment = env;
+            Configuration = configuration;
+            Environment = env;
         }
-        public IHostingEnvironment environment { get; set; }
-        public IConfigurationRoot Configuration { get; }
+
+        public IConfiguration Configuration { get; }
+        public IHostingEnvironment Environment { get; set; }
         public bool SslIsAvailable { get; set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string pathToCryptoKeys = Path.Combine(environment.ContentRootPath, "dp_keys");
+            string pathToCryptoKeys = Path.Combine(Environment.ContentRootPath, "dp_keys");
             services.AddDataProtection()
                 .PersistKeysToFileSystem(new System.IO.DirectoryInfo(pathToCryptoKeys));
 
@@ -55,7 +45,7 @@ namespace DotNetFoundationWebsite
             });
 
             services.AddMemoryCache();
-            
+
             //services.AddSession();
 
             ConfigureAuthPolicy(services);
@@ -69,9 +59,9 @@ namespace DotNetFoundationWebsite
             services.AddCloudscribeLoggingEFStorageMSSQL(connectionString);
 
             services.AddCloudscribeSimpleContentEFStorageMSSQL(connectionString);
-            
+
             services.AddCloudscribeLogging();
-            
+
             services.AddScoped<cloudscribe.Web.Navigation.INavigationNodePermissionResolver, cloudscribe.Web.Navigation.NavigationNodePermissionResolver>();
             services.AddScoped<cloudscribe.Web.Navigation.INavigationNodePermissionResolver, cloudscribe.SimpleContent.Web.Services.PagesNavigationNodePermissionResolver>();
             services.AddCloudscribeCore(Configuration);
@@ -163,8 +153,7 @@ namespace DotNetFoundationWebsite
                     options.AddCloudscribeLoggingBootstrap3Views();
 
                     options.ViewLocationExpanders.Add(new cloudscribe.Core.Web.Components.SiteViewLocationExpander());
-                })
-                    ;
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -173,19 +162,14 @@ namespace DotNetFoundationWebsite
             IHostingEnvironment env,
             ILoggerFactory loggerFactory,
             IOptions<cloudscribe.Core.Models.MultiTenantOptions> multiTenantOptionsAccessor,
-            IServiceProvider serviceProvider,
-            IOptions<RequestLocalizationOptions> localizationOptionsAccessor,
-            cloudscribe.Logging.Web.ILogRepository logRepo
+            IOptions<RequestLocalizationOptions> localizationOptionsAccessor
             )
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
-            ConfigureLogging(loggerFactory, serviceProvider, logRepo);
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
+                app.UseDatabaseErrorPage();
             }
             else
             {
@@ -197,7 +181,7 @@ namespace DotNetFoundationWebsite
             //app.UseSession();
 
             app.UseRequestLocalization(localizationOptionsAccessor.Value);
-            
+
             var multiTenantOptions = multiTenantOptionsAccessor.Value;
 
             app.UseCloudscribeCore(
@@ -207,15 +191,6 @@ namespace DotNetFoundationWebsite
 
             UseMvc(app, multiTenantOptions.Mode == cloudscribe.Core.Models.MultiTenantMode.FolderName);
 
-           
-            // this creates ensures the database is created and initial data
-            CoreEFStartup.InitializeDatabaseAsync(app.ApplicationServices).Wait();
-
-            // this one is only needed if using cloudscribe Logging with EF as the logging storage
-            LoggingEFStartup.InitializeDatabaseAsync(app.ApplicationServices).Wait();
-
-            SimpleContentEFStartup.InitializeDatabaseAsync(app.ApplicationServices).Wait();
-            
         }
 
         private void UseMvc(IApplicationBuilder app, bool useFolders)
@@ -229,17 +204,17 @@ namespace DotNetFoundationWebsite
 
                 routes.AddBlogRoutesForSimpleContent();
                 routes.AddSimpleContentStaticResourceRoutes();
-                routes.AddCloudscribeFileManagerRoutes();
+                //routes.AddCloudscribeFileManagerRoutes();
 
                 if (useFolders)
                 {
-					routes.MapRoute(
+                    routes.MapRoute(
                        name: "foldererrorhandler",
                        template: "{sitefolder}/oops/error/{statusCode?}",
                        defaults: new { controller = "Oops", action = "Error" },
                        constraints: new { name = new cloudscribe.Core.Web.Components.SiteFolderRouteConstraint() }
                     );
-					
+
                     routes.MapRoute(
                         name: "folderdefault",
                         template: "{sitefolder}/{controller}/{action}/{id?}",
@@ -258,8 +233,8 @@ namespace DotNetFoundationWebsite
 
                 routes.MapRoute(
                     name: "def",
-                    template: "{controller}/{action}",
-                    defaults: new { controller = "Home", action = "Index" }
+                    template: "{controller}/{action}"
+                    ,defaults: new { controller = "Home", action = "Index" }
                     );
 
                 //routes.AddDefaultPageRouteForSimpleContent();
@@ -316,48 +291,6 @@ namespace DotNetFoundationWebsite
 
         }
 
-        private void ConfigureLogging(
-            ILoggerFactory loggerFactory,
-            IServiceProvider serviceProvider
-            , cloudscribe.Logging.Web.ILogRepository logRepo
-            )
-        {
-            // a customizable filter for logging
-            LogLevel minimumLevel;
-            if (environment.IsProduction())
-            {
-                minimumLevel = LogLevel.Warning;
-            }
-            else
-            {
-                minimumLevel = LogLevel.Information;
-            }
-
-
-            // add exclusions to remove noise in the logs
-            var excludedLoggers = new List<string>
-            {
-                "Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware",
-                "Microsoft.AspNetCore.Hosting.Internal.WebHost",
-            };
-
-            Func<string, LogLevel, bool> logFilter = (string loggerName, LogLevel logLevel) =>
-            {
-                if (logLevel < minimumLevel)
-                {
-                    return false;
-                }
-
-                if (excludedLoggers.Contains(loggerName))
-                {
-                    return false;
-                }
-
-                return true;
-            };
-
-            loggerFactory.AddDbLogger(serviceProvider, logFilter, logRepo);
-        }
 
     }
 }
