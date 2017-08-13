@@ -12,14 +12,15 @@ namespace DotNetFoundationWebsite
         public static void Main(string[] args)
         {
             var host = new WebHostBuilder()
-                .UseKestrel(
-                options => {
-                    options.UseHttps("local.pfx","1234");
-                    }
-                 )
+                .UseKestrel()
+                //(
+                //options => {
+                //    options.UseHttps("local.pfx","1234");
+                //    }
+                // )
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
-                .UseUrls("http://*:8080", "https://*:43434")
+                //.UseUrls("http://*:8080", "https://*:43434")
                 .UseStartup<Startup>()
                 .Build();
 
