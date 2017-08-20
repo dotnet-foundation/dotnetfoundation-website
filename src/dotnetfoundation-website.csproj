@@ -3,9 +3,12 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <MvcRazorCompileOnPublish>true</MvcRazorCompileOnPublish>
+    <OutputType>Exe</OutputType>
+    <LangVersion>latest</LangVersion>    
     <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
     <UserSecretsId>aspnet-WebApp-0353CAB0-205A-4FCD-9626-1282ECF47059</UserSecretsId>
     <RetryAttemptsForDeployment>10</RetryAttemptsForDeployment>    
+    <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>    
   </PropertyGroup>
 
   <ItemGroup>
@@ -40,16 +43,16 @@
     <PackageReference Include="cloudscribe.Logging.EFCore.MSSQL" Version="2.0.*" />
     <PackageReference Include="cloudscribe.Web.Localization" Version="2.0.*" />
     
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.*" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.*" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.*" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" PrivateAssets="All" />
   </ItemGroup>
 
 
   <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.*" />
-    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.*" />
-    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.*" />
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
+    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
   </ItemGroup>
 
 </Project>
