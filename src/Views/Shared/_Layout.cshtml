@@ -257,6 +257,7 @@
         </div> <!-- boxed -->
     </div> <!-- sb-site -->
 
+@*
     @await Html.PartialAsync("_LoginPartial")
     @if (Context.User.Identity.IsAuthenticated && Context.User.IsInRole("Administrators"))
     {
@@ -264,6 +265,7 @@
             <a href="/siteadmin">Site Admin</a>
         </div>
     }
+*@
 </body>
 
 </html>
