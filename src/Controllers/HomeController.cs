@@ -30,21 +30,21 @@ namespace DotNetFoundationWebsite.Controllers
             return View();
         }
 
-                [HttpGet]
+        [HttpGet]
         [Route("api/meetup/")]
         public async Task<IActionResult> Meetups(int count = 10, int expiry = 60)
         {
             dynamic result;
             try
             {
-				using (var client = new HttpClient())
-				{
-					var url = String.Format("http://dotnetsocial.cloudapp.net/api/meetup?count={0}&expiry={1}", count, expiry);
-					var response = await client.GetStringAsync(url);
-					result = JsonConvert.DeserializeObject(response);
-				}
+                using (var client = new HttpClient())
+                {
+                    var url = String.Format("http://dotnetsocial.cloudapp.net/api/meetup?count={0}&expiry={1}", count, expiry);
+                    var response = await client.GetStringAsync(url);
+                    result = JsonConvert.DeserializeObject(response);
+                }
             }
-			catch (Exception e)
+            catch (Exception e)
             {
                 return Content(e.Message);
             }
