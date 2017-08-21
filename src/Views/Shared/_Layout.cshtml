@@ -88,7 +88,7 @@
                             <span class="sr-only">Toggle navigation</span>
                             <i class="fa fa-bars"></i>
                         </button>
-                        <a id="ar-brand" class="navbar-brand hidden-lg hidden-md hidden-sm" href="index.html">Artificial <span>Reason</span></a>
+                        <a id="ar-brand" class="navbar-brand hidden-lg hidden-md hidden-sm" href="/">.NET <span>Foundation</span></a>
                     </div> <!-- navbar-header -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
@@ -112,19 +112,8 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="dropdown">
-                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Get Involved</a>
-                                <ul class="dropdown-menu dropdown-menu-left animated-2x animated fadeIn">
-                                    <li>
-                                        <a href="/get-involved">Join In</a>
-                                    </li>
-                                    <li>
-                                        <a href="/events">Meet Ups</a>
-                                    </li>
-                                    <li>
-                                        <a href="/get-involved/merchendise">Merchendise</a>
-                                    </li>
-                                </ul>
+                            <li>
+                                <a href="/about">About</a>
                             </li>
                             <li>
                                 <a href="/blog">Blog</a>
@@ -136,9 +125,6 @@
                     </div><!-- navbar-collapse -->
                 </div><!-- container -->
             </nav>
-
-
-
 
             @RenderSection("Toolbar", required: false)
             @*
@@ -264,16 +250,15 @@
             <a href="/siteadmin">Site Admin</a>
         </div>
     }
-</body>
 
+    <!-- IsHttps: @Context.Request.IsHttps -->
+    <!-- Host: @Context.Request.Host.Host -->
+    <cache>
+    <!-- ViewType: @GetType().AssemblyQualifiedName -->
+    <!-- Environment: @HostingEnvironment.EnvironmentName -->
+    <!-- Application: @Microsoft.Extensions.PlatformAbstractions.PlatformServices.Default.Application.ApplicationName, @Microsoft.Extensions.PlatformAbstractions.PlatformServices.Default.Application.ApplicationVersion -->
+    <!-- OS: @System.Runtime.InteropServices.RuntimeInformation.OSDescription @System.Runtime.InteropServices.RuntimeInformation.OSArchitecture -->
+    <!-- Machine: @Environment.MachineName -->
+    </cache>
+  </body>
 </html>
-
-<!-- IsHttps: @Context.Request.IsHttps -->
-<!-- Host: @Context.Request.Host.Host -->
-<cache>
-<!-- ViewType: @GetType().AssemblyQualifiedName -->
-<!-- Environment: @HostingEnvironment.EnvironmentName -->
-<!-- Application: @Microsoft.Extensions.PlatformAbstractions.PlatformServices.Default.Application.ApplicationName, @Microsoft.Extensions.PlatformAbstractions.PlatformServices.Default.Application.ApplicationVersion -->
-<!-- OS: @System.Runtime.InteropServices.RuntimeInformation.OSDescription @System.Runtime.InteropServices.RuntimeInformation.OSArchitecture -->
-<!-- Machine: @Environment.MachineName -->
-</cache>
