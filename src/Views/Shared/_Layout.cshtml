@@ -1,8 +1,6 @@
-﻿@using cloudscribe.Web.Navigation
-@using cloudscribe.Core.Models
-@inject Microsoft.AspNetCore.Hosting.IHostingEnvironment HostingEnvironment
+﻿@inject Microsoft.AspNetCore.Hosting.IHostingEnvironment HostingEnvironment
+@inject SiteContext site
 @addTagHelper *, DotNetFoundationWebsite.TagHelpers
-
 <!DOCTYPE html>
 <html class="sb-init">
 <head>
@@ -27,24 +25,28 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="~/images/favicon/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-
     @RenderSection("Meta", required: false)
-
-    <link href="~/theme/css/preload.css" rel="stylesheet">
-    <link href="~/theme/css/vendors.css" rel="stylesheet">
-    <link href="~/theme/css/style-gray.css" rel="stylesheet" media="screen" title="default">
-    <link href="~/theme/css/width-full.css" rel="stylesheet" title="default">
-
-    <script src="~/theme/js/vendors.js"></script>
-    <link rel="stylesheet" href="~/css/site.css" />
-
     <environment names="Development">
+        <link href="~/theme/css/preload.css" rel="stylesheet">
+        <link href="~/theme/css/vendors.css" rel="stylesheet">
+        <link href="~/theme/css/style-gray.css" rel="stylesheet" media="screen" title="default">
+        <link href="~/theme/css/width-full.css" rel="stylesheet" title="default">
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     </environment>
     <environment names="Staging,Production">
+        <link href="~/theme/css/preload.css" rel="stylesheet">
+        <link href="~/theme/css/vendors.css" rel="stylesheet">
+        <link href="~/theme/css/style-gray.css" rel="stylesheet" media="screen" title="default">
+        <link href="~/theme/css/width-full.css" rel="stylesheet" title="default">
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <!--
+            
+        bundling fails at the moment
+            <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        -->
+        
     </environment>
-
     <partial name="_CookieConsent">
-
     @RenderSection("Styles", required: false)
 </head>
 <body>
@@ -91,6 +93,8 @@
                         <a id="ar-brand" class="navbar-brand hidden-lg hidden-md hidden-sm" href="/">.NET <span>Foundation</span></a>
                     </div> <!-- navbar-header -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        @await Component.InvokeAsync("Navigation", new { viewName = "BootstrapTopNavWithDropdowns", filterName = NamedNavigationFilters.TopNav, startingNodeKey = "" })
+                    <!--
                         <ul class="nav navbar-nav navbar-right">
                             <li>
                                 <a href="/">Home</a>
@@ -136,6 +140,7 @@
                                 <a href="http://forums.dotnetfoundation.org">Forums</a>
                             </li>
                         </ul>
+                        -->
                     </div><!-- navbar-collapse -->
                 </div><!-- container -->
             </nav>
@@ -162,7 +167,7 @@
                                 <li><a href="page_team.html">Our Team</a></li>
                                 <li><a href="page_services.html">Services</a></li>
                                 <li><a href="page_support.html">FAQ</a></li>
-                                <li><a href="page_login_full.html">Login</a></li>
+                                @await Html.PartialAsync("_LoginPartial")
                                 <li><a href="page_contact.html">Contact</a></li>
                             </ul>
                             <h3 class="footer-widget-title">Subscribe</h3>

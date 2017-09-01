@@ -34,9 +34,27 @@ namespace DotNetFoundationWebsite
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string pathToCryptoKeys = Path.Combine(Environment.ContentRootPath, "dp_keys");
-            services.AddDataProtection()
-                .PersistKeysToFileSystem(new System.IO.DirectoryInfo(pathToCryptoKeys));
+            // data protection keys are used to encrypt the auth token in the cookie
+            // and also to encrypt social auth secrets and smtp password in the db
+            if(Environment.IsProduction())
+            {
+                // TODO: Jon I guess the uri with sas token could be stored in azure as environment variable or using key vault
+                // but the keys go in azure blob storage per docs https://docs.microsoft.com/en-us/aspnet/core/security/data-protection/implementation/key-storage-providers
+                //var dpKeysUrl = Configuration["AppSettings:DataProtectionKeysBlobStorageUrl"];
+                services.AddDataProtection()
+                    //.PersistKeysToAzureBlobStorage(new Uri(dpKeysUrl))
+                    ;
+                ;
+            }
+            else
+            {
+                // dp_Keys folder is gitignored
+                string pathToCryptoKeys = Path.Combine(Environment.ContentRootPath, "dp_keys");
+                services.AddDataProtection()
+                    .PersistKeysToFileSystem(new System.IO.DirectoryInfo(pathToCryptoKeys))
+                    ;
+            }
+            
 
             services.Configure<ForwardedHeadersOptions>(options =>
             {
@@ -82,9 +100,10 @@ namespace DotNetFoundationWebsite
                 var supportedCultures = new[]
                 {
                     new CultureInfo("en-US"),
-                    new CultureInfo("en-GB"),
-                    new CultureInfo("fr-FR"),
-                    new CultureInfo("fr"),
+                    // TODO: Jon do we plan to localize? we don't have anything translated so for now commenting out all but en-US
+                    //new CultureInfo("en-GB"),
+                    //new CultureInfo("fr-FR"),
+                    //new CultureInfo("fr"),
                 };
 
                 // State what the default culture for your application is. This will be used if no specific culture
@@ -163,8 +182,7 @@ namespace DotNetFoundationWebsite
             ILoggerFactory loggerFactory,
             IOptions<cloudscribe.Core.Models.MultiTenantOptions> multiTenantOptionsAccessor,
             IServiceProvider serviceProvider,
-            IOptions<RequestLocalizationOptions> localizationOptionsAccessor,
-            cloudscribe.Logging.Web.ILogRepository logRepo
+            IOptions<RequestLocalizationOptions> localizationOptionsAccessor
             )
         {
            
