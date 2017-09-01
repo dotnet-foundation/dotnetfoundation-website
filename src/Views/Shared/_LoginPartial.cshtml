@@ -1,0 +1,32 @@
+﻿@using cloudscribe.Core.Models
+@using cloudscribe.Core.Identity
+@using cloudscribe.Web.Common.Extensions
+@using cloudscribe.Core.Web
+@using Microsoft.Extensions.Options
+@using Microsoft.Extensions.Localization
+@using Microsoft.AspNetCore.Identity
+@inject IStringLocalizer<CloudscribeCore> sr
+@inject SiteContext site
+@inject SignInManager<SiteUser> SignInManager
+@{ 
+    var helloFormat = sr["Hello {0}!"];
+}
+@if (SignInManager.IsSignedIn(User))
+{   
+<li> 
+    <a asp-controller="Manage" asp-action="Index" title='@sr["Manage"]'>My Account</a>
+</li> 
+<li>
+    <form asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm">
+        <a href="javascript:document.getElementById('logoutForm').submit()">@sr["Log off"]</a>
+    </form>
+</li>     
+}
+else
+{
+    <li><a id="loginLink" asp-controller="Account" asp-action="Login" asp-route-returnurl="@Context.Request.PathAndQuery()">@sr["Log in"]</a></li>
+    @if (site.AllowNewRegistration)
+    {
+        <li><a id="registerLink" asp-controller="Account" asp-action="Register">@sr["Register"]</a></li>
+    }
+}
