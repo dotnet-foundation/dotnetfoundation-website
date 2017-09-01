@@ -289,3 +289,7 @@ __pycache__/
 
 #Visual Studio Code
 .vscode/
+
+**/appsettings.Development.json
+**/appsettings.Production.json
+**/dp_keys/**
