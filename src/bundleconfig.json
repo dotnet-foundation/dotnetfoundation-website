@@ -15,7 +15,24 @@
   {
     "outputFileName": "wwwroot/js/site.min.js",
     "inputFiles": [
+      "wwwroot/theme/js/vendors.js",
+      "wwwroot/theme/js/DropdownHover.js",
+      "wwwroot/theme/js/app.js",
+      "wwwroot/theme/js/holder.js",
       "wwwroot/js/site.js"
+    ],
+    // Optionally specify minification options
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    // Optinally generate .map file
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/home.min.js",
+    "inputFiles": [
+      "wwwroot/theme/js/home_info.js"
     ],
     // Optionally specify minification options
     "minify": {

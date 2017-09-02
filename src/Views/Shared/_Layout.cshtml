@@ -1,13 +1,11 @@
 ﻿@inject Microsoft.AspNetCore.Hosting.IHostingEnvironment HostingEnvironment
 @inject SiteContext site
-@addTagHelper *, DotNetFoundationWebsite.TagHelpers
 <!DOCTYPE html>
 <html class="sb-init">
 <head>
     <meta charset="utf-8" />
     <title>.NET Foundation</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <link rel="apple-touch-icon" sizes="57x57" href="~/images/favicon/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="~/images/favicon/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="~/images/favicon/apple-icon-72x72.png">
@@ -39,12 +37,10 @@
         <link href="~/theme/css/style-gray.css" rel="stylesheet" media="screen" title="default">
         <link href="~/theme/css/width-full.css" rel="stylesheet" title="default">
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-        <!--
-            
-        bundling fails at the moment
+        <!--    
+        bundling css fails at the moment
             <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
         -->
-        
     </environment>
     <partial name="_CookieConsent">
     @RenderSection("Styles", required: false)
@@ -94,62 +90,12 @@
                     </div> <!-- navbar-header -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         @await Component.InvokeAsync("Navigation", new { viewName = "BootstrapTopNavWithDropdowns", filterName = NamedNavigationFilters.TopNav, startingNodeKey = "" })
-                    <!--
-                        <ul class="nav navbar-nav navbar-right">
-                            <li>
-                                <a href="/">Home</a>
-                            </li>
-                            <li>
-                                <a href="/projects">Projects</a>
-                            </li>
-                            <li class="dropdown">
-                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Get Involved</a>
-                                <ul class="dropdown-menu dropdown-menu-left animated-2x animated fadeIn">
-                                    <li>
-                                        <a href="/get-involved">Join In</a>
-                                    </li>
-                                    <li>
-                                        <a href="/events">Meet Ups</a>
-                                    </li>
-                                    <li>
-                                        <a href="/get-involved/merchendise">Merchendise</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">About</a>
-                                <ul class="dropdown-menu dropdown-menu-left animated-2x animated fadeIn">
-                                    <li>
-                                        <a href="/about">The Foundation</a>
-                                    </li>
-                                    <li>
-                                        <a href="/about/tsg">Technical Steering Group</a>
-                                    </li>
-                                    <li>
-                                        <a href="/team">Our Team</a>
-                                    </li>
-                                    <li>
-                                        <a href="/faq">FAQ</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="/blog">Blog</a>
-                            </li>
-                            <li>
-                                <a href="http://forums.dotnetfoundation.org">Forums</a>
-                            </li>
-                        </ul>
-                        -->
                     </div><!-- navbar-collapse -->
                 </div><!-- container -->
             </nav>
-
             @RenderSection("Toolbar", required: false)
-            @*
-                @await Component.InvokeAsync("Navigation", new { viewName = "BootstrapBreadcrumbs", filterName = NamedNavigationFilters.Breadcrumbs, startingNodeKey = "" })
-                @await Html.PartialAsync("AlertsPartial")
-            *@
+            @await Component.InvokeAsync("Navigation", new { viewName = "BootstrapBreadcrumbs", filterName = NamedNavigationFilters.Breadcrumbs, startingNodeKey = "" })
+            @await Html.PartialAsync("AlertsPartial")
             @RenderBody()
             <aside id="footer-widgets">
                 <div class="container">
@@ -233,45 +179,20 @@
             <div id="back-top">
                 <a href="#header"><i class="fa fa-chevron-up"></i></a>
             </div>
-
             <environment names="Development">
-                <script src="~/lib/jquery/dist/jquery.js"></script>
-                <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+                <script src="~/theme/js/vendors.js"></script>
+                <script src="~/theme/js/DropdownHover.js"></script>
+                <script src="~/theme/js/app.js"></script>
+                <script src="~/theme/js/holder.js"></script>
                 <script src="~/js/site.js" asp-append-version="true"></script>
             </environment>
             <environment names="Staging,Production">
-                <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
-                        asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                        asp-fallback-test="window.jQuery">
-                </script>
-                <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/bootstrap.min.js"
-                        asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                        asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
-                </script>
                 <script src="~/js/site.min.js" asp-append-version="true"></script>
             </environment>
-
             @RenderSection("Bottom", required: false)
-            @RenderSection("scripts", required: false)
-
-            <script src="~/theme/js/vendors.js"></script>
-            <script src="~/theme/js/DropdownHover.js"></script>
-            <script src="~/theme/js/app.js"></script>
-            <script src="~/theme/js/holder.js"></script>
-            <script src="~/theme/js/home_info.js"></script>
+            @RenderSection("scripts", required: false)   
         </div> <!-- boxed -->
     </div> <!-- sb-site -->
-
-@*
-    @await Html.PartialAsync("_LoginPartial")
-    @if (Context.User.Identity.IsAuthenticated && Context.User.IsInRole("Administrators"))
-    {
-        <div id="sidebar">
-            <a href="/siteadmin">Site Admin</a>
-        </div>
-    }
-*@
-
     <!-- IsHttps: @Context.Request.IsHttps -->
     <!-- Host: @Context.Request.Host.Host -->
     <cache>
