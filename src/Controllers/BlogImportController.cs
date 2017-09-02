@@ -13,7 +13,7 @@ namespace DotNetFoundationWebsite.Controllers
 {
     public class BlogImportController : Controller
     {
-        public BlogImportController(ILogger<HomeController> logger, IBlogService blogService)
+        public BlogImportController(ILogger<BlogImportController> logger, IBlogService blogService)
         {
             log = logger;
             this.blogService = blogService;

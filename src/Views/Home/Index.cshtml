@@ -686,3 +686,11 @@
         </div>
     </section>
 </div> <!-- container -->
+@section Scripts {
+    <environment names="Development">
+        <script src="~/theme/js/home_info.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="~/js/home.min.js" asp-append-version="true"></script>
+    </environment>
+}
