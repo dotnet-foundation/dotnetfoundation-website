@@ -17,6 +17,9 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using cloudscribe.Core.SimpleContent.Integration;
+using dotnetfoundation.Models;
+using dotnetfoundation.Services;
+using dotnetfoundation.Data;
 
 namespace DotNetFoundationWebsite
 {
@@ -62,7 +65,11 @@ namespace DotNetFoundationWebsite
             });
 
             services.AddMemoryCache();
-            
+            services.Configure<ProjectFeedConfig>(Configuration.GetSection("ProjectFeedConfig"));
+            services.AddScoped<ProjectFeedService>();
+            services.AddScoped<ProjectQueries>();
+            services.AddScoped<ProjectService>();
+
             //services.AddSession();
 
             ConfigureAuthPolicy(services);

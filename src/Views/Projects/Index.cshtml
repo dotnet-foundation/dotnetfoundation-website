@@ -1,0 +1,57 @@
+﻿@model dotnetfoundation.ViewModels.ProjectListViewModel
+@{
+    ViewData["Title"] = "Projects";
+}
+
+<div class="container">
+    <header>
+        <h1>Browse</h1>
+        <h2>.NET Foundation Projects</h2>
+    </header>
+    <p><strong>WORK IN PROGRESS - This page is under construction</strong></p>
+    <p>Projects under the stewardship of the .NET Foundation currently include the .NET Compiler Platform ("Roslyn") as well as the ASP.NET family of projects, .NET Core, Xamarin Forms along with popular .NET open source frameworks like xUnit and Reactive Extensions. We&rsquo;re actively engaged in supporting open source projects in the .NET ecosystem, you can <a href="/about">learn more about our work</a>&nbsp;or see our<span class="Apple-converted-space">&nbsp;</span><a title="blog" href="/blog">blog</a><span class="Apple-converted-space">&nbsp;</span>for the latest announcements.</p>
+    <p>Pick a project below to learn more about it and how to contribute:</p>
+
+    <form id="search"  method="get">
+            <div class="form-group">
+                <label class="control-label" for="q">Search</label>
+                <div class="input-group">
+                    <input class="form-control" id="q" name="q" type="text" value="@Model.Q" />
+                    <span class="input-group-addon">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </span>  
+                </div>
+                 
+            </div>
+            <div class="form-groupr">
+            <label>
+                <input id="type" name="type" type="radio" value="project" checked /> Projects
+            </label>
+            </div>
+            <div class="form-group">
+                <label>
+                    <input id="type" name="type" type="radio" value="repository" /> Repositories
+                </label>
+            </div>
+    </form>
+    @foreach (var item in Model.Projects.Data)
+    {
+        <article class="content-item project">
+            <header>
+                <h3>@item.Name</h3>
+            </header>
+            <p>@item.Description</p>
+        </article>
+    }
+    <div>
+        <cs-pager cs-paging-info="@Model.Paging"
+                  asp-action="Index" asp-controller="Projects"
+                  asp-route-q="@Model.Q"
+                  asp-route-type="@Model.Type"
+                  asp-route-ps="@Model.Paging.ItemsPerPage"
+                  cs-pagenumber-param="pn"
+                  ></cs-pager>
+    </div>
+
+</div>
+
