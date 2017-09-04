@@ -8,11 +8,14 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Diagnostics;
 using cloudscribe.SimpleContent.Models;
 using System.Xml.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DotNetFoundationWebsite.Controllers
 {
+    [Authorize(Policy = "AdminPolicy")]
     public class BlogImportController : Controller
     {
+      
         public BlogImportController(ILogger<BlogImportController> logger, IBlogService blogService)
         {
             log = logger;
@@ -22,9 +25,11 @@ namespace DotNetFoundationWebsite.Controllers
         private ILogger log;
         private IBlogService blogService;
 
+        // TODO: Jon this is a dangerous method and should be removed/commented out after import to avoid accidental delete all of posts
+        // I added AdminPolicy above so it at least can't be done by an anonymous request
         public async Task<IActionResult> Clear()
         {
-            var articles = await blogService.GetPosts(false);
+            var articles = await blogService.GetPosts(true);
             foreach(var a in articles)
             {
                 await blogService.Delete(a.Id);
@@ -50,6 +55,7 @@ namespace DotNetFoundationWebsite.Controllers
                                     Content = item.Elements().First(i => i.Name.LocalName == "description").Value,
                                     Slug = CleanSlug(item.Elements().First(i => i.Name.LocalName == "link").Value),
                                     PubDate = ParseDate(item.Elements().First(i => i.Name.LocalName == "pubDate").Value),
+                                    IsPublished = true,
                                     Title = item.Elements().First(i => i.Name.LocalName == "title").Value
                                 };
                 articles = feedItems.ToList();
