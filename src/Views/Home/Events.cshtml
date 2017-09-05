@@ -1,48 +1,62 @@
-﻿@{
+﻿@model dotnetfoundation.Models.MeetupFeed
+@{
     ViewData["Title"] = ".NET Community";
     ViewData["Description"] = "Get involved in the .NET community. Attent a meetup in your local area, join us on GitHub, ask a question on StackOverflow, or follow us on Twitter or Facebook.";
-}
-
-@section styles {
-		<style>table img { max-width: 66px; } </style>
-}
-
-@section scripts {
-    <script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.3.0.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
-    <script src="/js/community.js"></script>
     
 }
 
-<div class="container">
-    <div id="full" class="other-downloads">
-        <div id="communityContainer">
-            <div id="ugResults">
-                <!-- ko if: !loaded -->
-                <div id="ugLoader">Loading...</div>
-                <!-- /ko -->
-                <div id="meetup-table" data-bind="visible: true" style="display:none;">
-                    <table class="community-table">
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Source</th>
-                                <th>Event</th>
-                                <th>Group</th>
-                            </tr>
-                        </thead>
-                        <tbody data-bind="foreach: events">
-                            <tr>
-                                <td data-bind="text: dateTime"></td>
-                                <td><img data-bind="attr: { src: source().image }" alt="Logo for the event" class="ug-badge" /></td>
-                                <td><a data-bind="attr: { href: url }, text: name"></a></td>
-                                <td><a data-bind="attr: { href: orgGroup().url }, text: orgGroup().name"></a></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+@functions {
+    public string GetImageUrl(string source)
+    {
+        var cmLogo = "https://dotnetsocialweb.azurewebsites.net/assets/cm_logo.png";
+        var mLogo = "https://dotnetsocialweb.azurewebsites.net/assets/meetup_logo.png";
+        var dLogo = "https://dotnetsocialweb.azurewebsites.net/assets/net_logo.png";
+        switch (source)
+        {
+            case "meetup.com":
+                return mLogo;
+            case "communitymegaphone.com":
+                return cmLogo;
+        }
+        return dLogo;
+    }
 
-    </div>
+}
+
+@section styles
+{
+<style>table img { max-width: 66px; } </style>
+}
+<div class="container">
+    <h1>Events</h1>
+    <p>Developers meet every day in .NET user groups, all around the world, to talk and learn more about .NET development and opportunities. You can join a local user group to engage with other .NET developers, to learn, 
+    find job opportunities or hire .NET developers for your project. Take a look at <a href="https://www.meetup.com/find/?keywords=.net&amp;sort=recommended">MeetUp.com</a>&nbsp;to find your 
+    <a href="https://www.meetup.com/find/?keywords=.net&amp;sort=recommended">nearest .NET meet up</a>.</p>
+    <p>The following events are upcoming&nbsp;<a href="https://www.meetup.com/find/?keywords=.net&amp;sort=recommended">.NET User Groups on MeetUp.com</a>&nbsp;and <a href="https://communitymegaphone.com/">CommunityMegaphone</a>. 
+    If you don't have a meet up near you, then why not start your own and <a href="mailto:contact@dotnetfoundation.org">let us know</a>&nbsp;about it? &nbsp;If you are a .NET user group organizer, you can also get your events 
+    added to this list by adding them to <a href="http://www.communitymegaphone.com/AddEvent.aspx">CommunityMegaphone.com</a>.</p>
+
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Source</th>
+                <th>Event</th>
+                <th>Group</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in Model.Events)
+            {
+                <tr>
+                    <td>@item.Time.ToLongDateString()</td>
+                    <td><img src="@GetImageUrl(item.Source)"  alt="Logo for the event" class="ug-badge" /></td>
+                    <td><a href="@item.EventUrl">@item.Name</a></td>
+                    <td><a href="@item.GroupUrl">@item.GroupName</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
