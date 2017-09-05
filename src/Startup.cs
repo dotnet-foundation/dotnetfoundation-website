@@ -65,10 +65,13 @@ namespace DotNetFoundationWebsite
             });
 
             services.AddMemoryCache();
+
             services.Configure<ProjectFeedConfig>(Configuration.GetSection("ProjectFeedConfig"));
             services.AddScoped<ProjectFeedService>();
             services.AddScoped<ProjectQueries>();
             services.AddScoped<ProjectService>();
+            services.Configure<MeetupFeedConfig>(Configuration.GetSection("MeetupFeedConfig"));
+            services.AddScoped<MeetupFeedService>();
 
             //services.AddSession();
 
