@@ -3,6 +3,7 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -29,7 +30,10 @@ namespace dotnetfoundation.Services
             {
                 var url = string.Format(_config.FeedFormat, _config.NumberToGet, _config.ExpiryDays);
                 var jsonString = await client.GetStringAsync(url).ConfigureAwait(false);
-                return JsonConvert.DeserializeObject<MeetupFeed>(jsonString);
+                var list = JsonConvert.DeserializeObject<List<MeetupEvent>>(jsonString);
+                var feed = new MeetupFeed();
+                feed.Events = list;
+                return feed;
             }
 
         }
