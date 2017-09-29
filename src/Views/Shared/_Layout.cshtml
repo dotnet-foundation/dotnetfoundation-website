@@ -46,7 +46,29 @@
             <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
         -->
     </environment>
-    <partial name="_CookieConsent">
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+    window.addEventListener("load", function(){
+        window.cookieconsent.initialise({
+        "palette": {
+            "popup": {
+            "background": "#64386b",
+            "text": "#ffcdfd"
+            },
+            "button": {
+            "background": "#f8a8ff",
+            "text": "#3f0045"
+            },
+            law: {
+                regionalLaw: true,
+            },
+            location: true,
+        }
+      })
+    });
+    </script>
+
     @RenderSection("Styles", required: false)
 </head>
 <body class="@ViewData["BodyClass"]">
@@ -60,11 +82,12 @@
                     </div>
                     <nav class="top-nav">
                         <ul class="top-nav-social hidden-sm">
-                            <li><a href="#" class="animated fadeIn animation-delay-6 rss"><i class="fa fa-rss"></i></a></li>
-                            <li><a href="#" class="animated fadeIn animation-delay-7 twitter"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#" class="animated fadeIn animation-delay-8 facebook"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#" class="animated fadeIn animation-delay-9 google-plus"><i class="fa fa-google-plus"></i></a></li>
-                            <li><a href="#" class="animated fadeIn animation-delay-7 linkedin"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="/api/rss" class="animated fadeIn animation-delay-6 rss"><i title="RSS" class="fa fa-rss"></i></a></li>
+                            <li><a href="https://twitter.com/dotnetfdn" class="animated fadeIn animation-delay-7 twitter"><i title="Twitter" class="fa fa-twitter"></i></a></li>
+                            <li><a href="https://forums.dotnetfoundation.org/" class="animated fadeIn animation-delay-7 forums"><i title="Forum" class="fa fa-users"></i></a></li>
+<!--                            <li><a href="#" class="animated fadeIn animation-delay-8 facebook"><i class="fa fa-facebook"></i></a></li> 
+                            <li><a href="#" class="animated fadeIn animation-delay-9 google-plus"><i class="fa fa-google-plus"></i></a></li> 
+                            <li><a href="#" class="animated fadeIn animation-delay-7 linkedin"><i class="fa fa-linkedin"></i></a></li> -->
                         </ul>
                         <div class="dropdown animated fadeInDown animation-delay-13">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-search"></i></a>
