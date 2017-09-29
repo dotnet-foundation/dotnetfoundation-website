@@ -3,3 +3,7 @@
     background-size: contain;
     padding-left: 100px;
 }
+
+#carousel-home-hero .item {
+    min-height: 400px;
+}

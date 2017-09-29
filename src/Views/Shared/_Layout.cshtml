@@ -168,6 +168,17 @@
             <environment names="Staging,Production">
                 <script src="~/js/site.min.js" asp-append-version="true"></script>
             </environment>
+
+            <!-- //TODO: Move to script.js once script minification fixed -->
+            <!-- Added due to https://github.com/twbs/bootstrap/issues/21599 -->
+            <script>
+                $('.carousel').hover(function () { 
+                    $(this).carousel('pause') 
+                }, function () { 
+                    $(this).carousel('cycle') 
+                })
+            </script>
+
             @RenderSection("Bottom", required: false)
             @RenderSection("scripts", required: false)   
         </div> <!-- boxed -->
