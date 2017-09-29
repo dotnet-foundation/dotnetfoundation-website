@@ -1,0 +1,82 @@
+﻿@model cloudscribe.SimpleContent.Web.ViewModels.RecentPostsViewModel
+@inject cloudscribe.SimpleContent.Models.IBlogRoutes blogRoutes
+@using cloudscribe.SimpleContent.Web
+@using cloudscribe.SimpleContent.Models
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SimpleContent> sr
+@inject IHtmlProcessor htmlFilter
+@{
+    var defaultImageUrl = "/images/logo_big.png"; 
+}
+@if (Model.Posts.Count > 0)
+{
+        @foreach (var post in Model.Posts)
+        {
+            var imgUrl = htmlFilter.ExtractFirstImageUrl(post.Content, defaultImageUrl);
+
+            <div class="col-md-4 col-sm-6 masonry-item">
+                <div class="img-caption-ar wow fadeInUp">
+                @if (Model.ProjectSettings.IncludePubDateInPostUrls)
+                {
+                    @if (!string.IsNullOrWhiteSpace(imgUrl))
+                    {
+                        <img src="@imgUrl" class="img-responsive" alt="Image">
+                    }
+                    <div class="caption-ar">
+                        <div class="caption-content">
+                        <h4 class="media-heading">
+                            <a asp-route="@blogRoutes.PostWithDateRouteName"
+                               asp-route-year="@post.PubDate.Year"
+                               asp-route-month="@post.PubDate.Month.ToString("00")"
+                               asp-route-day="@post.PubDate.Day.ToString("00")"
+                               asp-route-slug="@post.Slug">@post.Title</a>
+                        </h4>
+                        <small>@Model.FormatDate(post.PubDate)</small>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    @if (!string.IsNullOrWhiteSpace(imgUrl))
+                    {
+                        <a class="pull-left" href="#"><img class="media-object" src="@imgUrl" alt="image"></a>
+                    }
+                    <div class="media-body">
+                        <h4 class="media-heading">
+                            <a asp-route="@blogRoutes.PostWithoutDateRouteName" asp-route-slug="@post.Slug">@post.Title</a>
+                        </h4>
+                        <small>@Model.FormatDate(post.PubDate)</small>
+                   </div>
+                    
+                } 
+            </div>
+        </div>
+
+        }
+}
+else
+{
+    @* boilerplate from theme is shown if no posts*@
+    <h3 class="footer-widget-title">Recent Posts</h3>
+    <div class="media">
+        <a class="pull-left" href="#"><img class="media-object" src="/theme/img/demo/m2.jpg" width="75" height="75" alt="image"></a>
+        <div class="media-body">
+            <h4 class="media-heading"><a href="#">Lorem ipsum Duis quis occaecat minim lorem ipsum tempor officia labor</a></h4>
+            <small>August 18, 2013</small>
+        </div>
+    </div>
+    <div class="media">
+        <a class="pull-left" href="#"><img class="media-object" src="/theme/img/demo/m11.jpg" width="75" height="75" alt="image"></a>
+        <div class="media-body">
+            <h4 class="media-heading"><a href="#">Lorem ipsum dolor excepteur sunt in lorem ipsum cillum tempor</a></h4>
+            <small>September 14, 2013</small>
+        </div>
+    </div>
+    <div class="media">
+        <a class="pull-left" href="#"><img class="media-object" src="/theme/img/demo/m4.jpg" width="75" height="75" alt="image"></a>
+        <div class="media-body">
+            <h4 class="media-heading"><a href="#">Lorem ipsum Dolor cupidatat minim adipisicing et fugiat</a></h4>
+            <small>October 9, 2013</small>
+        </div>
+    </div>
+}

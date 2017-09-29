@@ -175,44 +175,15 @@
     </section>
 </div> <!-- container -->
 <div class="container">
-    <div class="row">
+    <div class="row is-table-row">
         <div class="col-md-12">
             <h2 class="right-line">Recents Posts</h2>
         </div>
-        <div class="col-lg-4 col-md-6 col-sm-6">
-            <div class="img-caption-ar wow fadeInUp">
-                <img src="theme/img/demo/w1.jpg" class="img-responsive" alt="Image">
-                <div class="caption-ar">
-                    <div class="caption-content">
-                        <a href="#" class="animated fadeInDown"><i class="fa fa-search"></i>More info</a>
-                        <h4 class="caption-title">Image title</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-6">
-            <div class="img-caption-ar wow fadeInUp">
-                <img src="theme/img/demo/w2.jpg" class="img-responsive" alt="Image">
-                <div class="caption-ar">
-                    <div class="caption-content">
-                        <a href="#" class="animated fadeInDown"><i class="fa fa-search"></i>More info</a>
-                        <h4 class="caption-title">Image title</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-6">
-            <div class="img-caption-ar wow fadeInUp">
-                <img src="theme/img/demo/w3.jpg" class="img-responsive" alt="Image">
-                <div class="caption-ar">
-                    <div class="caption-content">
-                        <a href="#" class="animated fadeInDown"><i class="fa fa-search"></i>More info</a>
-                        <h4 class="caption-title">Image title</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
+    <div class="row masonry-container">
+        @await Component.InvokeAsync("RecentPosts", new { viewName = "RecentPostsSpotlight", numberToShow = 7 })
+    </div>
+    <hr />
 </div>
 <div class="container">
     <div class="row">
