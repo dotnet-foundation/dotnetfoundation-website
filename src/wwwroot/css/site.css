@@ -3,3 +3,12 @@
     background-size: contain;
     padding-left: 100px;
 }
+
+#carousel-home-hero .item {
+    min-height: 400px;
+}
+
+.masonry-item .img-caption-ar .media-body {
+    width: 100%;
+    display: block;
+}
