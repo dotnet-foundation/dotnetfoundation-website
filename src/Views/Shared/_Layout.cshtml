@@ -46,7 +46,7 @@
             <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
         -->
     </environment>
-    <partial name="_CookieConsent">
+    <partial name="_CookieConsent"/>
     @RenderSection("Styles", required: false)
 </head>
 <body class="@ViewData["BodyClass"]">
@@ -67,7 +67,7 @@
                             <li><a href="#" class="animated fadeIn animation-delay-9 google-plus"><i class="fa fa-google-plus"></i></a></li> 
                             <li><a href="#" class="animated fadeIn animation-delay-7 linkedin"><i class="fa fa-linkedin"></i></a></li> -->
                         </ul>
-                        <div class="dropdown animated fadeInDown animation-delay-13">
+                      <!--  <div class="dropdown animated fadeInDown animation-delay-13">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-search"></i></a>
                             <div class="dropdown-menu dropdown-menu-right dropdown-search-box animated fadeInUp">
                                 <form role="form">
@@ -76,10 +76,10 @@
                                         <span class="input-group-btn">
                                             <button class="btn btn-ar btn-primary" type="button">Go!</button>
                                         </span>
-                                    </div><!-- /input-group -->
+                                    </div>
                                 </form>
                             </div>
-                        </div> <!-- dropdown -->
+                        </div> --> <!-- dropdown -->
                     </nav>
                 </div> <!-- container -->
             </header> <!-- header-full -->
@@ -107,7 +107,7 @@
             <aside id="footer-widgets">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-6">
+                        <!-- <div class="col-md-6">
                             <h3 class="footer-widget-title">Sitemap</h3>
                             <ul class="list-unstyled three_cols">
                                 <li><a href="/">Home</a></li>
@@ -123,7 +123,7 @@
                                 @await Html.PartialAsync("_LoginPartial")
                                 <li><a href="page_contact.html">Contact</a></li>
                             </ul>
-                        </div>
+                        </div> -->
                         <div class="col-md-6">
                             <div class="footer-widget">
                                 @await Component.InvokeAsync("RecentPosts", new { viewName = "RecentPosts", numberToShow = 3 })

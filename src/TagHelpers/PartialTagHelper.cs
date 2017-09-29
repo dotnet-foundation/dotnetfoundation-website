@@ -8,7 +8,10 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace DotNetFoundationWebsite.TagHelpers
 {
-    [HtmlTargetElement("partial", Attributes = "name")]
+    /// <summary>
+    /// Renders a CSHTML partial.
+    /// </summary>
+    [HtmlTargetElement("partial", Attributes = "name", TagStructure = TagStructure.WithoutEndTag)]
     public class PartialTagHelper : TagHelper
     {
         private readonly IHtmlHelper _htmlHelper;
@@ -18,12 +21,18 @@ namespace DotNetFoundationWebsite.TagHelpers
             _htmlHelper = htmlHelper;
         }
 
-        [ViewContext]
-        public ViewContext ViewContext { get; set; }
-
+        /// <summary>
+        /// The name of the partial view used to create the HTML markup. Must not be <c>null</c>.
+        /// </summary>
         public string Name { get; set; }
 
+        /// <summary>
+        /// A model to pass into the partial view.
+        /// </summary>
         public object Model { get; set; }
+
+        [ViewContext]
+        public ViewContext ViewContext { get; set; }
 
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
