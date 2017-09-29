@@ -1,5 +1,9 @@
 ﻿@inject Microsoft.AspNetCore.Hosting.IHostingEnvironment HostingEnvironment
 @inject SiteContext site
+@{ 
+    var containerClass = "container";
+    if(Context.Request.Path == "/") { containerClass = null; }
+}
 <!DOCTYPE html>
 <html class="sb-init">
 <head>
@@ -25,17 +29,17 @@
     <meta name="theme-color" content="#ffffff">
     @RenderSection("Meta", required: false)
     <environment names="Development">
-        <link href="~/theme/css/preload.css" rel="stylesheet">
-        <link href="~/theme/css/vendors.css" rel="stylesheet">
-        <link href="~/theme/css/style-gray.css" rel="stylesheet" media="screen" title="default">
-        <link href="~/theme/css/width-full.css" rel="stylesheet" title="default">
+        <link href="~/theme/css/preload.css" rel="stylesheet" />
+        <link href="~/theme/css/vendors.css" rel="stylesheet" />
+        <link href="~/theme/css/style-gray.css" rel="stylesheet" media="screen" title="default" asp-append-version="true" />
+        <link href="~/theme/css/width-full.css" rel="stylesheet" title="default" />
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     </environment>
     <environment names="Staging,Production">
-        <link href="~/theme/css/preload.css" rel="stylesheet">
-        <link href="~/theme/css/vendors.css" rel="stylesheet">
-        <link href="~/theme/css/style-gray.css" rel="stylesheet" media="screen" title="default">
-        <link href="~/theme/css/width-full.css" rel="stylesheet" title="default">
+        <link href="~/theme/css/preload.css" rel="stylesheet" />
+        <link href="~/theme/css/vendors.css" rel="stylesheet" />
+        <link href="~/theme/css/style-gray.css" rel="stylesheet" media="screen" title="default" asp-append-version="true" />
+        <link href="~/theme/css/width-full.css" rel="stylesheet" title="default" />
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
         <!--    
         bundling css fails at the moment
@@ -45,7 +49,7 @@
     <partial name="_CookieConsent">
     @RenderSection("Styles", required: false)
 </head>
-<body>
+<body class="@ViewData["BodyClass"]">
     <div class="sb-site-container">
         <div class="boxed">
             <header id="header-full-top" class="hidden-xs header-full">
@@ -95,8 +99,10 @@
             </nav>
             @RenderSection("Toolbar", required: false)
             @await Component.InvokeAsync("Navigation", new { viewName = "BootstrapBreadcrumbs", filterName = NamedNavigationFilters.Breadcrumbs, startingNodeKey = "" })
+        <div class="@containerClass">
             @await Html.PartialAsync("AlertsPartial")
             @RenderBody()
+        </div>
             <aside id="footer-widgets">
                 <div class="container">
                     <div class="row">
@@ -121,7 +127,6 @@
                             <div class="footer-widget">
                                 @await Component.InvokeAsync("RecentPosts", new { viewName = "RecentPosts", numberToShow = 3 })
                             </div>
-                        </div>
                         </div>
                     </div> <!-- row -->
                 </div> <!-- container -->
