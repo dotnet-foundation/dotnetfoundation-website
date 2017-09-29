@@ -175,17 +175,6 @@
     </section>
 </div> <!-- container -->
 <div class="container">
-    <div class="row is-table-row">
-        <div class="col-md-12">
-            <h2 class="right-line">Recent Posts</h2>
-        </div>
-    </div>
-    <div class="row masonry-container">
-        @await Component.InvokeAsync("RecentPosts", new { viewName = "RecentPostsSpotlight", numberToShow = 7 })
-    </div>
-    <hr />
-</div>
-<div class="container">
     <div class="row">
         <div class="col-md-6">
             <h2>News</h2>
@@ -248,6 +237,17 @@
             </div>
         </div>
     </div>
+</div>
+<div class="container">
+    <div class="row is-table-row">
+        <div class="col-md-12">
+            <h2 class="right-line">Recent Posts</h2>
+        </div>
+    </div>
+    <div class="row masonry-container">
+        @await Component.InvokeAsync("RecentPosts", new { viewName = "RecentPostsSpotlight", numberToShow = 7 })
+    </div>
+    <hr />
 </div>
 <div class="container">
     <section class="css-section">
