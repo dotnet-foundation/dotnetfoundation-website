@@ -1,5 +1,9 @@
 ﻿@inject Microsoft.AspNetCore.Hosting.IHostingEnvironment HostingEnvironment
 @inject SiteContext site
+@{ 
+    var containerClass = "container";
+    if(Context.Request.Path == "/") { containerClass = null; }
+}
 <!DOCTYPE html>
 <html class="sb-init">
 <head>
@@ -25,17 +29,17 @@
     <meta name="theme-color" content="#ffffff">
     @RenderSection("Meta", required: false)
     <environment names="Development">
-        <link href="~/theme/css/preload.css" rel="stylesheet">
-        <link href="~/theme/css/vendors.css" rel="stylesheet">
-        <link href="~/theme/css/style-gray.css" rel="stylesheet" media="screen" title="default">
-        <link href="~/theme/css/width-full.css" rel="stylesheet" title="default">
+        <link href="~/theme/css/preload.css" rel="stylesheet" />
+        <link href="~/theme/css/vendors.css" rel="stylesheet" />
+        <link href="~/theme/css/style-gray.css" rel="stylesheet" media="screen" title="default" asp-append-version="true" />
+        <link href="~/theme/css/width-full.css" rel="stylesheet" title="default" />
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     </environment>
     <environment names="Staging,Production">
-        <link href="~/theme/css/preload.css" rel="stylesheet">
-        <link href="~/theme/css/vendors.css" rel="stylesheet">
-        <link href="~/theme/css/style-gray.css" rel="stylesheet" media="screen" title="default">
-        <link href="~/theme/css/width-full.css" rel="stylesheet" title="default">
+        <link href="~/theme/css/preload.css" rel="stylesheet" />
+        <link href="~/theme/css/vendors.css" rel="stylesheet" />
+        <link href="~/theme/css/style-gray.css" rel="stylesheet" media="screen" title="default" asp-append-version="true" />
+        <link href="~/theme/css/width-full.css" rel="stylesheet" title="default" />
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
         <!--    
         bundling css fails at the moment
@@ -67,7 +71,7 @@
 
     @RenderSection("Styles", required: false)
 </head>
-<body>
+<body class="@ViewData["BodyClass"]">
     <div class="sb-site-container">
         <div class="boxed">
             <header id="header-full-top" class="hidden-xs header-full">
@@ -78,11 +82,12 @@
                     </div>
                     <nav class="top-nav">
                         <ul class="top-nav-social hidden-sm">
-                            <li><a href="#" class="animated fadeIn animation-delay-6 rss"><i class="fa fa-rss"></i></a></li>
-                            <li><a href="#" class="animated fadeIn animation-delay-7 twitter"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#" class="animated fadeIn animation-delay-8 facebook"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#" class="animated fadeIn animation-delay-9 google-plus"><i class="fa fa-google-plus"></i></a></li>
-                            <li><a href="#" class="animated fadeIn animation-delay-7 linkedin"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="/api/rss" class="animated fadeIn animation-delay-6 rss"><i title="RSS" class="fa fa-rss"></i></a></li>
+                            <li><a href="https://twitter.com/dotnetfdn" class="animated fadeIn animation-delay-7 twitter"><i title="Twitter" class="fa fa-twitter"></i></a></li>
+                            <li><a href="https://forums.dotnetfoundation.org/" class="animated fadeIn animation-delay-7 forums"><i title="Forum" class="fa fa-users"></i></a></li>
+<!--                            <li><a href="#" class="animated fadeIn animation-delay-8 facebook"><i class="fa fa-facebook"></i></a></li> 
+                            <li><a href="#" class="animated fadeIn animation-delay-9 google-plus"><i class="fa fa-google-plus"></i></a></li> 
+                            <li><a href="#" class="animated fadeIn animation-delay-7 linkedin"><i class="fa fa-linkedin"></i></a></li> -->
                         </ul>
                         <div class="dropdown animated fadeInDown animation-delay-13">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-search"></i></a>
@@ -117,8 +122,10 @@
             </nav>
             @RenderSection("Toolbar", required: false)
             @await Component.InvokeAsync("Navigation", new { viewName = "BootstrapBreadcrumbs", filterName = NamedNavigationFilters.Breadcrumbs, startingNodeKey = "" })
+        <div class="@containerClass">
             @await Html.PartialAsync("AlertsPartial")
             @RenderBody()
+        </div>
             <aside id="footer-widgets">
                 <div class="container">
                     <div class="row">
@@ -143,7 +150,6 @@
                             <div class="footer-widget">
                                 @await Component.InvokeAsync("RecentPosts", new { viewName = "RecentPosts", numberToShow = 3 })
                             </div>
-                        </div>
                         </div>
                     </div> <!-- row -->
                 </div> <!-- container -->

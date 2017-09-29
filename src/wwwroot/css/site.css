@@ -12,3 +12,10 @@
     width: 100%;
     display: block;
 }
+
+/* custom social button */
+
+.top-nav-social a.forums:hover {
+    background-color: #68217A;
+    color: #fff;
+}

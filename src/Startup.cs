@@ -5,6 +5,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -227,6 +228,13 @@ namespace DotNetFoundationWebsite
         {
             app.UseMvc(routes =>
             {
+                //holder.js LIE to avoid large requests. The JS is already bundled. 
+                routes.MapGet("holder.js/{whatever}", context => 
+                {
+                    context.Response.StatusCode = 304;
+                    return Task.CompletedTask;
+                });
+
                 if (useFolders)
                 {
                     routes.AddBlogRoutesForSimpleContent(new cloudscribe.Core.Web.Components.SiteFolderRouteConstraint());
