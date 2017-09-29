@@ -274,7 +274,7 @@ namespace DotNetFoundationWebsite
 
         private void ConfigureAuthPolicy(IServiceCollection services)
         {
-            //https://docs.asp.net/en/latest/security/authorization/policies.html
+            //https://docs.microsoft.com/aspnet/core/security/authorization/policies
 
             services.AddAuthorization(options =>
             {
