@@ -10,6 +10,7 @@
     <UserSecretsId>aspnet-WebApp-0353CAB0-205A-4FCD-9626-1282ECF47059</UserSecretsId>
     <RetryAttemptsForDeployment>10</RetryAttemptsForDeployment>    
     <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>    
+    <AssemblyName>dotnetfoundation-website</AssemblyName>    
   </PropertyGroup>
 
   <ItemGroup>
