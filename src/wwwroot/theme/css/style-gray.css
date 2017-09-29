@@ -2453,12 +2453,15 @@ textarea.form-control:focus {
   font-size: 11px;
   color: #808080;
 }
+/*
+    commented out 2017-09-29 JA was causing checkboxes to not render as checked and to not accept input
 .checkbox input[type="checkbox"],
 .checkbox-inline input[type="checkbox"] {
   opacity: 0;
   z-index: 1;
   transition: all 0.15s ease-in-out;
 }
+*/
 .checkbox input[type="checkbox"]:focus + label::before,
 .checkbox-inline input[type="checkbox"]:focus + label::before {
   border-color: #808080;
