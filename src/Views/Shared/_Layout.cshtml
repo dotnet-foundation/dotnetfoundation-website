@@ -107,23 +107,15 @@
             <aside id="footer-widgets">
                 <div class="container">
                     <div class="row">
-                        <!-- <div class="col-md-6">
-                            <h3 class="footer-widget-title">Sitemap</h3>
+                        <div class="col-md-6">
+                            <h3 class="footer-widget-title">Site Links</h3>
                             <ul class="list-unstyled three_cols">
                                 <li><a href="/">Home</a></li>
-                                <li><a href="/blog">Blog</a></li>
-                                <li><a href="portfolio_sidebar.html">Portafolio</a></li>
-                                <li><a href="portfolio_topvar.html">Works</a></li>
-                                <li><a href="page_timeline_left.html">Timeline</a></li>
-                                <li><a href="page_pricing.html">Pricing</a></li>
-                                <li><a href="/about">About Us</a></li>
-                                <li><a href="/team">Our Team</a></li>
-                                <li><a href="page_services.html">Services</a></li>
-                                <li><a href="page_support.html">FAQ</a></li>
+                                <li><a href="/privacy-policy">Privacy Policy</a></li>
+                                <li><a href="/code-of-conduct">Code of Conduct</a></li>
                                 @await Html.PartialAsync("_LoginPartial")
-                                <li><a href="page_contact.html">Contact</a></li>
                             </ul>
-                        </div> -->
+                        </div>
                         <div class="col-md-6">
                             <div class="footer-widget">
                                 @await Component.InvokeAsync("RecentPosts", new { viewName = "RecentPosts", numberToShow = 3 })

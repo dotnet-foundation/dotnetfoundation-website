@@ -24,7 +24,7 @@
 }
 else
 {
-    <li><a id="loginLink" asp-controller="Account" asp-action="Login" asp-route-returnurl="@Context.Request.PathAndQuery()">@sr["Log in"]</a></li>
+    <li><a id="loginLink" style="color: #444;" asp-controller="Account" asp-action="Login" asp-route-returnurl="@Context.Request.PathAndQuery()">@sr["Log in"]</a></li>
     @if (site.AllowNewRegistration)
     {
         <li><a id="registerLink" asp-controller="Account" asp-action="Register">@sr["Register"]</a></li>
