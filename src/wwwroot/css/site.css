@@ -38,3 +38,7 @@
 .merchandise.row.content-box.box-royal {
     margin-top: 50px;
 }
+
+.navbar-default .navbar-brand {
+    text-transform: lowercase;
+}  
