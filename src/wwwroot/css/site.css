@@ -40,5 +40,5 @@
 }
 
 .navbar-default .navbar-brand {
-    text-transform: lowercase;
+    text-transform: inherit;
 }  
