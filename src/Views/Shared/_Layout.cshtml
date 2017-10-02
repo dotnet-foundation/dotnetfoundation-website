@@ -151,6 +151,24 @@
                 })
             </script>
 
+            <script>
+                $(document).ready(function() {
+
+                var parts = window.location.pathname.split('/');
+
+                var basename = "default-no-basename";
+                if( parts && parts.length ) {
+                    var idx = parts.length-1;
+                    if( parts[idx] == '' && parts.length > 1 ) {
+                        --idx;
+                    }
+                    basename = parts[idx];
+                }
+                //alert("basename: "+basename);
+                $(body).addClass( basename );
+            });
+            </script>
+
             @RenderSection("Bottom", required: false)
             @RenderSection("scripts", required: false)   
         </div> <!-- boxed -->
