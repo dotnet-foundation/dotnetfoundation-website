@@ -19,3 +19,26 @@
     background-color: #68217A;
     color: #fff;
 }
+
+.merchandise .img-border {
+    height: 220px;
+    width: 220px;
+}
+
+.merchandise img {
+    max-height: 220px;
+    max-width: 220px;
+    height: auto;
+}
+
+.merchandise .col-md-3 .content-box {
+    height: 370px;
+}
+
+.merchandise.row.content-box.box-royal {
+    margin-top: 50px;
+}
+
+.navbar-default .navbar-brand {
+    text-transform: inherit;
+}  

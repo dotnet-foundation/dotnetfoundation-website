@@ -46,29 +46,7 @@
             <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
         -->
     </environment>
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
-    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
-    <script>
-    window.addEventListener("load", function(){
-        window.cookieconsent.initialise({
-        "palette": {
-            "popup": {
-            "background": "#64386b",
-            "text": "#ffcdfd"
-            },
-            "button": {
-            "background": "#f8a8ff",
-            "text": "#3f0045"
-            },
-            law: {
-                regionalLaw: true,
-            },
-            location: true,
-        }
-      })
-    });
-    </script>
-
+    <partial name="_CookieConsent"/>
     @RenderSection("Styles", required: false)
 </head>
 <body class="@ViewData["BodyClass"]">
@@ -89,7 +67,7 @@
                             <li><a href="#" class="animated fadeIn animation-delay-9 google-plus"><i class="fa fa-google-plus"></i></a></li> 
                             <li><a href="#" class="animated fadeIn animation-delay-7 linkedin"><i class="fa fa-linkedin"></i></a></li> -->
                         </ul>
-                        <div class="dropdown animated fadeInDown animation-delay-13">
+                      <!--  <div class="dropdown animated fadeInDown animation-delay-13">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-search"></i></a>
                             <div class="dropdown-menu dropdown-menu-right dropdown-search-box animated fadeInUp">
                                 <form role="form">
@@ -98,10 +76,10 @@
                                         <span class="input-group-btn">
                                             <button class="btn btn-ar btn-primary" type="button">Go!</button>
                                         </span>
-                                    </div><!-- /input-group -->
+                                    </div>
                                 </form>
                             </div>
-                        </div> <!-- dropdown -->
+                        </div> --> <!-- dropdown -->
                     </nav>
                 </div> <!-- container -->
             </header> <!-- header-full -->
@@ -130,20 +108,12 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6">
-                            <h3 class="footer-widget-title">Sitemap</h3>
+                            <h3 class="footer-widget-title">Site Links</h3>
                             <ul class="list-unstyled three_cols">
                                 <li><a href="/">Home</a></li>
-                                <li><a href="/blog">Blog</a></li>
-                                <li><a href="portfolio_sidebar.html">Portafolio</a></li>
-                                <li><a href="portfolio_topvar.html">Works</a></li>
-                                <li><a href="page_timeline_left.html">Timeline</a></li>
-                                <li><a href="page_pricing.html">Pricing</a></li>
-                                <li><a href="/about">About Us</a></li>
-                                <li><a href="/team">Our Team</a></li>
-                                <li><a href="page_services.html">Services</a></li>
-                                <li><a href="page_support.html">FAQ</a></li>
+                                <li><a href="/privacy-policy">Privacy Policy</a></li>
+                                <li><a href="/code-of-conduct">Code of Conduct</a></li>
                                 @await Html.PartialAsync("_LoginPartial")
-                                <li><a href="page_contact.html">Contact</a></li>
                             </ul>
                         </div>
                         <div class="col-md-6">
@@ -179,6 +149,24 @@
                 }, function () { 
                     $(this).carousel('cycle') 
                 })
+            </script>
+
+            <script>
+                $(document).ready(function() {
+
+                var parts = window.location.pathname.split('/');
+
+                var basename = "default-no-basename";
+                if( parts && parts.length ) {
+                    var idx = parts.length-1;
+                    if( parts[idx] == '' && parts.length > 1 ) {
+                        --idx;
+                    }
+                    basename = parts[idx];
+                }
+                //alert("basename: "+basename);
+                $('body').addClass( basename );
+            });
             </script>
 
             @RenderSection("Bottom", required: false)
