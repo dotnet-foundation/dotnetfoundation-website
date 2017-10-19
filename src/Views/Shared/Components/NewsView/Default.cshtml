@@ -1,0 +1,19 @@
+﻿@model IEnumerable<dotnetfoundation.Models.NewsItem>
+
+<h2>News</h2>
+@foreach (var item in Model)
+{
+    <div class="media">
+        <a class="pull-left" href="@item.ItemDetails.Links.First().Uri">
+            <img class="media-object" src="holder.js/90x90?bg=68217A&text=@item.Source">
+        </a>
+        <div class="media-body">
+            <h4 class="media-heading"><a href="@item.ItemDetails.Links.First().Uri">
+                @item.ItemDetails.Title</a>
+            </h4>
+            <p>
+                @item.ItemDetails.Description.Substring(50) ...
+            </p>
+        </div>
+    </div>
+}
