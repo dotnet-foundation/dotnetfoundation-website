@@ -4,15 +4,15 @@
 @foreach (var item in Model)
 {
     <div class="media">
-        <a class="pull-left" href="@item.ItemDetails.Links.First().Uri">
+        <a class="pull-left" href="@item.Uri">
             <img class="media-object" src="holder.js/90x90?bg=68217A&text=@item.Source">
         </a>
         <div class="media-body">
-            <h4 class="media-heading"><a href="@item.ItemDetails.Links.First().Uri">
-                @item.ItemDetails.Title</a>
+            <h4 class="media-heading"><a href="@item.Uri">
+                @item.Title</a>
             </h4>
             <p>
-                @item.ItemDetails.Description.Substring(50) ...
+                @item.Excerpt
             </p>
         </div>
     </div>

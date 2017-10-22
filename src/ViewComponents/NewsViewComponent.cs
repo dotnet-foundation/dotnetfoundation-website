@@ -21,6 +21,7 @@ namespace dotnetfoundation.ViewComponents
         {
             var feed = await newsService.GetFeed();
             var items = feed.Items.ToList().Take(quantity);
+
             return View(items);
         }
     }
