@@ -20,7 +20,7 @@ namespace dotnetfoundation.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync(int quantity)
         {
             var feed = await newsService.GetFeed();
-            var items = feed.Items.ToList().Take(quantity);
+            var items = feed.Take(quantity);
 
             return View(items);
         }

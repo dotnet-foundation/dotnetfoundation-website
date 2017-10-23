@@ -14,7 +14,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="wwwroot\**\*;navigation.xml">
+    <None Update="wwwroot\**\*;navigation.xml;news.opml">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>
 

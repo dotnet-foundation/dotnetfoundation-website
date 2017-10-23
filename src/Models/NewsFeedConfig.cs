@@ -7,7 +7,7 @@ namespace dotnetfoundation.Models
 {
     public class NewsFeedConfig
     {
-        public string[] Feeds { get; set; } = new string[] { "https://blogs.msdn.microsoft.com/dotnet/feed/" }; 
+        public string OpmlFile { get; set; } = "news.opml"; 
         public string CacheKey { get; set; } = "newsFeed";
         public int CacheDurationInSeconds { get; set; } = 3600; //1 hour
     }

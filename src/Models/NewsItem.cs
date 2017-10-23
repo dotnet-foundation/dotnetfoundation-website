@@ -13,5 +13,6 @@ namespace dotnetfoundation.Models
         public string Title { get; set; }
         public string Uri { get; set; }
         public string Excerpt { get; set; }
+        public DateTime PublishDate { get; set; }
     }
 }

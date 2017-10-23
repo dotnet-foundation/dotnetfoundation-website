@@ -11,6 +11,7 @@ using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Xml.Linq;
 
 namespace dotnetfoundation.Services
 {
@@ -27,52 +28,47 @@ namespace dotnetfoundation.Services
 
         private NewsFeedConfig _config;
         private IMemoryCache _cache;
-        private NewsFeed _feed = null;
+        private List<NewsItem> _feed = null;
 
-        private async Task<NewsFeed> GetFeedInternal()
+        private async Task<List<NewsItem>> GetFeedInternal()
         {
-            var feed = new NewsFeed();
-            foreach (string feedUri in _config.Feeds)
+            var opml = XDocument.Load(_config.OpmlFile);
+            var feedData = from item in opml.Descendants("outline")
+                select new {
+                    Source = (string) item.Attribute("title"),
+                    XmlUrl = (string) item.Attribute("xmlUrl")
+                };
+            
+            var feed = new List<NewsItem>();
+            foreach (var currentFeed in feedData)
             {
-                using (var xmlReader = XmlReader.Create(feedUri, new XmlReaderSettings() { Async = true }))
+                using (var xmlReader = XmlReader.Create(currentFeed.XmlUrl, new XmlReaderSettings() { Async = true }))
                 {
                     var feedReader = new RssFeedReader(xmlReader);
 
                     while (await feedReader.Read())
                     {
-                        switch (feedReader.ElementType)
+                        if(feedReader.ElementType == SyndicationElementType.Item) 
                         {
-                            // Read category
-                            case SyndicationElementType.Category:
-                                ISyndicationCategory category = await feedReader.ReadCategory();
-                                break;
-
-                            // Read Image
-                            case SyndicationElementType.Image:
-                                ISyndicationImage image = await feedReader.ReadImage();
-                                break;
-
-                            // Read Item
-                            case SyndicationElementType.Item:
                                 ISyndicationItem item = await feedReader.ReadItem();
-                                feed.Items.Add(new NewsItem {
+                                feed.Add(new NewsItem {
                                     Title = item.Title,
                                     Uri = item.Links.First().Uri.AbsoluteUri,
                                     Excerpt = GetTextDescription(item.Description),
-                                    Source = ".NET Blog" //TODO: Set source from config
+                                    PublishDate = item.Published.UtcDateTime,
+                                    Source = currentFeed.Source
                                 });
-                                break;
                         }
                     }
                 }
             }
-            return feed;
+            return feed.OrderByDescending(f => f.PublishDate).ToList();
         }
 
-        private async Task<NewsFeed> GetOrCreateFeedCacheAsync()
+        private async Task<List<NewsItem>> GetOrCreateFeedCacheAsync()
         {
-            NewsFeed result = null;
-            if (!_cache.TryGetValue<NewsFeed>(_config.CacheKey, out result))
+            List<NewsItem> result = null;
+            if (!_cache.TryGetValue<List<NewsItem>>(_config.CacheKey, out result))
             {
                 result = await GetFeedInternal();
                 
@@ -102,7 +98,7 @@ namespace dotnetfoundation.Services
 
         }
 
-        public async Task<NewsFeed> GetFeed()
+        public async Task<List<NewsItem>> GetFeed()
         {
             await EnsureFeed();
             return _feed;
