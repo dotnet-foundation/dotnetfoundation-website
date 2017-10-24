@@ -76,7 +76,9 @@
                     <div class="row">
                         <div class="col-md-6 col-md-push-6">
                             <div class="carousel-object" class="img-responsive animated zoomInUp animation-delay-15 embed-responsive embed-responsive-16by9">
-                            <iframe src="https://channel9.msdn.com/Shows/Code-Conversations/Welcome-to-Code-Conversations/player" width="560" height="315" allowFullScreen frameBorder="0"></iframe>
+                                <div id="video-codeconversations" class="video-thumbnail">
+                                <img src="https://sec.ch9.ms/ch9/de3b/0a9d33e8-ee36-4629-a338-73db9aebde3b/codeconversationswelcome_512.jpg">
+                                </div>                                
                             </div>
                         </div>
                         <div class="col-md-6 col-md-pull-6">
@@ -225,8 +227,10 @@
 
             </div>
             <div class="col-md-6">
-                <iframe src="https://player.vimeo.com/video/223985470" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-<p><a href="https://vimeo.com/223985470">Open Source Software Foundations: Not Totally Boring, Actually Super Awesome - Jon Galloway</a> from <a href="https://vimeo.com\ndcconferences">NDC Conferences</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+                <div id="video-whatisdotnetfoundation" class="video-thumbnail">
+                    <img height="360" width="640" src="https://i.vimeocdn.com/video/642923290.webp?mw=960&mh=540">
+                </div>
+                <p><a href="https://vimeo.com/223985470">Open Source Software Foundations: Not Totally Boring, Actually Super Awesome - Jon Galloway</a> from <a href="https://vimeo.com\ndcconferences">NDC Conferences</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
             </div>
         </div> <!-- row -->
     </section>
@@ -339,4 +343,16 @@
     <environment names="Staging,Production">
         <script src="~/js/home.min.js" asp-append-version="true"></script>
     </environment>
+
+    <script>
+        $(function () {
+            $("#video-codeconversations").click(function () {
+                $("#video-codeconversations").replaceWith('<iframe src="https://channel9.msdn.com/Shows/Code-Conversations/Welcome-to-Code-Conversations/player" width="560" height="315" allowFullScreen frameBorder="0"></iframe>');
+            });
+
+            $("#video-whatisdotnetfoundation").click(function () {
+                $("#video-whatisdotnetfoundation").replaceWith('<iframe src="https://player.vimeo.com/video/223985470" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>');
+            });
+    });
+    </script>
 }
