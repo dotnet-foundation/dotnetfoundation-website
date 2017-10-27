@@ -43,47 +43,73 @@
                 </label>
             </div>
     </form>
-@if (Model.Type == "repository")
-{
-    @foreach (var item in Model.ProjectRepos.Data)
+<div class="col-md-9">
+    @if (Model.Type == "repository")
     {
-        <article class="content-item project">
-            <header>
-                <h3><a target="_blank" href="@item.Url">@item.Name </a></h3>
-            </header>
-            <p>@item.Description</p>
-        </article>
+        @foreach (var item in Model.ProjectRepos.Data)
+        {
+            <article class="content-item project">
+                <header>
+                    <h3><a target="_blank" href="@item.Url">@item.Name </a></h3>
+                </header>
+                <p>@item.Description</p>
+            </article>
+        }
+        <div>
+            <cs-pager asp-action="Index" asp-controller="Projects"
+                      asp-route-q="@Model.Q"
+                      asp-route-type="@Model.Type"
+                      asp-route-ps="@Model.ProjectRepos.PageSize"
+                      cs-paging-pagenumber="@Model.ProjectRepos.PageNumber"
+                      cs-paging-totalitems="@Model.ProjectRepos.TotalItems"
+                      cs-pagenumber-param="pn"></cs-pager>
+        </div>
     }
-    <div>
-        <cs-pager asp-action="Index" asp-controller="Projects"
-                  asp-route-q="@Model.Q"
-                  asp-route-type="@Model.Type"
-                  asp-route-ps="@Model.ProjectRepos.PageSize"
-                  cs-paging-pagenumber="@Model.ProjectRepos.PageNumber"
-                  cs-paging-totalitems="@Model.ProjectRepos.TotalItems"
-                  cs-pagenumber-param="pn"></cs-pager>
-    </div>
-}
-else
-{
-    @foreach (var item in Model.Projects.Data)
+    else
     {
-        <article class="content-item project">
-            <header>
-                <h3><a target="_blank" href="">@item.Name.Replace(".md","") </a></h3>
-            </header>
-
-        </article>
+        @foreach (var item in Model.Projects.Data)
+        {
+            <article class="content-item project">
+                <div data-mdurl="https://raw.githubusercontent.com/dotnet/home/master/projects/@item.Name"></div>
+            </article><hr />
+        }
+        <div>
+            <cs-pager asp-action="Index" asp-controller="Projects"
+                      asp-route-q="@Model.Q"
+                      asp-route-type="@Model.Type"
+                      asp-route-ps="@Model.Projects.PageSize"
+                      cs-paging-pagenumber="@Model.Projects.PageNumber"
+                      cs-paging-totalitems="@Model.Projects.TotalItems"
+                      cs-pagenumber-param="pn"></cs-pager>
+        </div>
     }
-    <div>
-        <cs-pager asp-action="Index" asp-controller="Projects"
-                  asp-route-q="@Model.Q"
-                  asp-route-type="@Model.Type"
-                  asp-route-ps="@Model.Projects.PageSize"
-                  cs-paging-pagenumber="@Model.Projects.PageNumber"
-                  cs-paging-totalitems="@Model.Projects.TotalItems"
-                  cs-pagenumber-param="pn"></cs-pager>
-    </div>
-}
+</div>
+<div class="col-md-3">
+    <ul class="list-unstyled">
+        <li>
+            @Model.Summary.Projects Projects
+        </li>
+        <li>
+            @Model.Summary.Contributors Contributors
+        </li>
+        <li>
+            @Model.Summary.Organizations Organization
+        </li>
+        <li>
+            @Model.Summary.Forks Forks
+        </li>
+        <li>
+            @Model.Summary.OpenIssues Open Issues
+        </li>
+        <li>
+            @Model.Summary.Stars Stars
+        </li>
+    </ul>
+    
+</div>
 
+@section Scripts {
+<script src="~/js/showdown.min.js"></script>
+<script src="~/js/showdown-unobtrusive.js" asp-append-version="true"></script>
+}
 

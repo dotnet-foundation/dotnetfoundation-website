@@ -23,7 +23,9 @@ namespace dotnetfoundation.Controllers
         private readonly ProjectService _projectService;
         private ILogger _log;
 
-        public async Task<IActionResult> Index(string q = "", string type = "project", int pn = 1, int ps = 20)
+        // TODO: would we want a different default page size for projects vs repos since projects shows details?
+
+        public async Task<IActionResult> Index(string q = "", string type = "project", int pn = 1, int ps = 10)
         {
             var maxPageSize = 50; //TODO: make this configurable?
             if (ps > maxPageSize) ps = maxPageSize;
@@ -32,12 +34,14 @@ namespace dotnetfoundation.Controllers
             model.Q = q;
             model.Type = type;
             model.Summary = await _projectService.GetRepoSummary();
-            if(type == "project")
+
+            if (type == "project")
             {
                 model.Projects = await _projectService.SearchProjects(q, pn, ps);
             }
             else
             {
+                
                 model.ProjectRepos = await _projectService.SearchRepos(q, pn, ps);
             }
             
@@ -45,14 +49,6 @@ namespace dotnetfoundation.Controllers
 
             return View(model);
         }
-
-        // TODO: another action for project detail? the current site has this.
-        // for example https://dotnetfoundation.org/net-compiler-platform-roslyn
-        // seems like more data is shown in the current site than exists in the feed
-        // unclear to me how the slugs are determined
-        // also even names on th elist like for .NET Compiler Platform ("Roslyn") does not match what is in the feed
-        // is there another data source?
-        // actually it seems like the feed data corresponds to the side bar on the current site not the main list
 
     }
 }

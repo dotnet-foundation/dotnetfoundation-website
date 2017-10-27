@@ -171,7 +171,7 @@ namespace dotnetfoundation.Data
                 {
                     matches = _projectFeed.Projects.Where(p =>
                      p.Name.Contains(query)
-                     || p.Contributor.Contains(query)
+                    // || p.Contributor.Contains(query)
                     ).OrderBy(p => p.Name)
                     .ToList<Project>();
                 }
