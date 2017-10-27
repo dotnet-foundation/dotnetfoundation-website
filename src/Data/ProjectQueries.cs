@@ -197,5 +197,13 @@ namespace dotnetfoundation.Data
 
         }
 
+        public async Task<List<ProjectContributor>> FetchContributors(
+           CancellationToken cancellationToken = default(CancellationToken)
+           )
+        {
+            await EnsureProjectFeed();
+            return _projectFeed.Contributors;
+        }
+
     }
 }

@@ -71,6 +71,23 @@
         {
             <article class="content-item project">
                 <div data-mdurl="https://raw.githubusercontent.com/dotnet/home/master/projects/@item.Name"></div>
+                @{ 
+                    var contributor = Model.GetContributor(item.Contributor);
+                }
+                @if (contributor != null)
+                {
+                    if (!string.IsNullOrWhiteSpace(contributor.Logo))
+                    {
+                        <div class=""><a href="@contributor.Web"><img class="img-responsive contrib-logos" src="@contributor.Logo" alt="@contributor.Name" /></a></div>
+
+                    }
+                    else
+                    {
+                        <div><a href="@contributor.Web">@contributor.Name</a></div>
+
+                    }
+
+                }
             </article><hr />
         }
         <div>

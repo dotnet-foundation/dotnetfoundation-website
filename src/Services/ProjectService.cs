@@ -54,5 +54,12 @@ namespace dotnetfoundation.Services
                 cancellationToken
                 );
         }
+
+        public async Task<List<ProjectContributor>> FetchContributors(
+           CancellationToken cancellationToken = default(CancellationToken)
+           )
+        {
+            return await _queries.FetchContributors();
+        }
     }
 }
