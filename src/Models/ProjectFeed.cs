@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace dotnetfoundation.Models
 {
@@ -7,13 +9,12 @@ namespace dotnetfoundation.Models
     {
         public ProjectFeed()
         {
-            Summary = new ProjectSummary();
             Projects = new List<Project>();
+            Contributors = new List<ProjectContributor>();
         }
 
-        public DateTime LastUpdated { get; set; }
-        public ProjectSummary Summary { get; set; }
+        public string Name { get; set; }
         public List<Project> Projects { get; set; }
-
+        public List<ProjectContributor> Contributors { get; set; }
     }
 }

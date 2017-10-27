@@ -1,7 +1,18 @@
 ﻿@model dotnetfoundation.ViewModels.ProjectListViewModel
 @{
     ViewData["Title"] = "Projects";
-}
+    string repoChecked =  null;
+    string projectChecked = null;
+    if(Model.Type == "repository")
+    {
+        repoChecked = "checked";
+    }
+    else
+    {
+        projectChecked = "checked";
+    }
+
+ }
 
     <header>
         <h1>Browse</h1>
@@ -23,31 +34,56 @@
             </div>
             <div class="form-groupr">
             <label>
-                <input id="type" name="type" type="radio" value="project" checked /> Projects
+                <input id="type" name="type" type="radio" value="project" @projectChecked /> Projects
             </label>
             </div>
             <div class="form-group">
                 <label>
-                    <input id="type" name="type" type="radio" value="repository" /> Repositories
+                    <input id="type" name="type" type="radio" value="repository" @repoChecked /> Repositories
                 </label>
             </div>
     </form>
-    @foreach (var item in Model.Projects.Data)
+@if (Model.Type == "repository")
+{
+    @foreach (var item in Model.ProjectRepos.Data)
     {
         <article class="content-item project">
             <header>
-                <h3>@item.Name</h3>
+                <h3><a target="_blank" href="@item.Url">@item.Name </a></h3>
             </header>
             <p>@item.Description</p>
         </article>
     }
     <div>
-        <cs-pager cs-paging-info="@Model.Paging"
-                  asp-action="Index" asp-controller="Projects"
+        <cs-pager asp-action="Index" asp-controller="Projects"
                   asp-route-q="@Model.Q"
                   asp-route-type="@Model.Type"
-                  asp-route-ps="@Model.Paging.ItemsPerPage"
-                  cs-pagenumber-param="pn"
-                  ></cs-pager>
+                  asp-route-ps="@Model.ProjectRepos.PageSize"
+                  cs-paging-pagenumber="@Model.ProjectRepos.PageNumber"
+                  cs-paging-totalitems="@Model.ProjectRepos.TotalItems"
+                  cs-pagenumber-param="pn"></cs-pager>
     </div>
+}
+else
+{
+    @foreach (var item in Model.Projects.Data)
+    {
+        <article class="content-item project">
+            <header>
+                <h3><a target="_blank" href="">@item.Name.Replace(".md","") </a></h3>
+            </header>
+
+        </article>
+    }
+    <div>
+        <cs-pager asp-action="Index" asp-controller="Projects"
+                  asp-route-q="@Model.Q"
+                  asp-route-type="@Model.Type"
+                  asp-route-ps="@Model.Projects.PageSize"
+                  cs-paging-pagenumber="@Model.Projects.PageNumber"
+                  cs-paging-totalitems="@Model.Projects.TotalItems"
+                  cs-pagenumber-param="pn"></cs-pager>
+    </div>
+}
+
 

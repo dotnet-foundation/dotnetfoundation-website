@@ -31,11 +31,17 @@ namespace dotnetfoundation.Controllers
             var model = new ProjectListViewModel();
             model.Q = q;
             model.Type = type;
-            model.Summary = await _projectService.GetSummary();
-            model.Projects = await _projectService.Search(q, pn, ps);
-            model.Paging.CurrentPage = pn;
-            model.Paging.ItemsPerPage = ps;
-            model.Paging.TotalItems = model.Projects.TotalItems;
+            model.Summary = await _projectService.GetRepoSummary();
+            if(type == "project")
+            {
+                model.Projects = await _projectService.SearchProjects(q, pn, ps);
+            }
+            else
+            {
+                model.ProjectRepos = await _projectService.SearchRepos(q, pn, ps);
+            }
+            
+
 
             return View(model);
         }
