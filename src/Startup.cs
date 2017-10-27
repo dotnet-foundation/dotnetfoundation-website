@@ -73,6 +73,8 @@ namespace DotNetFoundationWebsite
             services.AddScoped<ProjectService>();
             services.Configure<MeetupFeedConfig>(Configuration.GetSection("MeetupFeedConfig"));
             services.AddScoped<MeetupFeedService>();
+            services.Configure<NewsFeedService>(Configuration.GetSection("NewsFeedConfig"));
+            services.AddSingleton<NewsFeedService>();
 
             //services.AddSession();
 
