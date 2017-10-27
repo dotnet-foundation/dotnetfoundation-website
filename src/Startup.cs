@@ -94,9 +94,9 @@ namespace DotNetFoundationWebsite
             
             services.AddScoped<cloudscribe.Web.Navigation.INavigationNodePermissionResolver, cloudscribe.Web.Navigation.NavigationNodePermissionResolver>();
             services.AddScoped<cloudscribe.Web.Navigation.INavigationNodePermissionResolver, cloudscribe.SimpleContent.Web.Services.PagesNavigationNodePermissionResolver>();
-            services.AddCloudscribeCore(Configuration);
+            services.AddCloudscribeCoreMvc(Configuration);
             services.AddCloudscribeCoreIntegrationForSimpleContent();
-            services.AddSimpleContent(Configuration);
+            services.AddSimpleContentMvc(Configuration);
             services.AddMetaWeblogForSimpleContent(Configuration.GetSection("MetaWeblogApiOptions"));
             services.AddSimpleContentRssSyndiction();
             services.AddCloudscribeFileManagerIntegration(Configuration);
@@ -174,8 +174,7 @@ namespace DotNetFoundationWebsite
             services.AddMvc()
                 .AddRazorOptions(options =>
                 {
-                    options.AddCloudscribeViewLocationFormats();
-
+                    
                     options.AddCloudscribeCommonEmbeddedViews();
                     options.AddCloudscribeNavigationBootstrap3Views();
                     options.AddCloudscribeCoreBootstrap3Views();

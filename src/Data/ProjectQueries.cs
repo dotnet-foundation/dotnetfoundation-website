@@ -1,6 +1,6 @@
 ﻿using dotnetfoundation.Models;
 using dotnetfoundation.Services;
-using cloudscribe.Core.Models.Generic;
+using cloudscribe.Pagination.Models;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 using System;
@@ -27,18 +27,19 @@ namespace dotnetfoundation.Data
         private ProjectFeedService _feedService;
         private IMemoryCache _cache;
         private ProjectFeedConfig _config;
-        private ProjectFeed _feed = null;
+        private ProjectRepoFeed _repoFeed = null;
+        private ProjectFeed _projectFeed = null;
 
-        private async Task<ProjectFeed> GetOrCreateFeedCacheAsync()
+        private async Task<ProjectRepoFeed> GetOrCreateRepoFeedCacheAsync()
         {
-            ProjectFeed result = null;
-            if(!_cache.TryGetValue<ProjectFeed>(_config.CacheKey, out result))
+            ProjectRepoFeed result = null;
+            if(!_cache.TryGetValue<ProjectRepoFeed>(_config.RepoFeedCacheKey, out result))
             { 
-                result = await _feedService.GetFeed();
+                result = await _feedService.GetRepoFeed();
                 if(result != null)
                 {
                     _cache.Set(
-                        _config.CacheKey,
+                        _config.RepoFeedCacheKey,
                         result,
                         new MemoryCacheEntryOptions()
                          .SetSlidingExpiration(TimeSpan.FromSeconds(_config.CacheDurationInSeconds))
@@ -49,50 +50,129 @@ namespace dotnetfoundation.Data
 
             if(result == null) { throw new InvalidOperationException("failed to retrieve project feed"); }
 
+            return result;
+        }
+
+        private async Task<ProjectFeed> GetOrCreateProjectFeedCacheAsync()
+        {
+            ProjectFeed result = null;
+            if (!_cache.TryGetValue<ProjectFeed>(_config.ProjectFeedCacheKey, out result))
+            {
+                result = await _feedService.GetProjectFeed();
+                if (result != null)
+                {
+                    _cache.Set(
+                        _config.ProjectFeedCacheKey,
+                        result,
+                        new MemoryCacheEntryOptions()
+                         .SetSlidingExpiration(TimeSpan.FromSeconds(_config.CacheDurationInSeconds))
+                         );
+                }
+
+            }
+
+            if (result == null) { throw new InvalidOperationException("failed to retrieve project feed"); }
 
             return result;
         }
 
-        private async Task EnsureFeed()
+        private async Task EnsureRepoFeed()
         {
-            if(_feed == null)
+            if(_repoFeed == null)
             {
-                _feed = await GetOrCreateFeedCacheAsync();
+                _repoFeed = await GetOrCreateRepoFeedCacheAsync();
             }
            
         }
 
-        public async Task<ProjectSummary> GetSummary()
+        private async Task EnsureProjectFeed()
         {
-            await EnsureFeed();
-            return _feed.Summary;
+            if (_projectFeed == null)
+            {
+                _projectFeed = await GetOrCreateProjectFeedCacheAsync();
+            }
+
         }
 
-        public async Task<PagedResult<Project>> Fetch(
+        public async Task<ProjectRepoSummary> GetRepoSummary()
+        {
+            await EnsureRepoFeed();
+            return _repoFeed.Summary;
+        }
+
+        public async Task<PagedResult<ProjectRepo>> FetchRepos(
             string query,
             int pageNumber = 1,
             int pageSize = 1000,
             CancellationToken cancellationToken = default(CancellationToken)
             )
         {
-            await EnsureFeed();
-            var result = new PagedResult<Project>();
+            await EnsureRepoFeed();
+            var result = new PagedResult<ProjectRepo>();
 
-            if(_feed != null && _feed.Projects != null)
+            if(_repoFeed != null && _repoFeed.Projects != null)
             {
-                List<Project> matches = new List<Project>();
+                List<ProjectRepo> matches = new List<ProjectRepo>();
                 if (string.IsNullOrWhiteSpace(query))
                 {
-                    matches = _feed.Projects.OrderByDescending(p => p.Awesomeness)
-                   .ToList<Project>();
+                    matches = _repoFeed.Projects.OrderByDescending(p => p.Awesomeness)
+                   .ToList<ProjectRepo>();
                 }
                 else
                 {
-                    matches = _feed.Projects.Where(p =>
+                    matches = _repoFeed.Projects.Where(p =>
                      p.Name.Contains(query)
                      || p.Description.Contains(query)
                      || p.Contributor.Contains(query)
                     ).OrderByDescending(p => p.Awesomeness)
+                    .ToList<ProjectRepo>();
+                }
+
+                var totalItems = matches.Count;
+
+                if (pageSize > 0)
+                {
+                    var offset = 0;
+                    if (pageNumber > 1) { offset = pageSize * (pageNumber - 1); }
+                    matches = matches.Skip(offset).Take(pageSize).ToList<ProjectRepo>();
+
+                }
+                
+                result.Data = matches;
+                result.TotalItems = totalItems;
+                result.PageNumber = pageNumber;
+                result.PageSize = pageSize;
+            }
+            
+
+            return result;
+
+        }
+
+        public async Task<PagedResult<Project>> FetchProjects(
+            string query,
+            int pageNumber = 1,
+            int pageSize = 1000,
+            CancellationToken cancellationToken = default(CancellationToken)
+            )
+        {
+            await EnsureProjectFeed();
+            var result = new PagedResult<Project>();
+
+            if (_repoFeed != null && _repoFeed.Projects != null)
+            {
+                List<Project> matches = new List<Project>();
+                if (string.IsNullOrWhiteSpace(query))
+                {
+                    matches = _projectFeed.Projects.OrderBy(p => p.Name)
+                   .ToList<Project>();
+                }
+                else
+                {
+                    matches = _projectFeed.Projects.Where(p =>
+                     p.Name.Contains(query)
+                    // || p.Contributor.Contains(query)
+                    ).OrderBy(p => p.Name)
                     .ToList<Project>();
                 }
 
@@ -105,14 +185,24 @@ namespace dotnetfoundation.Data
                     matches = matches.Skip(offset).Take(pageSize).ToList<Project>();
 
                 }
-                
+
                 result.Data = matches;
                 result.TotalItems = totalItems;
+                result.PageNumber = pageNumber;
+                result.PageSize = pageSize;
             }
-            
+
 
             return result;
 
+        }
+
+        public async Task<List<ProjectContributor>> FetchContributors(
+           CancellationToken cancellationToken = default(CancellationToken)
+           )
+        {
+            await EnsureProjectFeed();
+            return _projectFeed.Contributors;
         }
 
     }

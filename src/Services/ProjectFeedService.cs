@@ -21,11 +21,21 @@ namespace dotnetfoundation.Services
 
         private ProjectFeedConfig _config;
 
-        public async Task<ProjectFeed> GetFeed()
+        public async Task<ProjectRepoFeed> GetRepoFeed()
         {
             using (var client = new HttpClient())
             {
-                var jsonString = await client.GetStringAsync(_config.FeedUrl).ConfigureAwait(false);
+                var jsonString = await client.GetStringAsync(_config.RepoFeedUrl).ConfigureAwait(false);
+                return JsonConvert.DeserializeObject<ProjectRepoFeed>(jsonString);
+            }
+
+        }
+
+        public async Task<ProjectFeed> GetProjectFeed()
+        {
+            using (var client = new HttpClient())
+            {
+                var jsonString = await client.GetStringAsync(_config.ProjectFeedUrl).ConfigureAwait(false);
                 return JsonConvert.DeserializeObject<ProjectFeed>(jsonString);
             }
 

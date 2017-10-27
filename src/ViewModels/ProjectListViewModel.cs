@@ -1,4 +1,4 @@
-﻿using cloudscribe.Core.Models.Generic;
+﻿using cloudscribe.Pagination.Models;
 using cloudscribe.Web.Pagination;
 using dotnetfoundation.Models;
 using System;
@@ -12,15 +12,29 @@ namespace dotnetfoundation.ViewModels
     {
         public ProjectListViewModel()
         {
-            Paging = new PaginationSettings();
+            ProjectRepos = new PagedResult<ProjectRepo>();
+            Projects = new PagedResult<Project>();
+            Contributors = new List<ProjectContributor>();
         }
 
 
         public string Q { get; set; }
         public string Type { get; set; }
-        public ProjectSummary Summary { get; set; }
+        public ProjectRepoSummary Summary { get; set; }
+        public PagedResult<ProjectRepo> ProjectRepos { get; set; }
         public PagedResult<Project> Projects { get; set; }
+        public List<ProjectContributor> Contributors { get; set; }
 
-        public PaginationSettings Paging { get; set; }
+        public ProjectContributor GetContributor(string name)
+        {
+            foreach(var c in Contributors)
+            {
+                if (c.Name == name) return c;
+            }
+
+            return null;
+        }
+
+        
     }
 }
