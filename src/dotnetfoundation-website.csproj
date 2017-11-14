@@ -33,10 +33,10 @@
 
   <ItemGroup>
 
-    <PackageReference Include="cloudscribe.Core.Web.Mvc" Version="2.0.41" />
+    <PackageReference Include="cloudscribe.Core.Web.Mvc" Version="2.0.45" />
     <PackageReference Include="cloudscribe.Core.Storage.EFCore.MSSQL" Version="2.0.6" />
     <PackageReference Include="cloudscribe.Core.SimpleContent.Mvc" Version="2.0.6" />
-    <PackageReference Include="cloudscribe.SimpleContent.Web.Mvc" Version="2.0.14" />
+    <PackageReference Include="cloudscribe.SimpleContent.Web.Mvc" Version="2.0.15" />
     <PackageReference Include="cloudscribe.SimpleContent.Storage.EFCore.MSSQL" Version="2.0.3" />
     <PackageReference Include="cloudscribe.SimpleContent.MetaWeblog" Version="2.0.1" />
     <PackageReference Include="cloudscribe.SimpleContent.Syndication" Version="2.0.1" />
@@ -45,12 +45,12 @@
     <PackageReference Include="cloudscribe.Logging.EFCore.MSSQL" Version="2.1.0" />
     <PackageReference Include="cloudscribe.Web.Localization" Version="2.0.0" />
     
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.0" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.SyndicationFeed.ReaderWriter" Version="1.0.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SyndicationFeed.ReaderWriter" Version="1.0.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.1" PrivateAssets="All" />
     <PackageReference Include="Microsoft.Win32.Registry" Version="4.4.0" />
-    <PackageReference Include="Microsoft.AspNetCore.DataProtection.AzureStorage" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.AzureStorage" Version="2.0.1" />
   </ItemGroup>
 
 
