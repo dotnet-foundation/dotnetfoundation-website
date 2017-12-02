@@ -48,10 +48,10 @@ namespace DotNetFoundationWebsite
             {
                 // this is false by default you should set it to true in azure environment variables
                 var useBlobStroageForDataProtection = Configuration.GetValue<bool>("AppSettings:UseAzureBlobForDataProtection");
-                if(useBlobStroageForDataProtection)
+                // best to put this in azure environment variables instead of appsettings.json
+                var storageConnectionString = Configuration["AppSettings:DataProtectionBlobStorageConnectionString"];
+                if (useBlobStroageForDataProtection && !string.IsNullOrWhiteSpace(storageConnectionString))
                 {
-                    // best to put this in azure environment variables instead of appsettings.json
-                    var storageConnectionString = Configuration["AppSettings:DataProtectionBlobStorageConnectionString"];
                     var storageAccount = CloudStorageAccount.Parse(storageConnectionString);
                     var client = storageAccount.CreateCloudBlobClient();
                     var container = client.GetContainerReference("key-container");
