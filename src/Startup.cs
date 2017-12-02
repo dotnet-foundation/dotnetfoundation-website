@@ -21,19 +21,23 @@ using cloudscribe.Core.SimpleContent.Integration;
 using dotnetfoundation.Models;
 using dotnetfoundation.Services;
 using dotnetfoundation.Data;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Auth;
 
 namespace DotNetFoundationWebsite
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration, IHostingEnvironment env)
+        public Startup(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory logFactory)
         {
             Configuration = configuration;
             Environment = env;
+            loggerFactory = logFactory;
         }
         public IHostingEnvironment Environment { get; set; }
         public IConfiguration Configuration { get; }
         public bool SslIsAvailable { get; set; }
+        private readonly ILoggerFactory loggerFactory;
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -42,13 +46,28 @@ namespace DotNetFoundationWebsite
             // and also to encrypt social auth secrets and smtp password in the db
             if(Environment.IsProduction())
             {
-                // TODO: Jon I guess the uri with sas token could be stored in azure as environment variable or using key vault
-                // but the keys go in azure blob storage per docs https://docs.microsoft.com/en-us/aspnet/core/security/data-protection/implementation/key-storage-providers
-                //var dpKeysUrl = Configuration["AppSettings:DataProtectionKeysBlobStorageUrl"];
-                services.AddDataProtection()
-                    //.PersistKeysToAzureBlobStorage(new Uri(dpKeysUrl))
-                    ;
-                ;
+                // this is false by default you should set it to true in azure environment variables
+                var useBlobStroageForDataProtection = Configuration.GetValue<bool>("AppSettings:UseAzureBlobForDataProtection");
+                if(useBlobStroageForDataProtection)
+                {
+                    // best to put this in azure environment variables instead of appsettings.json
+                    var storageConnectionString = Configuration["AppSettings:DataProtectionBlobStorageConnectionString"];
+                    var storageAccount = CloudStorageAccount.Parse(storageConnectionString);
+                    var client = storageAccount.CreateCloudBlobClient();
+                    var container = client.GetContainerReference("key-container");
+                    // The container must exist before calling the DataProtection APIs.
+                    // The specific file within the container does not have to exist,
+                    // as it will be created on-demand.
+                    container.CreateIfNotExistsAsync().GetAwaiter().GetResult();
+                    services.AddDataProtection()
+                        .PersistKeysToAzureBlobStorage(container, "keys.xml");
+ 
+                }
+                else
+                {
+                    services.AddDataProtection();
+                }
+  
             }
             else
             {
