@@ -79,3 +79,6 @@
     object-fit: cover; /*magic*/
 }
 
+p a {
+    text-decoration: underline;
+}
