@@ -26,6 +26,7 @@
     <Content Include="wwwroot\lib\**\*" CopyToPublishDirectory="Never" />
     <Content Include="bower.json" CopyToPublishDirectory="Never" />
     <Content Include="bundleconfig.json" CopyToPublishDirectory="Never" />
+    <Content Include="appsettings.Development.json" CopyToPublishDirectory="Never" />
 
     <Content Include="**\sitefiles\**\wwwroot\**" CopyToPublishDirectory="PreserveNewest" />
     
@@ -33,11 +34,11 @@
 
   <ItemGroup>
 
-    <PackageReference Include="cloudscribe.Core.Web.Mvc" Version="2.0.45" />
+    <PackageReference Include="cloudscribe.Core.Web.Mvc" Version="2.0.47" />
     <PackageReference Include="cloudscribe.Core.Storage.EFCore.MSSQL" Version="2.0.6" />
-    <PackageReference Include="cloudscribe.Core.SimpleContent.Mvc" Version="2.0.6" />
-    <PackageReference Include="cloudscribe.SimpleContent.Web.Mvc" Version="2.0.15" />
-    <PackageReference Include="cloudscribe.SimpleContent.Storage.EFCore.MSSQL" Version="2.0.3" />
+    <PackageReference Include="cloudscribe.Core.SimpleContent.Mvc" Version="2.0.7" />
+    <PackageReference Include="cloudscribe.SimpleContent.Web.Mvc" Version="2.0.20" />
+    <PackageReference Include="cloudscribe.SimpleContent.Storage.EFCore.MSSQL" Version="2.0.5" />
     <PackageReference Include="cloudscribe.SimpleContent.MetaWeblog" Version="2.0.1" />
     <PackageReference Include="cloudscribe.SimpleContent.Syndication" Version="2.0.1" />
     <PackageReference Include="cloudscribe.Syndication.Web" Version="2.0.0" />
