@@ -68,3 +68,17 @@
 .video-thumbnail:hover:before {
     color: #eee;
 }
+
+.contrib-logo-container {
+    max-height:100px;
+}
+
+.contrib-logos {
+    max-width: 100%;
+    max-height: 100px;
+    object-fit: cover; /*magic*/
+}
+
+p a {
+    text-decoration: underline;
+}

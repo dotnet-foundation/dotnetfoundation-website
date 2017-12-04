@@ -1,6 +1,6 @@
 ﻿namespace dotnetfoundation.Models
 {
-    public class ProjectSummary
+    public class ProjectRepoSummary
     {
         public int Projects { get; set; }
         public int Contributors { get; set; }
