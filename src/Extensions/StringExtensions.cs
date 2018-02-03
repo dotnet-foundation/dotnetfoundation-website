@@ -11,6 +11,10 @@ namespace System
         public static string PlainTextTruncate(this string input, int length)
         {
             string text = HtmlToPlainText(input);
+            if (text.Length < length) {
+                return text;
+            }
+
             char[] terminators = { '.', ',', ';', ':', '?', '!' };
             int end = text.LastIndexOfAny(terminators, length);
             if (end == -1)

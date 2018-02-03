@@ -13,7 +13,13 @@
                 </a>
             </h4>
             <p>
+            @if (!String.IsNullOrEmpty(item.Description))
+              {
                 @item.Description.PlainTextTruncate(100)
+            } else
+            {
+                <span>(No description listed)</span>
+            }
             </p>
         </div>
     </div>
