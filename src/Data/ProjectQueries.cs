@@ -170,7 +170,7 @@ namespace dotnetfoundation.Data
                 else
                 {
                     matches = _projectFeed.Projects.Where(p =>
-                     p.Name.Contains(query)
+                     p.Name.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0
                     // || p.Contributor.Contains(query)
                     ).OrderBy(p => p.Name)
                     .ToList<Project>();
