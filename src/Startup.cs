@@ -75,7 +75,7 @@ namespace DotNetFoundationWebsite
             services.AddScoped<MeetupFeedService>();
             services.Configure<NewsFeedService>(Configuration.GetSection("NewsFeedConfig"));
             services.AddSingleton<NewsFeedService>();
-
+            services.AddSingleton<IHttpClientFactory, HttpClientFactory>();
             //services.AddSession();
 
             ConfigureAuthPolicy(services);
