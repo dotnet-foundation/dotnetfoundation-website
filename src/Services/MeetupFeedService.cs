@@ -50,9 +50,7 @@ namespace dotnetfoundation.Services
                     _cache.Set(
                         _config.CacheKey,
                         result,
-                        new MemoryCacheEntryOptions()
-                         .SetSlidingExpiration(TimeSpan.FromSeconds(_config.CacheDurationInSeconds))
-                         );
+                        TimeSpan.FromHours(_config.CacheDurationInSeconds));
                 }
 
             }
