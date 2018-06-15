@@ -8,6 +8,15 @@
     min-height: 400px;
 }
 
+section.wrap-hero {
+    background-image: none;
+    background: linear-gradient(to bottom, #9a17bb 0%,rgb(104, 33, 122) 100%);
+}
+
+.wrap-hero .carousel-hero {
+    background-color: inherit;
+}
+
 .masonry-item .img-caption-ar .media-body {
     width: 100%;
     display: block;
