@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Diagnostics;
 using cloudscribe.SimpleContent.Models;
 using System.Xml.Linq;
 using Microsoft.AspNetCore.Authorization;
-using dotnetfoundation.Services;
 
 namespace DotNetFoundationWebsite.Controllers
 {
