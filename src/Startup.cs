@@ -69,6 +69,26 @@ namespace DotNetFoundationWebsite
                     .PersistKeysToFileSystem(new System.IO.DirectoryInfo(pathToCryptoKeys));
             }
 
+
+            services.Configure<ForwardedHeadersOptions>(options =>
+
+            {
+
+                options.ForwardedHeaders = Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.XForwardedProto;
+
+            });
+
+            services.AddMemoryCache();
+
+            services.AddHttpClient();
+            services.Configure<ProjectFeedConfig>(_configuration.GetSection("ProjectFeedConfig"));
+            services.AddScoped<ProjectFeedService>();
+            services.AddScoped<ProjectQueries>();
+            services.AddScoped<ProjectService>();
+            services.Configure<MeetupFeedConfig>(_configuration.GetSection("MeetupFeedConfig"));
+            services.AddScoped<MeetupFeedService>();
+            services.Configure<NewsFeedService>(_configuration.GetSection("NewsFeedConfig"));
+            services.AddSingleton<NewsFeedService>();
             services.Configure<ForwardedHeadersOptions>(options =>
             {
                 options.ForwardedHeaders = Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.XForwardedProto;
@@ -166,6 +186,12 @@ namespace DotNetFoundationWebsite
                     context.Response.StatusCode = 304;
                     return Task.CompletedTask;
                 });
+
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller}/{action}",
+                    defaults: new { controller = "Home", action = "Index" }
+                );
 
                 routes.UseCustomRoutes();
 
