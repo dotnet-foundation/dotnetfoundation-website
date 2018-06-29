@@ -13,6 +13,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.AddCloudscribeCoreEFStorageMSSQL(connectionString);
             services.AddCloudscribeSimpleContentEFStorageMSSQL(connectionString);
+            services.AddCloudscribeLoggingEFStorageMSSQL(connectionString);
 
             return services;
         }
@@ -31,6 +32,8 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddSimpleContentMvc(config);
             services.AddMetaWeblogForSimpleContent(config.GetSection("MetaWeblogApiOptions"));
             services.AddSimpleContentRssSyndiction();
+
+            services.AddCloudscribeLogging(config);
 
             return services;
         }

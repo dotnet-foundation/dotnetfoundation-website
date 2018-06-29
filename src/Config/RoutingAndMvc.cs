@@ -51,6 +51,19 @@ namespace Microsoft.AspNetCore.Builder
                 {
                     options.Filters.Add(new RequireHttpsAttribute());
                 }
+
+                options.CacheProfiles.Add("SiteMapCacheProfile",
+                     new CacheProfile
+                     {
+                         Duration = 30
+                     });
+
+                options.CacheProfiles.Add("RssCacheProfile",
+                     new CacheProfile
+                     {
+                         Duration = 100
+                     });
+
             });
 
             services.AddRouting(options =>

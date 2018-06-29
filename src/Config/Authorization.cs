@@ -11,6 +11,7 @@ namespace Microsoft.Extensions.DependencyInjection
             options.AddCloudscribeCoreDefaultPolicies();
 
             options.AddCloudscribeCoreSimpleContentIntegrationDefaultPolicies();
+            options.AddCloudscribeLoggingDefaultPolicy();
             // this is what the above extension adds
             //options.AddPolicy(
             //    "BlogEditPolicy",
