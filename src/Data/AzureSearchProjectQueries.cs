@@ -1,13 +1,8 @@
-﻿using dotnetfoundation.Models;
-using dotnetfoundation.Services;
-using cloudscribe.Pagination.Models;
-using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
+using cloudscribe.Pagination.Models;
+using dotnetfoundation.Models;
 using Microsoft.Azure.Search;
 using Microsoft.Azure.Search.Models;
 
