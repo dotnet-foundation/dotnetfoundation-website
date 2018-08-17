@@ -11,9 +11,9 @@ using System.Threading;
 
 namespace dotnetfoundation.Data
 {
-    public class ProjectQueries : IProjectQueries
+    public class JsonProjectQueries : IProjectQueries
     {
-        public ProjectQueries(
+        public JsonProjectQueries(
             IOptions<ProjectFeedConfig> configOptionsAccessor,
             ProjectFeedService feedService,
             IMemoryCache cache

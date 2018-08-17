@@ -1,26 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
+using dotnetfoundation.Data;
+using dotnetfoundation.Models;
+using dotnetfoundation.Services;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Azure.Search;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.DataProtection;
-using cloudscribe.SimpleContent.Models;
-using System.Globalization;
-using Microsoft.AspNetCore.Localization;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using cloudscribe.Core.SimpleContent.Integration;
-using dotnetfoundation.Models;
-using dotnetfoundation.Services;
-using dotnetfoundation.Data;
 using IProjectQueries = dotnetfoundation.Data.IProjectQueries;
 
 namespace DotNetFoundationWebsite
@@ -70,13 +65,22 @@ namespace DotNetFoundationWebsite
 
             services.Configure<ProjectFeedConfig>(Configuration.GetSection("ProjectFeedConfig"));
             services.AddScoped<ProjectFeedService>();
-            services.AddScoped<IProjectQueries, ProjectQueries>();
+
+            services.AddScoped<JsonProjectQueries>();
+            services.AddScoped<IProjectQueries, JsonProjectQueries>();
+            services.AddSingleton<SearchIndexClient>(
+                new SearchIndexClient(
+                    Configuration["AzureSearchConfig:SearchServiceName"], 
+                    Configuration["AzureSearchConfig:SearchIndexName"],
+                    new SearchCredentials(Configuration["AzureSearchConfig:SearchQueryKey"])));
+
             services.AddScoped<ProjectService>();
             services.Configure<MeetupFeedConfig>(Configuration.GetSection("MeetupFeedConfig"));
             services.AddScoped<MeetupFeedService>();
             services.Configure<NewsFeedService>(Configuration.GetSection("NewsFeedConfig"));
             services.AddSingleton<NewsFeedService>();
             services.AddSingleton<IHttpClientFactory, HttpClientFactory>();
+
             //services.AddSession();
 
             ConfigureAuthPolicy(services);
