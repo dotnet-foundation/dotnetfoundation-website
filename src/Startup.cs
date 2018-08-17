@@ -21,6 +21,7 @@ using cloudscribe.Core.SimpleContent.Integration;
 using dotnetfoundation.Models;
 using dotnetfoundation.Services;
 using dotnetfoundation.Data;
+using IProjectQueries = dotnetfoundation.Data.IProjectQueries;
 
 namespace DotNetFoundationWebsite
 {
@@ -69,7 +70,7 @@ namespace DotNetFoundationWebsite
 
             services.Configure<ProjectFeedConfig>(Configuration.GetSection("ProjectFeedConfig"));
             services.AddScoped<ProjectFeedService>();
-            services.AddScoped<ProjectQueries>();
+            services.AddScoped<IProjectQueries, ProjectQueries>();
             services.AddScoped<ProjectService>();
             services.Configure<MeetupFeedConfig>(Configuration.GetSection("MeetupFeedConfig"));
             services.AddScoped<MeetupFeedService>();

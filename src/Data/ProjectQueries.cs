@@ -11,7 +11,7 @@ using System.Threading;
 
 namespace dotnetfoundation.Data
 {
-    public class ProjectQueries
+    public class ProjectQueries : IProjectQueries
     {
         public ProjectQueries(
             IOptions<ProjectFeedConfig> configOptionsAccessor,

@@ -12,13 +12,13 @@ namespace dotnetfoundation.Services
     public class ProjectService
     {
         public ProjectService(
-            ProjectQueries queries
+            IProjectQueries queries
             )
         {
             _queries = queries;
         }
 
-        private ProjectQueries _queries;
+        private IProjectQueries _queries;
 
         public async Task<ProjectRepoSummary> GetRepoSummary()
         {
