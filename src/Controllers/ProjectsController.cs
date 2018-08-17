@@ -38,7 +38,6 @@ namespace dotnetfoundation.Controllers
             if (type == "project")
             {
                 model.Projects = await _projectService.SearchProjects(q, pn, ps);
-                model.Contributors = await _projectService.FetchContributors();
             }
             else
             {

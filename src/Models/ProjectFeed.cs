@@ -9,12 +9,12 @@ namespace dotnetfoundation.Models
     {
         public ProjectFeed()
         {
-            Projects = new List<Project>();
+            Projects = new List<ProjectFeedProject>();
             Contributors = new List<ProjectContributor>();
         }
 
         public string Name { get; set; }
-        public List<Project> Projects { get; set; }
+        public List<ProjectFeedProject> Projects { get; set; }
         public List<ProjectContributor> Contributors { get; set; }
     }
 }

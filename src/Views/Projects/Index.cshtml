@@ -72,7 +72,7 @@
             <article class="content-item project">
                 <div data-mdurl="https://raw.githubusercontent.com/dotnet/home/master/projects/@item.Name"></div>
                 @{ 
-                    var contributor = Model.GetContributor(item.Contributor);
+                    var contributor = item.Contributor;
                 }
                 @if (contributor != null)
                 {
