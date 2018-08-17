@@ -66,13 +66,20 @@ namespace DotNetFoundationWebsite
             services.Configure<ProjectFeedConfig>(Configuration.GetSection("ProjectFeedConfig"));
             services.AddScoped<ProjectFeedService>();
 
-            services.AddScoped<JsonProjectQueries>();
-            services.AddScoped<IProjectQueries, JsonProjectQueries>();
-            services.AddSingleton<SearchIndexClient>(
-                new SearchIndexClient(
-                    Configuration["AzureSearchConfig:SearchServiceName"], 
-                    Configuration["AzureSearchConfig:SearchIndexName"],
-                    new SearchCredentials(Configuration["AzureSearchConfig:SearchQueryKey"])));
+            if (Configuration.GetValue<bool>("FeatureToggles:AzureSearchEnabled", false))
+            {
+                services.AddScoped<JsonProjectQueries>();
+                services.AddScoped<IProjectQueries, AzureSearchProjectQueries>();
+                services.AddSingleton<SearchIndexClient>(
+                    new SearchIndexClient(
+                        Configuration["AzureSearchConfig:SearchServiceName"],
+                        Configuration["AzureSearchConfig:SearchIndexName"],
+                        new SearchCredentials(Configuration["AzureSearchConfig:SearchQueryKey"])));
+            }
+            else
+            {
+                services.AddScoped<IProjectQueries, JsonProjectQueries>();
+            }
 
             services.AddScoped<ProjectService>();
             services.Configure<MeetupFeedConfig>(Configuration.GetSection("MeetupFeedConfig"));
