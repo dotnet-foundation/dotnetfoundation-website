@@ -176,11 +176,11 @@
     <!-- IsHttps: @Context.Request.IsHttps -->
     <!-- Host: @Context.Request.Host.Host -->
     <cache>
-    <!-- ViewType: @GetType().AssemblyQualifiedName -->
-    <!-- Environment: @HostingEnvironment.EnvironmentName -->
-    <!-- Application: @Microsoft.Extensions.PlatformAbstractions.PlatformServices.Default.Application.ApplicationName, @Microsoft.Extensions.PlatformAbstractions.PlatformServices.Default.Application.ApplicationVersion -->
-    <!-- OS: @System.Runtime.InteropServices.RuntimeInformation.OSDescription @System.Runtime.InteropServices.RuntimeInformation.OSArchitecture -->
-    <!-- Machine: @Environment.MachineName -->
+        <!-- ViewType: @GetType().AssemblyQualifiedName -->
+        <!-- Environment: @HostingEnvironment.EnvironmentName -->
+        <!-- Application: @System.Reflection.Assembly.GetEntryAssembly().GetName().Name, @System.Reflection.Assembly.GetEntryAssembly().GetName().Version -->
+        <!-- OS: @System.Runtime.InteropServices.RuntimeInformation.OSDescription @System.Runtime.InteropServices.RuntimeInformation.OSArchitecture -->
+        <!-- Machine: @Environment.MachineName -->
     </cache>
   </body>
 </html>
