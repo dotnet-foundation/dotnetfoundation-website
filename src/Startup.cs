@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -16,6 +16,8 @@ using dotnetfoundation.Models;
 using dotnetfoundation.Services;
 using dotnetfoundation.Data;
 using Microsoft.AspNetCore.Http;
+using IProjectQueries = dotnetfoundation.Data.IProjectQueries;
+using Microsoft.Azure.Search;
 
 namespace DotNetFoundationWebsite
 {
@@ -83,7 +85,21 @@ namespace DotNetFoundationWebsite
             services.AddHttpClient();
             services.Configure<ProjectFeedConfig>(_configuration.GetSection("ProjectFeedConfig"));
             services.AddScoped<ProjectFeedService>();
-            services.AddScoped<ProjectQueries>();
+            if (_configuration.GetValue<bool>("FeatureToggles:AzureSearchEnabled", false))
+            {
+                services.AddScoped<JsonProjectQueries>();
+                services.AddScoped<IProjectQueries, AzureSearchProjectQueries>();
+                services.AddSingleton<SearchIndexClient>(
+                    new SearchIndexClient(
+                        _configuration["AzureSearchConfig:SearchServiceName"],
+                        _configuration["AzureSearchConfig:SearchIndexName"],
+                        new SearchCredentials(_configuration["AzureSearchConfig:SearchQueryKey"])));
+            }
+            else
+            {
+                services.AddScoped<IProjectQueries, JsonProjectQueries>();
+            }
+
             services.AddScoped<ProjectService>();
             services.Configure<MeetupFeedConfig>(_configuration.GetSection("MeetupFeedConfig"));
             services.AddScoped<MeetupFeedService>();
@@ -126,7 +142,7 @@ namespace DotNetFoundationWebsite
             services.SetupMvc(_sslIsAvailable);
 
             services.AddOptions();
-            
+
             services.Configure<MvcOptions>(options =>
             {
                 if (_sslIsAvailable)
@@ -151,7 +167,7 @@ namespace DotNetFoundationWebsite
             IOptions<RequestLocalizationOptions> localizationOptionsAccessor
             )
         {
-           
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -170,7 +186,7 @@ namespace DotNetFoundationWebsite
             //app.UseSession();
 
             app.UseRequestLocalization(localizationOptionsAccessor.Value);
-            
+
             var multiTenantOptions = multiTenantOptionsAccessor.Value;
 
             app.UseCloudscribeCore(
@@ -181,7 +197,7 @@ namespace DotNetFoundationWebsite
             app.UseMvc(routes =>
             {
                 //holder.js LIE to avoid large requests. The JS is already bundled. 
-                routes.MapGet("holder.js/{whatever}", context => 
+                routes.MapGet("holder.js/{whatever}", context =>
                 {
                     context.Response.StatusCode = 304;
                     return Task.CompletedTask;

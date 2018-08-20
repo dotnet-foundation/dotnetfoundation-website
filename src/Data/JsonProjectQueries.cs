@@ -11,9 +11,9 @@ using System.Threading;
 
 namespace dotnetfoundation.Data
 {
-    public class ProjectQueries
+    public class JsonProjectQueries : IProjectQueries
     {
-        public ProjectQueries(
+        public JsonProjectQueries(
             IOptions<ProjectFeedConfig> configOptionsAccessor,
             ProjectFeedService feedService,
             IMemoryCache cache
@@ -161,20 +161,22 @@ namespace dotnetfoundation.Data
 
             if (_repoFeed != null && _repoFeed.Projects != null)
             {
-                List<Project> matches = new List<Project>();
-                if (string.IsNullOrWhiteSpace(query))
-                {
-                    matches = _projectFeed.Projects.OrderBy(p => p.Name)
-                   .ToList<Project>();
-                }
-                else
-                {
-                    matches = _projectFeed.Projects.Where(p =>
-                     p.Name.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0
-                    // || p.Contributor.Contains(query)
-                    ).OrderBy(p => p.Name)
-                    .ToList<Project>();
-                }
+                List<Project> matches = _projectFeed.Projects
+                    .Where(p =>
+                        p.Name.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0
+                        || string.IsNullOrWhiteSpace(query)
+                    )
+                    .OrderBy(p => p.Name)
+                    .Select(p =>
+                    {
+                        var contributor = _projectFeed.Contributors.FirstOrDefault(c => c.Name == p.Contributor) ;
+                        return new Project
+                        {
+                            Name = p.Name,
+                            Contributor = contributor ?? new ProjectContributor()
+                        };
+                    })
+                    .ToList();
 
                 var totalItems = matches.Count;
 
@@ -196,14 +198,5 @@ namespace dotnetfoundation.Data
             return result;
 
         }
-
-        public async Task<List<ProjectContributor>> FetchContributors(
-           CancellationToken cancellationToken = default(CancellationToken)
-           )
-        {
-            await EnsureProjectFeed();
-            return _projectFeed.Contributors;
-        }
-
     }
 }

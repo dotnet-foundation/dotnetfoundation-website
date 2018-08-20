@@ -14,7 +14,6 @@ namespace dotnetfoundation.ViewModels
         {
             ProjectRepos = new PagedResult<ProjectRepo>();
             Projects = new PagedResult<Project>();
-            Contributors = new List<ProjectContributor>();
         }
 
 
@@ -23,18 +22,5 @@ namespace dotnetfoundation.ViewModels
         public ProjectRepoSummary Summary { get; set; }
         public PagedResult<ProjectRepo> ProjectRepos { get; set; }
         public PagedResult<Project> Projects { get; set; }
-        public List<ProjectContributor> Contributors { get; set; }
-
-        public ProjectContributor GetContributor(string name)
-        {
-            foreach(var c in Contributors)
-            {
-                if (c.Name == name) return c;
-            }
-
-            return null;
-        }
-
-        
     }
 }

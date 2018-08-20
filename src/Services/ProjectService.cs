@@ -12,13 +12,13 @@ namespace dotnetfoundation.Services
     public class ProjectService
     {
         public ProjectService(
-            ProjectQueries queries
+            IProjectQueries queries
             )
         {
             _queries = queries;
         }
 
-        private ProjectQueries _queries;
+        private IProjectQueries _queries;
 
         public async Task<ProjectRepoSummary> GetRepoSummary()
         {
@@ -53,13 +53,6 @@ namespace dotnetfoundation.Services
                 pageSize,
                 cancellationToken
                 );
-        }
-
-        public async Task<List<ProjectContributor>> FetchContributors(
-           CancellationToken cancellationToken = default(CancellationToken)
-           )
-        {
-            return await _queries.FetchContributors();
         }
     }
 }

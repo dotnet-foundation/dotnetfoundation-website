@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 
 namespace dotnetfoundation.Models
 {
-    public class Project
+    public class ProjectFeedProject
     {
         public string Name { get; set; }
-        public ProjectContributor Contributor { get; set; }
-
+        public string Contributor { get; set; }
     }
 }
