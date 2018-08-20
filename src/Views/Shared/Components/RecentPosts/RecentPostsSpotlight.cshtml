@@ -4,7 +4,7 @@
 @using cloudscribe.SimpleContent.Models
 @using Microsoft.Extensions.Localization
 @inject IStringLocalizer<SimpleContent> sr
-@inject IHtmlProcessor htmlFilter
+@inject cloudscribe.SimpleContent.Web.Services.IContentProcessor htmlFilter
 @{
     var defaultImageUrl = "/images/logo_big.png"; 
 }
@@ -12,7 +12,7 @@
 {
         @foreach (var post in Model.Posts)
         {
-            var imgUrl = htmlFilter.ExtractFirstImageUrl(post.Content, defaultImageUrl);
+            var imgUrl = htmlFilter.ExtractFirstImageUrl(post, Url, defaultImageUrl);
 
             <div class="col-md-4 col-sm-6 masonry-item">
                 <div class="img-caption-ar wow fadeInUp">
@@ -26,12 +26,12 @@
                         <div class="caption-content">
                         <h4 class="media-heading">
                             <a asp-route="@blogRoutes.PostWithDateRouteName"
-                               asp-route-year="@post.PubDate.Year"
-                               asp-route-month="@post.PubDate.Month.ToString("00")"
-                               asp-route-day="@post.PubDate.Day.ToString("00")"
+                               asp-route-year="@post.PubDate.Value.Year"
+                               asp-route-month="@post.PubDate.Value.Month.ToString("00")"
+                               asp-route-day="@post.PubDate.Value.Day.ToString("00")"
                                asp-route-slug="@post.Slug">@post.Title</a>
                         </h4>
-                        <small>@Model.FormatDate(post.PubDate)</small>
+                        <small>@Model.FormatDate(post.PubDate.Value)</small>
                         </div>
                     </div>
                 }
@@ -45,7 +45,7 @@
                         <h4 class="media-heading">
                             <a asp-route="@blogRoutes.PostWithoutDateRouteName" asp-route-slug="@post.Slug">@post.Title</a>
                         </h4>
-                        <small>@Model.FormatDate(post.PubDate)</small>
+                        <small>@Model.FormatDate(post.PubDate.Value)</small>
                    </div>
                     
                 } 

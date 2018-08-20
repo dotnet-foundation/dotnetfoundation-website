@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore;
+﻿using cloudscribe.Logging.Models;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DotNetFoundationWebsite
 {
@@ -11,87 +14,106 @@ namespace DotNetFoundationWebsite
     {
         public static void Main(string[] args)
         {
-            var host = BuildWebHost(args);
-            var loggerFactory = host.Services.GetRequiredService<ILoggerFactory>();
-            var env = host.Services.GetRequiredService<IHostingEnvironment>();
-            ConfigureLogging(env, loggerFactory, host.Services);
+            //CreateWebHostBuilder(args).Build().Run();
+            var hostBuilder = CreateWebHostBuilder(args);
+            var host = hostBuilder.Build();
 
             using (var scope = host.Services.CreateScope())
             {
-                var services = scope.ServiceProvider;
-
+                var scopedServices = scope.ServiceProvider;
                 try
                 {
-                    EnsureDataStorageIsReady(services);
+                    EnsureDataStorageIsReady(scopedServices);
 
                 }
                 catch (Exception ex)
                 {
-                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    var logger = scopedServices.GetRequiredService<ILogger<Program>>();
                     logger.LogError(ex, "An error occurred while migrating the database.");
                 }
             }
 
+            var env = host.Services.GetRequiredService<IHostingEnvironment>();
+            var loggerFactory = host.Services.GetRequiredService<ILoggerFactory>();
+            var config = host.Services.GetRequiredService<IConfiguration>();
+            ConfigureLogging(env, loggerFactory, host.Services, config);
+
             host.Run();
+
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .Build();
+                .UseStartup<Startup>();
 
-        private static void EnsureDataStorageIsReady(IServiceProvider services)
+        private static void EnsureDataStorageIsReady(IServiceProvider scopedServices)
         {
-            CoreEFStartup.InitializeDatabaseAsync(services).Wait();
+            CoreEFStartup.InitializeDatabaseAsync(scopedServices).Wait();
+            SimpleContentEFStartup.InitializeDatabaseAsync(scopedServices).Wait();
+            LoggingEFStartup.InitializeDatabaseAsync(scopedServices).Wait();
 
-            SimpleContentEFStartup.InitializeDatabaseAsync(services).Wait();
-
-            LoggingEFStartup.InitializeDatabaseAsync(services).Wait();
         }
 
         private static void ConfigureLogging(
             IHostingEnvironment env,
             ILoggerFactory loggerFactory,
-            IServiceProvider serviceProvider
+            IServiceProvider serviceProvider,
+            IConfiguration config
             )
         {
+            var dbLoggerConfig = config.GetSection("DbLoggerConfig").Get<DbLoggerConfig>();
             LogLevel minimumLevel;
+            string levelConfig;
             if (env.IsProduction())
             {
-                minimumLevel = LogLevel.Warning;
+                levelConfig = dbLoggerConfig.ProductionLogLevel;
             }
             else
             {
-                minimumLevel = LogLevel.Information;
+                levelConfig = dbLoggerConfig.DevLogLevel;
+            }
+            switch (levelConfig)
+            {
+                case "Debug":
+                    minimumLevel = LogLevel.Debug;
+                    break;
+
+                case "Information":
+                    minimumLevel = LogLevel.Information;
+                    break;
+
+                case "Trace":
+                    minimumLevel = LogLevel.Trace;
+                    break;
+
+                default:
+                    minimumLevel = LogLevel.Warning;
+                    break;
             }
 
             // a customizable filter for logging
-            // add exclusions to remove noise in the logs
-            var excludedLoggers = new List<string>
+            // add exclusions in appsettings.json to remove noise in the logs
+            bool logFilter(string loggerName, LogLevel logLevel)
             {
-                "Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware",
-                "Microsoft.AspNetCore.Hosting.Internal.WebHost",
-            };
+                if (dbLoggerConfig.ExcludedNamesSpaces.Any(f => loggerName.StartsWith(f)))
+                {
+                    return false;
+                }
 
-            Func<string, LogLevel, bool> logFilter = (string loggerName, LogLevel logLevel) =>
-            {
                 if (logLevel < minimumLevel)
                 {
                     return false;
                 }
 
-                if (excludedLoggers.Contains(loggerName))
+                if (dbLoggerConfig.BelowWarningExcludedNamesSpaces.Any(f => loggerName.StartsWith(f)) && logLevel < LogLevel.Warning)
                 {
                     return false;
                 }
-
                 return true;
-            };
+            }
 
             loggerFactory.AddDbLogger(serviceProvider, logFilter);
         }
 
-
     }
-
 }
