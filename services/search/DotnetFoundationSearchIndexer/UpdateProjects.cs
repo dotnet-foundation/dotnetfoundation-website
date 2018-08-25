@@ -22,7 +22,9 @@ namespace DotnetFoundationSearchIndexer
     {
         private static HttpClient httpClient = new HttpClient();
         [FunctionName("UpdateProjects")]
-        public static async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)]HttpRequest req, ILogger log)
+        public static async Task<IActionResult> Run(
+            [HttpTrigger(AuthorizationLevel.Function, "post")]HttpRequest req, 
+            ILogger log)
         {
             var indexName = Env("SEARCH_INDEX_NAME");
             var searchClient = new SearchServiceClient(
