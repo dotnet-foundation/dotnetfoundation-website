@@ -110,8 +110,10 @@ namespace DotnetFoundationSearchIndexer
 
         private static async Task<IEnumerable<Project>> GetProjects(ILogger log)
         {
+            var projectJsonUrl = Env("PROJECT_JSON_URL", "https://raw.githubusercontent.com/dotnet/home/master/projects/projects.json");
+
             ProjectList projectList;
-            using (var stream = await httpClient.GetStreamAsync("https://raw.githubusercontent.com/anthonychu/home/fix-project-json-errors/projects/projects.json"))
+            using (var stream = await httpClient.GetStreamAsync(projectJsonUrl))
             using (var streamReader = new StreamReader(stream))
             {
                 var jsonTextReader = new JsonTextReader(streamReader);
@@ -174,9 +176,10 @@ namespace DotnetFoundationSearchIndexer
         }
 
 
-        private static string Env(string key)
+        private static string Env(string key, string defaultValue = null)
         {
-            return Environment.GetEnvironmentVariable(key, EnvironmentVariableTarget.Process);
+            var val = Environment.GetEnvironmentVariable(key, EnvironmentVariableTarget.Process);
+            return string.IsNullOrEmpty(val) ? defaultValue : val;
         }
     }
 
