@@ -5,9 +5,17 @@
     "resourceNamePrefix": {
       "type": "string"
     },
-    "location": {
+    "appInsightsLocation": {
       "type": "string",
-      "defaultValue": "westus"
+      "defaultValue": "westus2",
+      "allowedValues": [
+        "eastus",
+        "northeurope",
+        "southcentralus",
+        "southeastasia",
+        "westeurope",
+        "westus2"
+      ]
     },
     "sku": {
       "type": "string",
@@ -21,7 +29,7 @@
     }
   },
   "variables": {
-    "searchServiceName": "[concat(parameters('resourceNamePrefix'), '-search')]",
+    "searchServiceName": "[parameters('resourceNamePrefix')]",
     "functionAppName": "[concat(parameters('resourceNamePrefix'), '-indexer')]",
     "storageName": "[concat('funcstorage', uniqueString(variables('functionAppName')))]"
   },
@@ -29,7 +37,7 @@
     {
       "apiVersion": "2015-08-19",
       "name": "[variables('searchServiceName')]",
-      "location": "[parameters('location')]",
+      "location": "[resourceGroup().location]",
       "sku": {
         "name": "[parameters('sku')]"
       },
@@ -101,14 +109,14 @@
         "reserved": false
       },
       "apiVersion": "2016-03-01",
-      "location": "[parameters('location')]",
+      "location": "[resourceGroup().location]",
       "kind": "functionapp"
     },
     {
       "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Storage/storageAccounts",
       "name": "[variables('storageName')]",
-      "location": "[parameters('location')]",
+      "location": "[resourceGroup().location]",
       "properties": {
         "accountType": "Standard_LRS"
       }
@@ -117,7 +125,7 @@
       "apiVersion": "2015-05-01",
       "name": "[variables('functionAppName')]",
       "type": "microsoft.insights/components",
-      "location": "West US 2",
+      "location": "[parameters('appInsightsLocation')]",
       "tags": {
         "[concat('hidden-link:', resourceGroup().id, '/providers/Microsoft.Web/sites/', variables('functionAppName'))]": "Resource"
       },
