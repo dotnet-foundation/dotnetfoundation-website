@@ -113,7 +113,7 @@ namespace DotNetFoundationWebsite
                 return true;
             }
 
-            loggerFactory.AddDbLogger(serviceProvider, logFilter);
+            //loggerFactory.AddDbLogger(serviceProvider, logFilter);
         }
 
     }
