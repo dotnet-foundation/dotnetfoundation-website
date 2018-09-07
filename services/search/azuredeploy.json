@@ -1,0 +1,138 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "resourceNamePrefix": {
+      "type": "string"
+    },
+    "appInsightsLocation": {
+      "type": "string",
+      "defaultValue": "westus2",
+      "allowedValues": [
+        "eastus",
+        "northeurope",
+        "southcentralus",
+        "southeastasia",
+        "westeurope",
+        "westus2"
+      ]
+    },
+    "sku": {
+      "type": "string",
+      "defaultValue": "free",
+      "allowedValues": [
+        "free",
+        "basic",
+        "standard",
+        "standard2"
+      ]
+    }
+  },
+  "variables": {
+    "searchServiceName": "[parameters('resourceNamePrefix')]",
+    "functionAppName": "[concat(parameters('resourceNamePrefix'), '-indexer')]",
+    "storageName": "[concat('funcstorage', uniqueString(variables('functionAppName')))]"
+  },
+  "resources": [
+    {
+      "apiVersion": "2015-08-19",
+      "name": "[variables('searchServiceName')]",
+      "location": "[resourceGroup().location]",
+      "sku": {
+        "name": "[parameters('sku')]"
+      },
+      "type": "Microsoft.Search/searchServices",
+      "properties": {
+        "replicaCount": 1,
+        "partitionCount": 1,
+        "hostingMode": "Default"
+      }
+    },
+    {
+      "name": "[variables('functionAppName')]",
+      "type": "Microsoft.Web/sites",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts', variables('storageName'))]",
+        "[resourceId('microsoft.insights/components/', variables('functionAppName'))]"
+      ],
+      "properties": {
+        "siteConfig": {
+          "appSettings": [
+            {
+              "name": "AzureWebJobsDashboard",
+              "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageName')), '2015-05-01-preview').key1)]"
+            },
+            {
+              "name": "AzureWebJobsStorage",
+              "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageName')), '2015-05-01-preview').key1)]"
+            },
+            {
+              "name": "FUNCTIONS_EXTENSION_VERSION",
+              "value": "~2"
+            },
+            {
+              "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
+              "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageName')), '2015-05-01-preview').key1)]"
+            },
+            {
+              "name": "WEBSITE_CONTENTSHARE",
+              "value": "[concat(toLower(variables('functionAppName')), 'a1ed')]"
+            },
+            {
+              "name": "WEBSITE_NODE_DEFAULT_VERSION",
+              "value": "6.5.0"
+            },
+            {
+              "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
+              "value": "[reference(resourceId('microsoft.insights/components/', variables('functionAppName')), '2015-05-01').InstrumentationKey]"
+            },
+            {
+              "name": "SEARCH_SERVICE_NAME",
+              "value": "[variables('searchServiceName')]"
+            },
+            {
+              "name": "SEARCH_SERVICE_KEY",
+              "value": "[listAdminKeys(variables('searchServiceName'), '2015-08-19').PrimaryKey]"
+            },
+            {
+              "name": "SEARCH_INDEX_NAME",
+              "value": "projects"
+            },
+            {
+              "name": "PROJECT",
+              "value": "services/search/DotnetFoundationSearchIndexer"
+            }
+          ]
+        },
+        "name": "[variables('functionAppName')]",
+        "clientAffinityEnabled": false,
+        "reserved": false
+      },
+      "apiVersion": "2016-03-01",
+      "location": "[resourceGroup().location]",
+      "kind": "functionapp"
+    },
+    {
+      "apiVersion": "2015-05-01-preview",
+      "type": "Microsoft.Storage/storageAccounts",
+      "name": "[variables('storageName')]",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "accountType": "Standard_LRS"
+      }
+    },
+    {
+      "apiVersion": "2015-05-01",
+      "name": "[variables('functionAppName')]",
+      "type": "microsoft.insights/components",
+      "location": "[parameters('appInsightsLocation')]",
+      "tags": {
+        "[concat('hidden-link:', resourceGroup().id, '/providers/Microsoft.Web/sites/', variables('functionAppName'))]": "Resource"
+      },
+      "properties": {
+        "ApplicationId": "[variables('functionAppName')]",
+        "Request_Source": "IbizaWebAppExtensionCreate"
+      }
+    }
+  ]
+}

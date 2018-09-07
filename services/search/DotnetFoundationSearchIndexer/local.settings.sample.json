@@ -1,0 +1,11 @@
+{
+    "IsEncrypted": false,
+    "Values": {
+        "AzureWebJobsStorage": "",
+        "AzureWebJobsDashboard": "",
+        "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+        "SEARCH_SERVICE_NAME": "test-antchu-search",
+        "SEARCH_SERVICE_KEY": "",
+        "SEARCH_INDEX_NAME": "projects"
+    }
+}
