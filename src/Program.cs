@@ -114,7 +114,6 @@ namespace DotNetFoundationWebsite
             }
 
             loggerFactory.AddDbLogger(serviceProvider, logFilter);
-            loggerFactory.AddAzureWebAppDiagnostics();
         }
 
     }
