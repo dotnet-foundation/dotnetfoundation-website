@@ -44,6 +44,7 @@ namespace DotNetFoundationWebsite
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseIISIntegration()
                 .UseStartup<Startup>();
 
         private static void EnsureDataStorageIsReady(IServiceProvider scopedServices)
