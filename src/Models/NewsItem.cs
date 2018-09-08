@@ -14,5 +14,6 @@ namespace dotnetfoundation.Models
         public string Uri { get; set; }
         public string Excerpt { get; set; }
         public DateTime PublishDate { get; set; }
+        public string NewsType { get; set; }
     }
 }

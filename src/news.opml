@@ -11,5 +11,7 @@
 		<outline text=".NET Blog" description="A first-hand look from the .NET engineering teams" htmlUrl="https://blogs.msdn.microsoft.com/dotnet/" language="English" title=".NET Blog" type="rss" version="RSS2" xmlUrl="https://blogs.msdn.microsoft.com/dotnet/feed/"/>
 		<outline text=".NET Web Development and Tools Blog" description="Your official information source from the .NET Web Development and Tools group at Microsoft." htmlUrl="https://blogs.msdn.microsoft.com/webdev/" language="English" title=".NET Web Dev Blog" type="rss" version="RSS2" xmlUrl="https://blogs.msdn.microsoft.com/webdev/feed/"/>
 		<outline text="Scott Hanselman" description="Scott Hanselman on Programming, User Experience, The Zen of Computers and Life in General" htmlUrl="https://www.hanselman.com/blog/" language="English" title="Scott Hanselman" type="rss" version="RSS2" xmlUrl="http://feeds.hanselman.com/ScottHanselman"/>
+		<outline text=".NET Foundation Blog" description="Your source for everything going on in the .NET Open Source world..." htmlUrl="http://dotnetfoundation.org/blog" language="English" xmlUrl="http://dotnetfoundation.org/api/rss"/>
+		<outline text="Discover.NET" description="A roundup of recent blog posts, podcasts, and more." xmlUrl="https://discoverdot.net/feeds/news.rss"/>
 	</body>
 </opml>
