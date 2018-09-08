@@ -179,9 +179,10 @@ namespace DotNetFoundationWebsite
                 app.UseHsts();
             }
 
-            app.UseForwardedHeaders();
+            
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseCloudscribeCommonStaticFiles();
             app.UseCookiePolicy();
             //app.UseSession();
 
