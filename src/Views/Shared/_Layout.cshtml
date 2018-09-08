@@ -7,9 +7,10 @@
 <!DOCTYPE html>
 <html class="sb-init">
 <head>
-    <meta charset="utf-8" />
-    <title>.NET Foundation</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>.NET Foundation</title>
     <link rel="apple-touch-icon" sizes="57x57" href="~/images/favicon/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="~/images/favicon/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="~/images/favicon/apple-icon-72x72.png">
@@ -29,150 +30,158 @@
     <meta name="theme-color" content="#ffffff">
     @RenderSection("Meta", required: false)
     <environment names="Development">
-        <link href="~/theme/css/preload.css" rel="stylesheet" />
-        <link href="~/theme/css/vendors.css" rel="stylesheet" />
-        <link href="~/theme/css/style-gray.css" rel="stylesheet" media="screen" title="default" asp-append-version="true" />
-        <link href="~/theme/css/width-full.css" rel="stylesheet" title="default" />
-        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.0/jquery.waypoints.min.js"></script>
+        <script src="~/js/jquery.counterup.min.js"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+        <link rel="stylesheet" href="~/css/style.css">
+        <link rel="stylesheet" href="~/css/home.css">
     </environment>
     <environment names="Staging,Production">
-        <link href="~/theme/css/preload.css" rel="stylesheet" />
-        <link href="~/theme/css/vendors.css" rel="stylesheet" />
-        <link href="~/theme/css/style-gray.css" rel="stylesheet" media="screen" title="default" asp-append-version="true" />
-        <link href="~/theme/css/width-full.css" rel="stylesheet" title="default" />
-        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-        <!--    
-        bundling css fails at the moment
-            <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-        -->
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.0/jquery.waypoints.min.js"></script>
+        <script src="~/js/jquery.counterup.min.js"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+        <link rel="stylesheet" href="~/css/style.css" asp-append-version="true">
+        <link rel="stylesheet" href="~/css/home.css" asp-append-version="true">
     </environment>
-    <partial name="_CookieConsent"/>
+    <partial name="_CookieConsent" />
     @RenderSection("Styles", required: false)
 </head>
-<body class="@ViewData["BodyClass"]">
-    <div class="sb-site-container">
-        <div class="boxed">
-            <header id="header-full-top" class="hidden-xs header-full">
-                <div class="container">
-                    <div class="header-full-title">
-                        <h1 class="animated fadeInRight"><a href="/">.NET <span>Foundation</span></a></h1>
-                        <p class="animated fadeInRight">supporting open source .NET</p>
-                    </div>
-                    <nav class="top-nav">
-                        <ul class="top-nav-social hidden-sm">
-                            <li><a href="/api/rss" class="animated fadeIn animation-delay-6 rss"><i title="RSS" class="fa fa-rss"></i></a></li>
-                            <li><a href="https://twitter.com/dotnetfdn" class="animated fadeIn animation-delay-7 twitter"><i title="Twitter" class="fa fa-twitter"></i></a></li>
-                            <li><a href="https://forums.dotnetfoundation.org/" class="animated fadeIn animation-delay-7 forums"><i title="Forum" class="fa fa-users"></i></a></li>
-<!--                            <li><a href="#" class="animated fadeIn animation-delay-8 facebook"><i class="fa fa-facebook"></i></a></li> 
-                            <li><a href="#" class="animated fadeIn animation-delay-9 google-plus"><i class="fa fa-google-plus"></i></a></li> 
-                            <li><a href="#" class="animated fadeIn animation-delay-7 linkedin"><i class="fa fa-linkedin"></i></a></li> -->
-                        </ul>
-                      <!--  <div class="dropdown animated fadeInDown animation-delay-13">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-search"></i></a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-search-box animated fadeInUp">
-                                <form role="form">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Search...">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-ar btn-primary" type="button">Go!</button>
-                                        </span>
-                                    </div>
-                                </form>
-                            </div>
-                        </div> --> <!-- dropdown -->
-                    </nav>
-                </div> <!-- container -->
-            </header> <!-- header-full -->
-            <nav class="navbar navbar-default navbar-header-full navbar-dark yamm navbar-static-top" role="navigation" id="header">
-                <div class="container">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                            <span class="sr-only">Toggle navigation</span>
-                            <i class="fa fa-bars"></i>
-                        </button>
-                        <a id="ar-brand" class="navbar-brand hidden-lg hidden-md hidden-sm" href="/">.NET <span>Foundation</span></a>
-                    </div> <!-- navbar-header -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        @await Component.InvokeAsync("Navigation", new { viewName = "BootstrapTopNavWithDropdowns", filterName = NamedNavigationFilters.TopNav, startingNodeKey = "" })
-                    </div><!-- navbar-collapse -->
-                </div><!-- container -->
-            </nav>
-            @RenderSection("Toolbar", required: false)
-            @await Component.InvokeAsync("Navigation", new { viewName = "BootstrapBreadcrumbs", filterName = NamedNavigationFilters.Breadcrumbs, startingNodeKey = "" })
-        <div class="@containerClass">
-            @await Html.PartialAsync("AlertsPartial")
-            @RenderBody()
-        </div>
-            <aside id="footer-widgets">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h3 class="footer-widget-title">Site Links</h3>
-                            <ul class="list-unstyled three_cols">
-                                <li><a href="/">Home</a></li>
-                                <li><a href="/privacy-policy">Privacy Policy</a></li>
-                                <li><a href="/code-of-conduct">Code of Conduct</a></li>
-                                @await Html.PartialAsync("_LoginPartial")
-                            </ul>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="footer-widget">
-                                @await Component.InvokeAsync("RecentPosts", new { viewName = "RecentPosts", numberToShow = 3 })
-                            </div>
-                        </div>
-                    </div> <!-- row -->
-                </div> <!-- container -->
-            </aside> <!-- footer-widgets -->
-            <footer id="footer">
-                <p>&copy; @DateTime.Now.Year .NET Foundation and Contributors.</p>
-            </footer>
-            <div id="back-top">
-                <a href="#header"><i class="fa fa-chevron-up"></i></a>
+<body>
+<header class="page-header_wrapper" role="banner">
+    <section class="flash justify-content-center align-items-center">
+        <p class="flash_message">
+            BEAKING NEWS: Lorem ipsum dolor sit amet. <a class="flash_link" href="">Find out more ></a>
+        </p>
+        <div class="flash_close">X</div>
+    </section>
+
+    <div class="site-nav_container container">
+        <nav class="navbar navbar-expand-md align-items-end">
+            <a class="navbar-brand" href="http://localhost:4000"><img id="site-logo" src="/img/dotNetFoundationHorizontal.png"></a>
+            <button class="main-menu_toggle navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul id="main-menu" class="navbar-nav ml-auto">
+                    <li class="main-menu_item nav-item">
+                        <a class="nav-link" href="#">Get Involved <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="main-menu_item nav-item">
+                        <a class="nav-link" href="#">Projects</a>
+                    </li>
+                    <li class="main-menu_item nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="main-menu_item nav-item">
+                        <a class="nav-link" href="#">News</a>
+                    </li>
+                </ul>
             </div>
-            <environment names="Development">
-                <script src="~/theme/js/vendors.js"></script>
-                <script src="~/theme/js/DropdownHover.js"></script>
-                <script src="~/theme/js/app.js"></script>
-                <script src="~/theme/js/holder.js"></script>
-                <script src="~/js/site.js" asp-append-version="true"></script>
-            </environment>
-            <environment names="Staging,Production">
-                <script src="~/js/site.min.js" asp-append-version="true"></script>
-            </environment>
+        </nav>
+        <section class="site-social_container d-flex position-absolute">
+            <div class="site-social_icon site-social_icon--rss">
+                <a href="#">
+                    <i class="fas fa-rss"></i>
+                </a>
+            </div>
+            <div class="site-social_icon site-social_icon--twitter">
+                <a href="#">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </div>
+            <div class="site-social_icon site-social_icon--users">
+                <a href="#">
+                    <i class="fas fa-users"></i>
+                </a>
+            </div>
+        </section>
+    </div>
+</header>
 
-            <!-- //TODO: Move to script.js once script minification fixed -->
-            <!-- Added due to https://github.com/twbs/bootstrap/issues/21599 -->
-            <script>
-                $('.carousel').hover(function () { 
-                    $(this).carousel('pause') 
-                }, function () { 
-                    $(this).carousel('cycle') 
-                })
-            </script>
-
-            <script>
-                $(document).ready(function() {
-
-                var parts = window.location.pathname.split('/');
-
-                var basename = "default-no-basename";
-                if( parts && parts.length ) {
-                    var idx = parts.length-1;
-                    if( parts[idx] == '' && parts.length > 1 ) {
-                        --idx;
-                    }
-                    basename = parts[idx];
+<main id="site_wrapper">
+    <div id="site_container" class="">
+        @RenderBody()
+    </div>
+</main>
+<footer id="site-footer" class="h-card">
+    <data class="u-url" href="/"></data>
+    <div id="site-footer_container" class="container">
+        <div class="site-footer_row" class="row">
+            <div class="col-12 d-flex justify-content-between">
+                <img src="/img/Logo_footer.png">
+                <ul id="site-footer_menu" class="align-self-end">
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Code of Conduct</a></li>
+                    <li><a href="#">Register</a></li>
+                    <li><a href="#"><strong>Log In</strong></a></li>
+                </ul>
+            </div>
+        </div>
+        <section class="site-social_container d-flex position-absolute">
+            <div class="site-social_icon site-social_icon--rss">
+                <a href="#">
+                    <i class="fas fa-rss"></i>
+                </a>
+            </div>
+            <div class="site-social_icon site-social_icon--twitter">
+                <a href="#">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </div>
+            <div class="site-social_icon site-social_icon--users">
+                <a href="#">
+                    <i class="fas fa-users"></i>
+                </a>
+            </div>
+        </section>
+    </div>
+    <div id="site-footer_bookend" class="">
+        <div class="site-footer_container container">
+            <div class="site-footer_row row">
+                <div class="col-12 d-flex justify-content-end">
+                    <p id="site-footer_copyright">
+                        &copy; @DateTime.Now.Year .NET Foundation and Contributors.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <environment names="Development">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="~/js/home.js" asp-append-version="true"></script>
+        <script src="~/lib/holder/holder.js"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="~/js/home.js" asp-append-version="true"></script>
+        <script src="~/lib/holder/holder.min.js"></script>
+    </environment>
+    <script>
+        $(document).ready(function () {
+            var parts = window.location.pathname.split('/');
+            var basename = "default-no-basename";
+            if (parts && parts.length) {
+                var idx = parts.length - 1;
+                if (parts[idx] == '' && parts.length > 1) {
+                    --idx;
                 }
-                //alert("basename: "+basename);
-                $('body').addClass( basename );
-            });
-            </script>
-
-            @RenderSection("Bottom", required: false)
-            @RenderSection("scripts", required: false)   
-        </div> <!-- boxed -->
-    </div> <!-- sb-site -->
+                basename = parts[idx];
+            }
+            //alert("basename: "+basename);
+            $('body').addClass(basename);
+        });
+    </script>
+    @RenderSection("Bottom", required: false)
+    @RenderSection("scripts", required: false)
     <!-- IsHttps: @Context.Request.IsHttps -->
     <!-- Host: @Context.Request.Host.Host -->
     <cache>
@@ -182,5 +191,6 @@
         <!-- OS: @System.Runtime.InteropServices.RuntimeInformation.OSDescription @System.Runtime.InteropServices.RuntimeInformation.OSArchitecture -->
         <!-- Machine: @Environment.MachineName -->
     </cache>
-  </body>
+</footer>
+</body>
 </html>

@@ -31,11 +31,12 @@ namespace dotnetfoundation.Services
         {
             var opml = XDocument.Load(_config.OpmlFile);
             var feedData = from item in opml.Descendants("outline")
-                select new {
-                    Source = (string) item.Attribute("title"),
-                    XmlUrl = (string) item.Attribute("xmlUrl")
-                };
-            
+                           select new
+                           {
+                               Source = (string)item.Attribute("title"),
+                               XmlUrl = (string)item.Attribute("xmlUrl")
+                           };
+
             var feed = new List<NewsItem>();
             foreach (var currentFeed in feedData)
             {
@@ -45,21 +46,38 @@ namespace dotnetfoundation.Services
 
                     while (await feedReader.Read())
                     {
-                        if(feedReader.ElementType == SyndicationElementType.Item) 
+                        if (feedReader.ElementType == SyndicationElementType.Item)
                         {
-                                ISyndicationItem item = await feedReader.ReadItem();
-                                feed.Add(new NewsItem {
-                                    Title = item.Title,
-                                    Uri = item.Links.First().Uri.AbsoluteUri,
-                                    Excerpt = item.Description.PlainTextTruncate(120),
-                                    PublishDate = item.Published.UtcDateTime,
-                                    Source = currentFeed.Source
-                                });
+                            ISyndicationItem item = await feedReader.ReadItem();
+
+                            if (string.IsNullOrWhiteSpace(item.Description) ||
+                                !item.Links.First().Uri.IsAbsoluteUri)
+                            {
+                                continue;
+                            }
+
+                            var uri = item.Links.First().Uri.AbsoluteUri;
+                            feed.Add(new NewsItem
+                            {
+                                Title = item.Title,
+                                Uri = uri,
+                                Excerpt = item.Description.PlainTextTruncate(120),
+                                PublishDate = item.Published.UtcDateTime,
+                                Source = currentFeed.Source ?? item.Contributors.First().Name ?? item.Contributors.First().Email,
+                                NewsType = GetNewsTypeForUri(uri)
+                            });
                         }
                     }
                 }
             }
             return feed.OrderByDescending(f => f.PublishDate).ToList();
+        }
+
+        private string GetNewsTypeForUri(string uri)
+        {
+            if (uri.Contains("blogs.msdn.microsoft.com")) return "product";
+            if (uri.Contains("dotnetfoundation.org")) return "news";
+            return "community";
         }
 
         private async Task<List<NewsItem>> GetOrCreateFeedCacheAsync()
@@ -68,7 +86,7 @@ namespace dotnetfoundation.Services
             if (!_cache.TryGetValue<List<NewsItem>>(_config.CacheKey, out result))
             {
                 result = await GetFeedInternal();
-                
+
                 if (result != null)
                 {
                     _cache.Set(
