@@ -22,7 +22,7 @@ namespace DotnetFoundationSearchIndexer
         private static HttpClient httpClient = new HttpClient();
         [FunctionName("UpdateProjects")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, WebHookType = "github")]HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "post")]HttpRequest req,
             ILogger log)
         {
             var indexName = Env("SEARCH_INDEX_NAME");
