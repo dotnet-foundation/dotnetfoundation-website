@@ -11,7 +11,7 @@
         if (childNode.Value.Text == "Separator")
         {
             <li class="divider"></li>
-                continue;
+            continue;
         }
         if (!Model.HasVisibleChildren(childNode))
         {
@@ -21,7 +21,7 @@
         {
             <li role="presentation" class='@Model.GetClass(childNode.Value, "dropdown-submenu")' cwn-data-attributes="@childNode.Value.DataAttributes">
                 <a href="@Url.Content(Model.AdjustUrl(childNode))">@Html.Raw(Model.GetIcon(childNode.Value))@Model.AdjustText(childNode) <span class="caret"></span></a>
-                @Model.UpdateTempNode(childNode)@Html.Partial("NavigationNodeChildDropdownPartial", Model) @* recursion *@
+                @Model.UpdateTempNode(childNode)@{ await Html.PartialAsync("NavigationNodeChildDropdownPartial", Model); } @* recursion *@
             </li>
         }
     }

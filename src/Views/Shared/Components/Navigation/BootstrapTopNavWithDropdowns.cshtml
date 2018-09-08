@@ -14,19 +14,19 @@
             {
                 <li role="presentation" class='@Model.GetClass(node.Value)' cwn-data-attributes="@node.Value.DataAttributes"><a href="@Url.Content(Model.AdjustUrl(node))">@Html.Raw(Model.GetIcon(node.Value))@Model.AdjustText(node)</a></li>
             }
-            else if(!node.Value.IsClickable)
+            else if (!node.Value.IsClickable)
             {
 
                 <li role="presentation" class='@Model.GetClass(node.Value, "dropdown")' cwn-data-attributes="@node.Value.DataAttributes">  
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">@Model.AdjustText(node)</a>
-                    @Model.UpdateTempNode(node)@Html.Partial("NavNodeChildDropdownAnimatedPartial", Model)
+                    @Model.UpdateTempNode(node)@{ await Html.PartialAsync("NavNodeChildDropdownAnimatedPartial", Model); }
                 </li>
             }
             else
             {
                 <li role="presentation" class='@Model.GetClass(node.Value, "dropdown")' cwn-data-attributes="@node.Value.DataAttributes">
                     <a href="@Url.Content(Model.AdjustUrl(node))">@Html.Raw(Model.GetIcon(node.Value))@Model.AdjustText(node) <span class="caret"></span></a>
-                    @Model.UpdateTempNode(node)@Html.Partial("NavigationNodeChildDropdownPartial", Model)
+                    @Model.UpdateTempNode(node)@{await Html.PartialAsync("NavigationNodeChildDropdownPartial", Model); }
                 </li>
             }
         }
