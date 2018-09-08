@@ -182,6 +182,7 @@ namespace DotNetFoundationWebsite
             app.UseForwardedHeaders();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseCloudscribeCommonStaticFiles();
             app.UseCookiePolicy();
             //app.UseSession();
 
