@@ -151,7 +151,7 @@ p {
     font-family: 'Bree Serif', serif;
 }
 
-.page-section p {
+.page-section p, ul li {
     font-size: 16px;
     margin-bottom: 0;
 }
