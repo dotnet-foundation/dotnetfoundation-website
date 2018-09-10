@@ -545,3 +545,9 @@ img {
 .site-footer_row {
     padding: 2rem 0;
 }
+
+
+#swag-store {
+    background-image: url(/img/swag_background.png);
+    background-size: cover;
+}
