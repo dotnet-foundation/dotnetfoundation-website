@@ -195,7 +195,9 @@ namespace DotNetFoundationWebsite
                     multiTenantOptions,
                     _sslIsAvailable);
 
-            app.UseMvc();
+            app.UseMvc(
+                routes => routes.AddBlogRoutesForSimpleContent()
+                );
         }
     }
 }
