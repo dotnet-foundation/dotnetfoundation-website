@@ -195,27 +195,7 @@ namespace DotNetFoundationWebsite
                     multiTenantOptions,
                     _sslIsAvailable);
 
-            app.UseMvc(routes =>
-            {
-                //holder.js LIE to avoid large requests. The JS is already bundled. 
-                routes.MapGet("holder.js/{whatever}", context =>
-                {
-                    context.Response.StatusCode = 304;
-                    return Task.CompletedTask;
-                });
-
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller}/{action}",
-                    defaults: new { controller = "Home", action = "Index" }
-                );
-
-                routes.UseCustomRoutes();
-
-                //routes.AddBlogRoutesForSimpleContent();
-                //routes.AddSimpleContentStaticResourceRoutes();
-                //routes.AddCloudscribeFileManagerRoutes();
-            });
+            app.UseMvc();
         }
     }
 }
