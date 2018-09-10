@@ -68,6 +68,11 @@ p {
     background-color: #ebe0eb;
 }
 
+.page-section--purple {
+    background-color: #68217a;
+    color: #fff;
+}
+
 .page-section_column {
     padding-top: 6rem;
     padding-bottom: 6rem;
