@@ -1,5 +1,6 @@
 ﻿using dotnetfoundation.Models;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.SyndicationFeed;
 using Microsoft.SyndicationFeed.Rss;
@@ -16,15 +17,18 @@ namespace dotnetfoundation.Services
     {
         public NewsFeedService(
             IOptions<NewsFeedConfig> configOptionsAccessor,
-            IMemoryCache cache
+            IMemoryCache cache,
+            ILogger<NewsFeedService> log
             )
         {
             _config = configOptionsAccessor.Value;
             _cache = cache;
+            _log = log;
         }
 
         private NewsFeedConfig _config;
         private IMemoryCache _cache;
+        private ILogger<NewsFeedService> _log;
         private List<NewsItem> _feed = null;
 
         private async Task<List<NewsItem>> GetFeedInternal()
@@ -57,15 +61,22 @@ namespace dotnetfoundation.Services
                             }
 
                             var uri = item.Links.First().Uri.AbsoluteUri;
-                            feed.Add(new NewsItem
+                            try
                             {
-                                Title = item.Title,
-                                Uri = uri,
-                                Excerpt = item.Description.PlainTextTruncate(120),
-                                PublishDate = item.Published.UtcDateTime,
-                                Source = currentFeed.Source ?? item.Contributors.First().Name ?? item.Contributors.First().Email,
-                                NewsType = GetNewsTypeForUri(uri)
-                            });
+                                feed.Add(new NewsItem
+                                {
+                                    Title = item.Title,
+                                    Uri = uri,
+                                    Excerpt = item.Description.PlainTextTruncate(120),
+                                    PublishDate = item.Published.UtcDateTime,
+                                    Source = currentFeed.Source ?? item.Contributors.First().Name ?? item.Contributors.First().Email,
+                                    NewsType = GetNewsTypeForUri(uri)
+                                });
+                            }
+                            catch (Exception ex)
+                            {
+                                _log.LogError(ex.ToString());
+                            }
                         }
                     }
                 }
