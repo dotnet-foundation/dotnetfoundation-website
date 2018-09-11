@@ -35,19 +35,24 @@
     <environment names="Development">
         <link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
-        <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-        <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.0/jquery.waypoints.min.js"></script>
+        <script src="~/js/jquery.counterup.min.js"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+        <link rel="stylesheet" href="~/css/style.css">
+        <link rel="stylesheet" href="~/css/home.css">
     </environment>
     <environment names="Staging,Production">
-        <link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.0/jquery.waypoints.min.js"></script>
+        <script src="~/js/jquery.counterup.min.js"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+        <link rel="stylesheet" href="~/css/style.css" asp-append-version="true">
+        <link rel="stylesheet" href="~/css/home.css" asp-append-version="true">
     </environment>
-    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true">
-    <link rel="stylesheet" href="~/css/home.css" asp-append-version="true">
     <partial name="_CookieConsent" />
     @RenderSection("Styles", required: false)
 </head>
@@ -57,7 +62,7 @@
             <p class="flash_message">
                 Join us for <a class="flash_link" href="https://dotnetconf.net">.NET Conf - September 12-14</a>!
             </p>
-            @*<div class="flash_close">X</div>*@
+            <div class="flash_close">X</div>
         </section>
 
         <div class="site-nav_container container">
@@ -67,7 +72,20 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    @await Component.InvokeAsync("Navigation", new { viewName = "Bootstrap4TopNavWithDropdowns", filterName = NamedNavigationFilters.TopNav, startingNodeKey = "" })
+                    <ul id="main-menu" class="navbar-nav ml-auto">
+                        <li class="main-menu_item nav-item">
+                            <a class="nav-link" href="Get-Involved">Get Involved <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="main-menu_item nav-item">
+                            <a class="nav-link" href="#">Projects</a>
+                        </li>
+                        <li class="main-menu_item nav-item">
+                            <a class="nav-link" href="#">About</a>
+                        </li>
+                        <li class="main-menu_item nav-item">
+                            <a class="nav-link" href="Blog">News</a>
+                        </li>
+                    </ul>
                 </div>
             </nav>
             <section class="site-social_container d-flex position-absolute">
@@ -90,44 +108,12 @@
         </div>
     </header>
 
-    @*<main id="site_wrapper">
-            <div id="site_container" class="">
-                @RenderBody()
-            </div>
-        </main>*@
-    <div id="site_wrapper" class="container-fluid cs-container flex-fill">
-
-        <div class="row">
-            <main id="site_container" role="main" class="col order-3">
-                @await Html.PartialAsync("AlertsPartial")
-                @RenderBody()
-            </main>
-            @if (sideNavVisible)
-            {
-                <nav id="sidenavmenu" class=" col col-3 order-1 @sideNavToggleClass">
-                    @RenderSection("SideNav", required: false)
-                </nav>
-
-            }
-            @if (asideSecondaryVisible)
-            {
-                <aside id="asideSecondary" class="col col-1 order-2">
-                    @RenderSection("AsideSecondary", required: false)
-                </aside>
-
-            }
-            @if (asidePrimaryVisible)
-            {
-                <aside id="asidePrimary" class="col-12 col-md-2 col-sm-12  col-sm-12 order-4">
-                    @RenderSection("AsidePrimary", required: false)
-                </aside>
-
-            }
+    <main id="site_wrapper">
+        <div id="site_container" class="">
+            @RenderBody()
         </div>
-    </div>
-
-
-    <footer id="site-footer" class="sticky-bottom h-card">
+    </main>
+    <footer id="site-footer" class="h-card">
         <data class="u-url" href="/"></data>
         <div id="site-footer_container" class="container">
             <div class="site-footer_row row">
@@ -141,7 +127,7 @@
             </div>
             <section class="site-social_container d-flex position-absolute">
                 <div class="site-social_icon site-social_icon--rss">
-                    <a href="/api/rss">
+                    <a href="/Blog">
                         <i class="fas fa-rss"></i>
                     </a>
                 </div>
@@ -167,20 +153,20 @@
                     </div>
                 </div>
             </div>
-            
         </div>
-        <partial name="SignOutPartial" />
+        @RenderSection("Toolbar", required: false);
         <environment names="Development">
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-            @*<script src="~/lib/holder/holder.js"></script>*@
+            <script src="~/js/home.js" asp-append-version="true"></script>
+            <script src="~/lib/holder/holder.js"></script>
         </environment>
         <environment names="Staging,Production">
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-            @*<script src="~/lib/holder/holder.min.js"></script>*@
+            <script src="~/js/home.js" asp-append-version="true"></script>
+            <script src="~/lib/holder/holder.min.js"></script>
         </environment>
-        <script src="~/cr/js/bs4.smartmenus.min.js"></script>
         <script>
             $(document).ready(function () {
                 var parts = window.location.pathname.split('/');
@@ -201,7 +187,6 @@
         <!-- IsHttps: @Context.Request.IsHttps -->
         <!-- Host: @Context.Request.Host.Host -->
         <cache>
-
             <!-- ViewType: @GetType().AssemblyQualifiedName -->
             <!-- Environment: @HostingEnvironment.EnvironmentName -->
             <!-- Application: @System.Reflection.Assembly.GetEntryAssembly().GetName().Name, @System.Reflection.Assembly.GetEntryAssembly().GetName().Version -->
@@ -209,7 +194,5 @@
             <!-- Machine: @Environment.MachineName -->
         </cache>
     </footer>
-    
-    @RenderSection("Toolbar", required: false)
 </body>
 </html>

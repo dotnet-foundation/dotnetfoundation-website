@@ -195,8 +195,12 @@ namespace DotNetFoundationWebsite
                     multiTenantOptions,
                     _sslIsAvailable);
 
+            // JA comment not sure why you did this, can't even login since login page is not found
+            //app.UseMvc(
+            //    routes => routes.AddBlogRoutesForSimpleContent()
+            //    );
             app.UseMvc(
-                routes => routes.AddBlogRoutesForSimpleContent()
+                routes => routes.UseCustomRoutes()
                 );
         }
     }

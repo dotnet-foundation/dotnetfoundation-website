@@ -4,6 +4,15 @@
 @{
     Layout = "_Layout";
     ViewData["Title"] = ".NET Foundation";
+    ViewData["BodyClass"] = "pages";
+}
+@section Styles{
+    <environment names="Development">
+       <link rel="stylesheet" href="~/css/home.css" asp-append-version="true">
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="~/css/home.css" asp-append-version="true">
+    </environment>
 }
 
 <section id="home-hero">
@@ -189,7 +198,7 @@
     </div>
 </section>
 
-<partial name="_CookieConsent" />
+@*<partial name="_CookieConsent" />*@
 
 @section Scripts {
     <environment names="Development">

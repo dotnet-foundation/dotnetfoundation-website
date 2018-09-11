@@ -1,0 +1,27 @@
+﻿@using cloudscribe.Web.Navigation
+@using System.Text
+@model NavigationViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, cloudscribe.Web.Navigation
+
+<ul id="main-menu" class="navbar-nav ml-auto" role="menubar">
+    
+    @if (Model.HasVisibleChildren(Model.RootNode))
+    {
+        @foreach (var node in Model.RootNode.Children)
+        {
+            if (!Model.ShouldAllowView(node)) { continue; }
+            if (!Model.HasVisibleChildren(node))
+            {
+                <li class='@Model.GetClass(node.Value, "main-menu_item nav-item")'><a class="nav-link" href="@Url.Content(Model.AdjustUrl(node))">@Html.Raw(Model.GetIcon(node.Value))@Model.AdjustText(node)</a></li>
+            }
+            else
+            {
+                <li class='@Model.GetClass(node.Value, "main-menu_item nav-item dropdown",  "active", true)'>
+                    <a class="nav-link dropdown-toggle" id="dropdown-@node.Value.Key" aria-haspopup="true" aria-expanded="false" href="@Url.Content(Model.AdjustUrl(node))">@Html.Raw(Model.GetIcon(node.Value))@Model.AdjustText(node) </a>
+                    @Model.UpdateTempNode(node) <partial name="Bootstrap4NavigationNodeChildDropdownPartial" model="@Model" />
+                </li>
+            }
+        }
+    }
+</ul>
