@@ -1,0 +1,8 @@
+﻿@{
+}
+@if(User.Identity.IsAuthenticated)
+{
+    <form style="display:inline" asp-controller="Account" asp-action="LogOff">
+        <button type="submit" class="btn btn-link">Sign Out</button>
+    </form>
+}
