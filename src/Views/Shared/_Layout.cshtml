@@ -57,7 +57,7 @@
             <p class="flash_message">
                 Join us for <a class="flash_link" href="https://dotnetconf.net">.NET Conf - September 12-14</a>!
             </p>
-            @*<div class="flash_close">X</div>*@
+            <div class="flash_close">X</div>
         </section>
 
         <div class="site-nav_container container">
@@ -67,12 +67,25 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    @await Component.InvokeAsync("Navigation", new { viewName = "Bootstrap4TopNavWithDropdowns", filterName = NamedNavigationFilters.TopNav, startingNodeKey = "" })
+                    <ul id="main-menu" class="navbar-nav ml-auto">
+                        <li class="main-menu_item nav-item">
+                            <a class="nav-link" href="Get-Involved">Get Involved <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="main-menu_item nav-item">
+                            <a class="nav-link" href="#">Projects</a>
+                        </li>
+                        <li class="main-menu_item nav-item">
+                            <a class="nav-link" href="#">About</a>
+                        </li>
+                        <li class="main-menu_item nav-item">
+                            <a class="nav-link" href="Blog">News</a>
+                        </li>
+                    </ul>
                 </div>
             </nav>
             <section class="site-social_container d-flex position-absolute">
                 <div class="site-social_icon site-social_icon--rss">
-                    <a href="/api/rss">
+                    <a href="/Blog">
                         <i class="fas fa-rss"></i>
                     </a>
                 </div>
