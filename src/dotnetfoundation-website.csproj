@@ -59,5 +59,6 @@
 
   <ItemGroup>
     <Folder Include="Views\Shared\" />
+    <Folder Include="wwwroot\lib\font-awesome\" />
   </ItemGroup>
 </Project>

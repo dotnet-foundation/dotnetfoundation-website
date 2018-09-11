@@ -37,6 +37,14 @@
         "jquery.min.js",
         "jquery.min.map"
       ]
+    },
+    {
+      "library": "waypoints@4.0.1",
+      "destination": "wwwroot/lib/waypoints/",
+      "files": [
+        "jquery.waypoints.js",
+        "jquery.waypoints.min.js"
+      ]
     }
   ]
 }
