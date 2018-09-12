@@ -368,9 +368,6 @@ img {
     }
 
 .icon-box {
-    opacity: 0;
-    animation-name: none;
-    animation-duration: 1s;
     background-color: #f6f6f6;
     border: 1px solid #999999;
     padding: 2rem;
@@ -378,6 +375,12 @@ img {
 
     .icon-box > * + * {
         margin-top: 2rem;
+    }
+
+    .icon-box .animated {
+        opacity: 0;
+        animation-name: none;
+        animation-duration: 1s;
     }
 
 .icon-box_stat {
