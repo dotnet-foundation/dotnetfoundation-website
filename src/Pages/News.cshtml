@@ -1,0 +1,113 @@
+@page
+@using Microsoft.AspNetCore.Mvc.RazorPages
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "About";
+    ViewData["BodyClass"] = "pages";
+}
+
+<section class="page-section page-section--purple">
+    <div class="page-section_container container">
+        <div class="page-section_row row">
+            <div class="page-section_column col-12 text-center">
+                <h2>
+                    Get involved
+                </h2>
+                <p class="mx-auto">
+                    We need you! Community involvement is what makes the .NET Foundation such a resounding success.
+                </p>
+                <p class="mx-auto">
+                    There are four main ways for you to get in on the action: find a Meetup group, host a new user group in your area (we'll help!), and of course, join an active project that sparks your interest. There's no wrong way to be a part of the community, even if you just want to rock some merch or show your love on social!
+                </p>
+                <div class="mx-auto d-flex justify-content-between">
+                    <a href="https://meetup.com/pro/dotnet" class="site-button site-button--pink">Find a Meetup</a>
+                    <a href="#meetups" class="site-button site-button--pink">Host a Meetup</a>
+                    <a href="/Projects" class="site-button site-button--pink">Join a project</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="page-section">
+    <div class="page-section_container container">
+        <div class="page-section_row row text-left">
+            <div class="page-section_column col-12">
+                <h2>
+                    Meetups and user groups
+                </h2>
+                <p>
+                    We need you! Community involvement is what makes the .NET Foundation such a resounding success.
+                </p>
+                <p>
+                    There are four main ways for you to get in on the action: find a Meetup group, host a new user group in your area (we'll help!), and of course, join an active project that sparks your interest. There's no wrong way to be a part of the community, even if you just want to rock some merch or show your love on social!
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <img class="img-fluid w-100" src="~/img/meetup_map.png" />
+    </div>
+</section>
+
+<section class="page-section page-section--purple--light" id="meetups">
+    <div class="page-section_container container">
+        <div class="page-section_row row h-100">
+            <div class="page-section_column col-8 text-right">
+                <h2>
+                    Host a meetup
+                </h2>
+                <p>
+                    That map above could always use more pins. If there&apos;s no active group in your area, no problem! You&apos;re the boss now. By hosting a meetup, you&apos;ll not only tap into talent in your area, you&apos;ll make new friends while impressing your boss and beefing up your resume. Win-win-win-win.
+                </p>
+                <div>
+                    <a href="https://dotnet-presentations.github.io/" class="site-button site-button--pink">Browse resources</a>
+                </div>
+            </div>
+            <div class="col-3 offset-1 my-auto px-3">
+                <img src="~/img/meetup_hello.svg" />
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="page-section page-section">
+    <div class="page-section_container container">
+        <div class="page-section_row row">
+            <div class="col-4">
+                <img src="~/img/art-ball-shaped-blur-326036.png" />
+            </div>
+            <div class="page-section_column col-8 text-left">
+                <h2>
+                    Contribute code
+                </h2>
+                <p>
+                    There are several .NET open-source projects that will expand the .NET ecosystem&mdash;and your skillset, of course. No matter your level of expertise, there&apos;s room for you to learn and grow alongside others who are happy to learn from you as well. Peruse the projects and see what tickles your brain. No judgment; sometimes you want to teach, other times you want to try. Either way, there&apos;s lots of room to grow.
+                </p>
+                <div>
+                    <a href="/Projects" class="site-button site-button--pink">Join a project</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="swag-store" class="page-section page-section--purple">
+    <div class="page-section_container container">
+        <div class="page-section_row row">
+            <div class="page-section_column col-4 text-left">
+                <h2>
+                    Merch, gear, and swag.
+                </h2>
+                <p>
+                    Show off your nerd side&mdash;with pride! Support the .NET Foundation by rocking some gear and gifting it to your event attendees. And of course, since we&apos;re all about the open-source, you can totally make your own. Use our project artwork (creative commons, so no worries there) to get started, then show off your stuff with photos tagged with #dotnetpride. We&apos;d love to see what you make.
+                </p>
+            </div>
+            <div class="col-8 text-center align-middle">
+                <img src="~/img/swag.png" class="img-responsive" />
+                <a href="https://stores.kotisdesign.com/dotnetconf" class="site-button site-button--pink">Get stuff</a>
+            </div>
+        </div>
+    </div>
+</section>

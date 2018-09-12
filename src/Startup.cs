@@ -195,27 +195,13 @@ namespace DotNetFoundationWebsite
                     multiTenantOptions,
                     _sslIsAvailable);
 
-            app.UseMvc(routes =>
-            {
-                //holder.js LIE to avoid large requests. The JS is already bundled. 
-                routes.MapGet("holder.js/{whatever}", context =>
-                {
-                    context.Response.StatusCode = 304;
-                    return Task.CompletedTask;
-                });
-
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller}/{action}",
-                    defaults: new { controller = "Home", action = "Index" }
+            // JA comment not sure why you did this, can't even login since login page is not found
+            //app.UseMvc(
+            //    routes => routes.AddBlogRoutesForSimpleContent()
+            //    );
+            app.UseMvc(
+                routes => routes.UseCustomRoutes()
                 );
-
-                routes.UseCustomRoutes();
-
-                //routes.AddBlogRoutesForSimpleContent();
-                //routes.AddSimpleContentStaticResourceRoutes();
-                //routes.AddCloudscribeFileManagerRoutes();
-            });
         }
     }
 }

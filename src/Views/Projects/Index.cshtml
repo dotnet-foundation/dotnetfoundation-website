@@ -1,9 +1,9 @@
 ﻿@model dotnetfoundation.ViewModels.ProjectListViewModel
 @{
     ViewData["Title"] = "Projects";
-    string repoChecked =  null;
+    string repoChecked = null;
     string projectChecked = null;
-    if(Model.Type == "repository")
+    if (Model.Type == "repository")
     {
         repoChecked = "checked";
     }
@@ -12,121 +12,191 @@
         projectChecked = "checked";
     }
 
- }
-
-    <header>
-        <h1>Browse</h1>
-        <h2>.NET Foundation Projects</h2>
-    </header>
-    <p>Projects under the stewardship of the .NET Foundation currently include the .NET Compiler Platform ("Roslyn") as well as the ASP.NET family of projects, .NET Core, Xamarin Forms along with popular .NET open source frameworks like xUnit and Reactive Extensions. We&rsquo;re actively engaged in supporting open source projects in the .NET ecosystem, you can <a href="/about">learn more about our work</a>&nbsp;or see our<span class="Apple-converted-space">&nbsp;</span><a title="blog" href="/blog">blog</a><span class="Apple-converted-space">&nbsp;</span>for the latest announcements.</p>
-    <p>Pick a project below to learn more about it and how to contribute:</p>
-
-    <form id="search"  method="get">
-            <div class="form-group">
-                <label class="control-label" for="q">Search</label>
-                <div class="input-group">
-                    <input class="form-control" id="q" name="q" type="text" value="@Model.Q" />
-                    <span class="input-group-addon">
-                        <i class="fa fa-search" aria-hidden="true"></i>
-                    </span>  
-                </div>
-                 
-            </div>
-            <div class="form-groupr">
-            <label>
-                <input id="type" name="type" type="radio" value="project" @projectChecked /> Projects
-            </label>
-            </div>
-            <div class="form-group">
-                <label>
-                    <input id="type" name="type" type="radio" value="repository" @repoChecked /> Repositories
-                </label>
-            </div>
-    </form>
-<div class="col-md-9">
-    @if (Model.Type == "repository")
-    {
-        @foreach (var item in Model.ProjectRepos.Data)
-        {
-            <article class="content-item project">
-                <header>
-                    <h3><a target="_blank" href="@item.Url">@item.Name </a></h3>
-                </header>
-                <p>@item.Description</p>
-            </article>
-        }
-        <div>
-            <cs-pager asp-action="Index" asp-controller="Projects"
-                      asp-route-q="@Model.Q"
-                      asp-route-type="@Model.Type"
-                      asp-route-ps="@Model.ProjectRepos.PageSize"
-                      cs-paging-pagenumber="@Model.ProjectRepos.PageNumber"
-                      cs-paging-totalitems="@Model.ProjectRepos.TotalItems"
-                      cs-pagenumber-param="pn"></cs-pager>
-        </div>
-    }
-    else
-    {
-        @foreach (var item in Model.Projects.Data)
-        {
-            <article class="content-item project">
-                <div data-mdurl="https://raw.githubusercontent.com/dotnet/home/master/projects/@item.Name"></div>
-                @{ 
-                    var contributor = item.Contributor;
-                }
-                @if (contributor != null)
-                {
-                    if (!string.IsNullOrWhiteSpace(contributor.Logo))
-                    {
-                        <div class=""><a href="@contributor.Web"><img class="img-responsive contrib-logos" src="@contributor.Logo" alt="@contributor.Name" /></a></div>
-
-                    }
-                    else
-                    {
-                        <div><a href="@contributor.Web">@contributor.Name</a></div>
-
-                    }
-
-                }
-            </article><hr />
-        }
-        <div>
-            <cs-pager asp-action="Index" asp-controller="Projects"
-                      asp-route-q="@Model.Q"
-                      asp-route-type="@Model.Type"
-                      asp-route-ps="@Model.Projects.PageSize"
-                      cs-paging-pagenumber="@Model.Projects.PageNumber"
-                      cs-paging-totalitems="@Model.Projects.TotalItems"
-                      cs-pagenumber-param="pn"></cs-pager>
-        </div>
-    }
-</div>
-<div class="col-md-3">
-    <ul class="list-unstyled">
-        <li>
-            @Model.Summary.Projects Projects
-        </li>
-        <li>
-            @Model.Summary.Contributors Contributors
-        </li>
-        <li>
-            @Model.Summary.Organizations Organization
-        </li>
-        <li>
-            @Model.Summary.Forks Forks
-        </li>
-        <li>
-            @Model.Summary.OpenIssues Open Issues
-        </li>
-        <li>
-            @Model.Summary.Stars Stars
-        </li>
-    </ul>
-    
-</div>
-
-@section Scripts {
-<script src="~/js/showdown.min.js"></script>
-<script src="~/js/showdown-unobtrusive.js" asp-append-version="true"></script>
 }
 
+<section class="page-section page-section--purple">
+    <div class="page-section_container container">
+        <div class="page-section_row row">
+            <div class="page-section_column col-12 text-center">
+                <h2>
+                    .NET Foundation Projects
+                </h2>
+                <p class="mx-auto">
+                    Projects—and the people behind them—are at the heart of what .NET Foundation is all about. These days, you’ll find awide variety of projects, including the .NET Compiler Platform, ASP.NET, .NET Core, and Xamarin Forms, along with the popular .NET open-source frameworks xUnit and Reactive Extensions.
+                </p>
+                <p class="mx-auto">
+                    Can you contribute to something already in the works? Browse our projects below to find out how to contribute!
+                </p>
+                <p class="mx-auto">
+                    Of course, we’re always on the lookout for new open-source projects to support. Learn how to submit your project.
+                </p>
+                <div class="container">
+                    <form id="search" method="get">
+                        <div class="form-group col-6 offset-3">
+                            <div class="input-group">
+                                <input class="form-control" id="q" name="q" type="text" value="@Model.Q" />
+                                <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                        <div class="row sr-only">
+                            <div class="form-groupr">
+                                <label>
+                                    <input id="type" name="type" type="radio" value="project" @projectChecked /> Projects
+                                </label>
+                            </div>
+                            <div class="form-group>
+                                <label>
+                                    <input id="type" name="type" type="radio" value="repository" @repoChecked /> Repositories
+                                </label>
+                            </div>
+                        </div> 
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="page-section">
+    <div class="page-section_container container">
+        <div class="page-section_row row">
+            <div class="page-section_column col-lg-3 col-sm-6">
+                <div class="icon-box icon-box--grey d-flex flex-column align-items-center">
+                    <div class="icon-box_stat">
+                        @Model.Summary.Contributors
+                    </div>
+                    <div class="icon-box_icon">
+                        <img src="~/img/developers_icon.png">
+                    </div>
+                    <div class="icon-box_label">
+                        Contributors
+                    </div>
+                </div>
+            </div>
+            <div class="page-section_column col-lg-3 col-sm-6 pad-fix--sm">
+                <div class="icon-box icon-box--grey d-flex flex-column align-items-center">
+                    <div class="icon-box_stat">
+                        @Model.Summary.Organizations
+                    </div>
+                    <div class="icon-box_icon">
+                        <img src="~/img/building_icon.png">
+                    </div>
+                    <div class="icon-box_label">
+                        GitHub Orgs
+                    </div>
+                </div>
+            </div>
+            <div class="page-section_column col-lg-3 col-sm-6 pad-fix--lg">
+                <div class="icon-box icon-box--grey d-flex flex-column align-items-center">
+                    <div class="icon-box_stat">
+                        @Model.Summary.Projects
+                    </div>
+                    <div class="icon-box_icon">
+                        <img src="~/img/member_projects_icon.png">
+                    </div>
+                    <div class="icon-box_label">
+                        Projects
+                    </div>
+                </div>
+            </div>
+            <div class="page-section_column col-lg-3 col-sm-6 pad-fix--lg">
+                <div class="icon-box icon-box--grey animation-delay--6 d-flex flex-column align-items-center" data-delay="700">
+                    <div class="icon-box_stat counter">
+                        @Model.Summary.Forks
+                    </div>
+                    <div class="icon-box_icon">
+                        <img src="~/img/github_icon.png">
+                    </div>
+                    <div class="icon-box_label">
+                        Forks
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="page-section">
+    <div class="page-section_container container">
+        <div class="page-section_row row text-left">
+            <div class="page-section_column col-12">
+                @if (Model.Type == "repository")
+                {
+                    @foreach (var item in Model.ProjectRepos.Data)
+                    {
+                        <article class="content-item project">
+                            <header>
+                                <h3><a target="_blank" href="@item.Url">@item.Name </a></h3>
+                            </header>
+                            <p>@item.Description</p>
+                        </article>
+                    }
+                    <div>
+                        <cs-pager asp-action="Index" asp-controller="Projects"
+                                  asp-route-q="@Model.Q"
+                                  asp-route-type="@Model.Type"
+                                  asp-route-ps="@Model.ProjectRepos.PageSize"
+                                  cs-paging-pagenumber="@Model.ProjectRepos.PageNumber"
+                                  cs-paging-totalitems="@Model.ProjectRepos.TotalItems"
+                                  cs-pagenumber-param="pn"
+                                  cs-pager-ul-class="pagination d-flex flex-wrap"
+                                  cs-pager-li-current-class="page-item active"
+                                  cs-pager-li-other-class="page-item"
+                                  cs-pager-li-non-active-class="page-item disabled"
+                                  cs-pager-link-current-class="page-link"
+                                  cs-pager-link-other-class="page-link"
+                                  ></cs-pager>
+                    </div>
+                }
+                else
+                {
+                    @foreach (var item in Model.Projects.Data)
+                    {
+                        <article class="row">
+                            @{
+                                var contributor = item.Contributor;
+                            }
+                            @if (contributor != null)
+                            {
+                                if (!string.IsNullOrWhiteSpace(contributor.Logo))
+                                {
+                                    <div class="col-4"><a href="@contributor.Web"><img class="img-responsive contrib-logos" src="@contributor.Logo" alt="@contributor.Name" /></a></div>
+
+                                }
+                                else
+                                {
+                                    <div class="col-4"><a href="@contributor.Web">@contributor.Name</a></div>
+
+                                }
+
+                            }
+
+                            <div class="col-8" data-mdurl="https://raw.githubusercontent.com/dotnet/home/master/projects/@item.Name"></div>
+                        </article><hr />
+                    }
+                    <div>
+                        <cs-pager asp-action="Index" asp-controller="Projects"
+                                  asp-route-q="@Model.Q"
+                                  asp-route-type="@Model.Type"
+                                  asp-route-ps="@Model.Projects.PageSize"
+                                  cs-paging-pagenumber="@Model.Projects.PageNumber"
+                                  cs-paging-totalitems="@Model.Projects.TotalItems"
+                                  cs-pagenumber-param="pn"
+                                  cs-pager-ul-class="pagination d-flex flex-wrap"
+                                  cs-pager-li-current-class="page-item active"
+                                  cs-pager-li-other-class="page-item"
+                                  cs-pager-li-non-active-class="page-item disabled"
+                                  cs-pager-link-current-class="page-link"
+                                  cs-pager-link-other-class="page-link"
+                                  ></cs-pager>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/showdown.min.js"></script>
+    <script src="~/js/showdown-unobtrusive.js" asp-append-version="true"></script>
+}

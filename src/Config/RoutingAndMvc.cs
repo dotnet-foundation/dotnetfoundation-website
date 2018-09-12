@@ -29,7 +29,7 @@ namespace Microsoft.AspNetCore.Builder
                 template: "{controller}/{action}"
                 , defaults: new { action = "Index" }
                 );
-            routes.AddDefaultPageRouteForSimpleContent();
+            //routes.AddDefaultPageRouteForSimpleContent();
 
             
             return routes;
