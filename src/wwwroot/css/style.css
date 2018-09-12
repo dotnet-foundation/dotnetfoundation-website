@@ -140,15 +140,22 @@ p {
     margin-bottom: 0;
 }
 
-.page-section_title {
-    font-size: 3rem;
+.page-section h2, h3, h4 {
+    margin-top: 2rem;
     margin-bottom: 0;
     font-family: 'Bree Serif', serif;
 }
 
-.page-section_sub-title {
+.page-section h2 {
+    font-size: 3rem;
+}
+
+.page-section h3 {
     font-size: 2.4rem;
-    font-family: 'Bree Serif', serif;
+}
+
+.page-section h4 {
+    font-size: 2rem;
 }
 
 .page-section p, ul li {
