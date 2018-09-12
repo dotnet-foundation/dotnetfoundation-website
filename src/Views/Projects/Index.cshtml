@@ -138,7 +138,14 @@
                                   asp-route-ps="@Model.ProjectRepos.PageSize"
                                   cs-paging-pagenumber="@Model.ProjectRepos.PageNumber"
                                   cs-paging-totalitems="@Model.ProjectRepos.TotalItems"
-                                  cs-pagenumber-param="pn"></cs-pager>
+                                  cs-pagenumber-param="pn"
+                                  cs-pager-ul-class="pagination d-flex flex-wrap"
+                                  cs-pager-li-current-class="page-item active"
+                                  cs-pager-li-other-class="page-item"
+                                  cs-pager-li-non-active-class="page-item disabled"
+                                  cs-pager-link-current-class="page-link"
+                                  cs-pager-link-other-class="page-link"
+                                  ></cs-pager>
                     </div>
                 }
                 else
@@ -174,7 +181,14 @@
                                   asp-route-ps="@Model.Projects.PageSize"
                                   cs-paging-pagenumber="@Model.Projects.PageNumber"
                                   cs-paging-totalitems="@Model.Projects.TotalItems"
-                                  cs-pagenumber-param="pn"></cs-pager>
+                                  cs-pagenumber-param="pn"
+                                  cs-pager-ul-class="pagination d-flex flex-wrap"
+                                  cs-pager-li-current-class="page-item active"
+                                  cs-pager-li-other-class="page-item"
+                                  cs-pager-li-non-active-class="page-item disabled"
+                                  cs-pager-link-current-class="page-link"
+                                  cs-pager-link-other-class="page-link"
+                                  ></cs-pager>
                     </div>
                 }
             </div>
