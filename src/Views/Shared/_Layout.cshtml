@@ -54,10 +54,12 @@
 <body class="d-flex flex-column @ViewData["BodyClass"]">
     <header class="page-header_wrapper" role="banner">
         <section class="flash justify-content-center align-items-center">
-            <p class="flash_message">
+            <div class="alert alert-info alert-dismissible fade show w-100 text-center" role="alert">
                 Join us for <a class="flash_link" href="https://dotnetconf.net">.NET Conf - September 12-14</a>!
-            </p>
-            <div class="flash_close">X</div>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         </section>
 
         <div class="site-nav_container container">
