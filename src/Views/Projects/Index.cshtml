@@ -1,9 +1,9 @@
 ﻿@model dotnetfoundation.ViewModels.ProjectListViewModel
 @{
     ViewData["Title"] = "Projects";
-    string repoChecked =  null;
+    string repoChecked = null;
     string projectChecked = null;
-    if(Model.Type == "repository")
+    if (Model.Type == "repository")
     {
         repoChecked = "checked";
     }
@@ -12,37 +12,52 @@
         projectChecked = "checked";
     }
 
- }
+}
 
-    <header>
-        <h1>Browse</h1>
-        <h2>.NET Foundation Projects</h2>
-    </header>
-    <p>Projects under the stewardship of the .NET Foundation currently include the .NET Compiler Platform ("Roslyn") as well as the ASP.NET family of projects, .NET Core, Xamarin Forms along with popular .NET open source frameworks like xUnit and Reactive Extensions. We&rsquo;re actively engaged in supporting open source projects in the .NET ecosystem, you can <a href="/about">learn more about our work</a>&nbsp;or see our<span class="Apple-converted-space">&nbsp;</span><a title="blog" href="/blog">blog</a><span class="Apple-converted-space">&nbsp;</span>for the latest announcements.</p>
-    <p>Pick a project below to learn more about it and how to contribute:</p>
-
-    <form id="search"  method="get">
-            <div class="form-group">
-                <label class="control-label" for="q">Search</label>
-                <div class="input-group">
-                    <input class="form-control" id="q" name="q" type="text" value="@Model.Q" />
-                    <span class="input-group-addon">
-                        <i class="fa fa-search" aria-hidden="true"></i>
-                    </span>  
-                </div>
-                 
-            </div>
+<section class="page-section page-section--purple">
+    <div class="page-section_container container">
+        <div class="page-section_row row">
+            <div class="page-section_column col-12 text-center">
+                <h1>
+                    .NET Foundation Projects
+                </h1>
+                <p class="mx-auto">
+                    Projects—and the people behind them—are at the heart of what .NET Foundation is all about. These days, you’ll find awide variety of projects, including the .NET Compiler Platform, ASP.NET, .NET Core, and Xamarin Forms, along with the popular .NET open-source frameworks xUnit and Reactive Extensions.
+                </p>
+                <p class="mx-auto">
+                    Can you contribute to something already in the works? Browse our projects below to find out how to contribute!
+                </p>
+                <p class="mx-auto">
+                    Of course, we’re always on the lookout for new open-source projects to support. Learn how to submit your project.
+                </p>
+                <div class="container">
+                    <form id="search" method="get">
+                        <div class="form-group col-6 offset-3">
+                            <div class="input-group">
+                                <input class="form-control" id="q" name="q" type="text" value="@Model.Q" />
+                                <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                        <input id="type" name="type" type="hidden" value="project" @repoChecked /> 
+                        @*{
             <div class="form-groupr">
-            <label>
-                <input id="type" name="type" type="radio" value="project" @projectChecked /> Projects
-            </label>
+                <label>
+                    <input id="type" name="type" type="radio" value="project" @projectChecked /> Projects
+                </label>
             </div>
             <div class="form-group">
                 <label>
                     <input id="type" name="type" type="radio" value="repository" @repoChecked /> Repositories
                 </label>
             </div>
-    </form>
+        }*@
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <div class="col-md-9">
     @if (Model.Type == "repository")
     {
@@ -71,7 +86,7 @@
         {
             <article class="content-item project">
                 <div data-mdurl="https://raw.githubusercontent.com/dotnet/home/master/projects/@item.Name"></div>
-                @{ 
+                @{
                     var contributor = item.Contributor;
                 }
                 @if (contributor != null)
@@ -122,11 +137,11 @@
             @Model.Summary.Stars Stars
         </li>
     </ul>
-    
+
 </div>
 
 @section Scripts {
-<script src="~/js/showdown.min.js"></script>
-<script src="~/js/showdown-unobtrusive.js" asp-append-version="true"></script>
+    <script src="~/js/showdown.min.js"></script>
+    <script src="~/js/showdown-unobtrusive.js" asp-append-version="true"></script>
 }
 

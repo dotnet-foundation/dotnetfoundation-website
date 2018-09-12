@@ -552,9 +552,18 @@ img {
     background-size: cover;
 }
 
-/* JA adjustments*/
+#search .form-control, #search .btn-primary {
+    font-size: 1.6rem;
+    height: 2.8rem;
+}
+
+#search .btn-primary {
+    background-color: #e2068c;
+    border-color: #e2068c;
+}
+
 body.pages .container-fluid {
-    padding:0;
+    padding: 0;
 }
 body.pages .row {
     margin-right:0;
