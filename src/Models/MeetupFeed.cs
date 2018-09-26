@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using dotnetfoundation.Models;
+using System.Collections.Generic;
 
 namespace dotnetfoundation.Models
 {
