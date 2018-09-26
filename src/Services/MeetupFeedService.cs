@@ -29,7 +29,7 @@ namespace dotnetfoundation.Services
 
         private async Task<MeetupFeed> GetFeedInternal()
         {
-            var url = string.Format(_config.FeedFormat, _config.NumberToGet, _config.ExpiryDays);
+            var url = string.Format(_config.FeedFormat);
             var http = _httpClientFactory.CreateClient();
             var jsonString = await http.GetStringAsync(url).ConfigureAwait(false);
             var data = JsonConvert.DeserializeObject<MeetupEventData>(jsonString);
