@@ -29,7 +29,7 @@ namespace Microsoft.AspNetCore.Builder
                 template: "{controller}/{action}"
                 , defaults: new { action = "Index" }
                 );
-            routes.AddDefaultPageRouteForSimpleContent();
+            //routes.AddDefaultPageRouteForSimpleContent();
 
             
             return routes;
@@ -40,11 +40,7 @@ namespace Microsoft.AspNetCore.Builder
             bool sslIsAvailable
             )
         {
-            services.Configure<ForwardedHeadersOptions>(options =>
-            {
-                options.ForwardedHeaders = Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.XForwardedProto;
-            });
-
+            
             services.Configure<MvcOptions>(options =>
             {
                 if (sslIsAvailable)

@@ -1,0 +1,222 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.RazorPages
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = ".NET Foundation";
+    ViewData["BodyClass"] = "pages";
+}
+@section Styles{
+    <environment names="Development">
+       <link rel="stylesheet" href="~/css/home.css" asp-append-version="true">
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="~/css/home.css" asp-append-version="true">
+    </environment>
+}
+
+<section id="home-hero">
+    <div id="home-hero_container" class="container-fluid d-flex justify-content-center position-relative">
+        <div id="home-hero_overlay" class="position-absolute"></div>
+        <div id="home-hero_content" class="position-relative">
+            <h2 id="home-hero_title">Independent. Innovative. And always open source.</h2>
+            <p id="home-hero_copy" class="mx-auto">
+                You&apos;ve found the heartbeat of .NET&mdash;where projects and communities come together to get things done in our open-source world. Share your skills for the greater good. Meet in person, get involved virtually, and stay on top of the latest news, meetups, and events.
+            </p>
+            <div id="home-hero_buttons" class="mx-auto d-flex justify-content-between">
+                <a href="https://meetup.com/pro/dotnet" class="home-hero_button site-button site-button--pink">Find a Meetup</a>
+                <a href="/Projects" class="home-hero_button site-button site-button--pink">Dive into projects</a>
+                <a href="/Blog" class="home-hero_button site-button site-button--pink">Get the news</a>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="page-section">
+    <div class="page-section_container container">
+        <div class="page-section_row row">
+            <div class="page-section_column col-lg-3 col-sm-6">
+                <div class="icon-box animated icon-box--grey animation-delay--8 d-flex flex-column align-items-center" data-delay="900">
+                    <div class="icon-box_stat counter">
+                        25,000
+                    </div>
+                    <div class="icon-box_icon">
+                        <img src="~/img/developers_icon.png">
+                    </div>
+                    <div class="icon-box_label">
+                        Contributors
+                    </div>
+                </div>
+            </div>
+            <div class="page-section_column col-lg-3 col-sm-6 pad-fix--sm">
+                <div class="icon-box animated icon-box--grey animation-delay--2 d-flex flex-column align-items-center" data-delay="300">
+                    <div class="icon-box_stat counter">
+                        1700
+                    </div>
+                    <div class="icon-box_icon">
+                        <img src="~/img/building_icon.png">
+                    </div>
+                    <div class="icon-box_label">
+                        Companies
+                    </div>
+                </div>
+            </div>
+            <div class="page-section_column col-lg-3 col-sm-6 pad-fix--lg">
+                <div class="icon-box animated icon-box--grey animation-delay--4 d-flex flex-column align-items-center" data-delay="500">
+                    <div class="icon-box_stat counter">
+                        55
+                    </div>
+                    <div class="icon-box_icon">
+                        <img src="~/img/member_projects_icon.png">
+                    </div>
+                    <div class="icon-box_label">
+                        Active Projects
+                    </div>
+                </div>
+            </div>
+            <div class="page-section_column col-lg-3 col-sm-6 pad-fix--lg">
+                <div class="icon-box animated icon-box--grey animation-delay--6 d-flex flex-column align-items-center" data-delay="700">
+                    <div class="icon-box_stat counter">
+                        462
+                    </div>
+                    <div class="icon-box_icon">
+                        <img src="~/img/github_icon.png">
+                    </div>
+                    <div class="icon-box_label">
+                        Resources
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="page-section page-section--purple--light">
+    <div class="page-section_container container">
+        <div class="page-section_row row">
+            <div class="page-section_column col-12 text-center">
+                <h2>Our main focus? YOU&#8230; and all you do with .NET.</h2>
+            </div>
+        </div>
+        <div class="page-section_row row">
+            <div class="page-section_column page-section_column--narrow col-md-4 pad-fix--all text-center">
+                <img src="~/img/comp.png">
+                <h3>Projects</h3>
+                <p>
+                    There&apos;s a growing list of projects that are currently taking advantage of our open-source Foundation, benefitting from commercially friendly IP, copyright terms, and licenses.
+                </p>
+            </div>
+            <div class="page-section_column page-section_column--narrow col-md-4 pad-fix--all text-center">
+                <img src="~/img/globe_icon.png">
+                <h3>Community</h3>
+                <p>
+                    We work not only with Microsoft, but with the broader industry to increase exposure of .NET&apos;s capabilities. All our resources are designed to support developers and your projects, and help promote your endeavors with like-minded folks!
+                </p>
+            </div>
+            <div class="page-section_column page-section_column--narrow col-md-4 pad-fix--all text-center">
+                <img src="~/img/Ellipse_1.png">
+                <h3>Non-Profit</h3>
+                <p>
+                    The .NET Foundation is a 503(c).6 non-profit organization, which was established to support an innovative, commercially friendly, open-source ecosystem around the .NET platform.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="page-section" id="home-meetup">
+    <div class="page-section_container container">
+        <div class="page-section_row row">
+            <div class="page-section_column col-sm-5 text-center" id="home-meetup_container">
+                <h2>.NET Foundation sponsored</h2>
+                <img id="home-meetup_image" src="~/img/meetup_logo.png">
+                <p>
+                    Developers meet every day, across the world, in .NET user groups. <u>Join a group</u>&mdash;or a few!&mdash;to swap knowledge, discover opportunities, or find your next hire.
+                </p>
+                <div class="site-button_row">
+                    <a class="site-button site-button--pink" href="/Get-Involved#meetups">Find out more</a>
+                    <a class="site-button site-button--pink" href="https://meetup.com/pro/dotnet">Join a Meetup</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="height: 3rem;"></div>
+    <div id="home-meetup_overlay"></div>
+</section>
+<section class="page-section" id="home-latest">
+    <div class="page-section_container container">
+        <div class="page-section_row row">
+            <div class="page-section_column col-md-6">
+                <h2>Upcoming Events and Meetups</h2>
+                <vc:meetup quantity="4" />
+                <p class="">
+                    <a class="link_title" href="/News">Find more events and Meetups ></a>
+                </p>
+            </div>
+            <div class="page-section_column col-md-6 pad-fix--md">
+                <h2>Latest News and Blog</h2>
+                <vc:news quantity="5" />
+                <p class="">
+                    <a class="link_title" href="/News">Get more news ></a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="page-section" id="home-whiteboard">
+    <div class="page-section_container container" id="home-whiteboard_container">
+        <div class="page-section_row row">
+            <div class="page-section_column page-section_column--narrow col-sm-4 text-center">
+                <h2>Build your own event</h2>
+                <p>
+                    Gearing up for an event of your own? <a href="https://dotnet-presentations.github.io/">Visit our Presentation Library</a> to download FREE workshop materials to get a head start. Browse available resources, including presentations, slides, code, and scripts. We have everything you need to fill a one-hour intro or a full two-day course.
+                </p>
+                <a class="site-button site-button--pink" href="https://dotnet-presentations.github.io/">Browse resources</a>
+            </div>
+        </div>
+    </div>
+    <div id="home-whiteboard_overlay"></div>
+</section>
+<section id="home-bot" class="page-section page-section--purple">
+    <div class="page-section_container container">
+        <div class="page-section_row row">
+            <div class="page-section_column col-md-1 pad-fix--none">
+            </div>
+            <div class="page-section_column col-md-4 text-center pad-fix_add--md d-flex align-items-center justify-content-center">
+                <img src="~/img/dot_bot.png" id="home-bot_image">
+            </div>
+            <div class="page-section_column col-md-6 pad-fix--md text-center">
+                <h2>Start kicking out code!</h2>
+                <p>
+                    Have a passion project you&apos;re ready to turn into a reality? A little gem of an idea that you believe in, but haven&apos;t gotten around to?
+                </p>
+                <p>
+                    There&apos;s no time like today to get going. Start your own project, use some code to get traction, and invite fellow coders to bring it to life. It&apos;s more fun with others lending a hand!
+                </p>
+                <a class="site-button site-button--pink" href="#">Get started</a>
+            </div>
+            <div class="page-section_column col-md-1 pad-fix--none">
+            </div>
+        </div>
+    </div>
+</section>
+
+@*<partial name="_CookieConsent" />*@
+
+@section Scripts {
+    <environment names="Development">
+        <script src="~/js/home.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="~/js/home.js" asp-append-version="true"></script>
+    </environment>
+
+    <script>
+        $(function () {
+            $(".video-thumbnail").click(function () {
+                var videoSrc = $(this).data("videoSrc");
+                var thumb = $(this).children('img');
+                $(this).replaceWith('<iframe src="' + videoSrc +
+                    '" width="' + thumb.width() +
+                    '" height="' + thumb.height() + '" allowFullScreen frameBorder="0"></iframe>');
+            });
+        });
+    </script>
+}

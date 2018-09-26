@@ -32,9 +32,9 @@ namespace dotnetfoundation.Services
             var url = string.Format(_config.FeedFormat, _config.NumberToGet, _config.ExpiryDays);
             var http = _httpClientFactory.CreateClient();
             var jsonString = await http.GetStringAsync(url).ConfigureAwait(false);
-            var list = JsonConvert.DeserializeObject<List<MeetupEvent>>(jsonString);
+            var data = JsonConvert.DeserializeObject<MeetupEventData>(jsonString);
             var feed = new MeetupFeed();
-            feed.Events = list;
+            feed.Events = data.Results;
             return feed;
         }
 
