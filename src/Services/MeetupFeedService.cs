@@ -50,7 +50,7 @@ namespace dotnetfoundation.Services
                     _cache.Set(
                         _config.CacheKey,
                         result,
-                        TimeSpan.FromHours(_config.CacheDurationInSeconds));
+                        TimeSpan.FromSeconds(_config.CacheDurationInSeconds));
                 }
 
             }

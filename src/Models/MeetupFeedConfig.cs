@@ -10,6 +10,6 @@ namespace dotnetfoundation.Models
 
         public string FeedFormat { get; set; } = "https://meetupfeeda0cc.blob.core.windows.net/outcontainer/feed.json";
         public string CacheKey { get; set; } = "meetupFeed";
-        public int CacheDurationInSeconds { get; set; } = 18000; //5 hours
+        public int CacheDurationInSeconds { get; set; } = 3600; //1 hour
     }
 }
