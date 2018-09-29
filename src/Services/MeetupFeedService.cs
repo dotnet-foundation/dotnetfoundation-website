@@ -34,7 +34,10 @@ namespace dotnetfoundation.Services
             var jsonString = await http.GetStringAsync(url).ConfigureAwait(false);
             var data = JsonConvert.DeserializeObject<MeetupEventData>(jsonString);
             var feed = new MeetupFeed();
-            feed.Events = data.Results;
+            if (data != null)
+            {
+                feed.Events = data.Results;
+            }
             return feed;
         }
 

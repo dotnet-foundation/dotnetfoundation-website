@@ -12,102 +12,152 @@
         <div class="page-section_row row">
             <div class="page-section_column col-12 text-center">
                 <h2>
-                    Get involved
+                    Chatter to keep up with.
                 </h2>
                 <p class="mx-auto">
-                    We need you! Community involvement is what makes the .NET Foundation such a resounding success.
+                    This is the page to bookmark. Remember, you, your colleagues, your co-coders in arms &mdash; whether you know them yet or not &mdash; are the ones who make up the community and are the true innovators. So keep an eye on this page for news from us, news about .NET, and most important, updates from your peers. Contributors are commended.
                 </p>
-                <p class="mx-auto">
-                    There are four main ways for you to get in on the action: find a Meetup group, host a new user group in your area (we'll help!), and of course, join an active project that sparks your interest. There's no wrong way to be a part of the community, even if you just want to rock some merch or show your love on social!
-                </p>
-                <div class="mx-auto d-flex justify-content-between">
-                    <a href="https://meetup.com/pro/dotnet" class="site-button site-button--pink">Find a Meetup</a>
-                    <a href="#meetups" class="site-button site-button--pink">Host a Meetup</a>
-                    <a href="/Projects" class="site-button site-button--pink">Join a project</a>
-                </div>
             </div>
         </div>
     </div>
 </section>
 
-<section class="page-section">
-    <div class="page-section_container container">
-        <div class="page-section_row row text-left">
-            <div class="page-section_column col-12">
-                <h2>
-                    Meetups and user groups
-                </h2>
-                <p>
-                    We need you! Community involvement is what makes the .NET Foundation such a resounding success.
-                </p>
-                <p>
-                    There are four main ways for you to get in on the action: find a Meetup group, host a new user group in your area (we'll help!), and of course, join an active project that sparks your interest. There's no wrong way to be a part of the community, even if you just want to rock some merch or show your love on social!
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid">
-        <img class="img-fluid w-100" src="~/img/meetup_map.png" />
-    </div>
-</section>
-
-<section class="page-section page-section--purple--light" id="meetups">
-    <div class="page-section_container container">
-        <div class="page-section_row row h-100">
-            <div class="page-section_column col-8 text-right">
-                <h2>
-                    Host a meetup
-                </h2>
-                <p>
-                    That map above could always use more pins. If there&apos;s no active group in your area, no problem! You&apos;re the boss now. By hosting a meetup, you&apos;ll not only tap into talent in your area, you&apos;ll make new friends while impressing your boss and beefing up your resume. Win-win-win-win.
-                </p>
-                <div>
-                    <a href="https://dotnet-presentations.github.io/" class="site-button site-button--pink">Browse resources</a>
-                </div>
-            </div>
-            <div class="col-3 offset-1 my-auto px-3">
-                <img src="~/img/meetup_hello.svg" />
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="page-section page-section">
+<section class="page-section page-section--main">
     <div class="page-section_container container">
         <div class="page-section_row row">
-            <div class="col-4">
-                <img src="~/img/art-ball-shaped-blur-326036.png" />
-            </div>
-            <div class="page-section_column col-8 text-left">
-                <h2>
-                    Contribute code
-                </h2>
-                <p>
-                    There are several .NET open-source projects that will expand the .NET ecosystem&mdash;and your skillset, of course. No matter your level of expertise, there&apos;s room for you to learn and grow alongside others who are happy to learn from you as well. Peruse the projects and see what tickles your brain. No judgment; sometimes you want to teach, other times you want to try. Either way, there&apos;s lots of room to grow.
-                </p>
-                <div>
-                    <a href="/Projects" class="site-button site-button--pink">Join a project</a>
+
+            <article class="col-md-8">
+                <h2>Community News</h2>
+
+                <div class="page-section_row page-section_row--inner page-section_row--inner--no-margin row margin-fix--all">
+                    <vc:news quantity="15"></vc:news>
                 </div>
-            </div>
+            </article>
+
+            <aside class="page-section_column page-section_aside col-md-4 pad-fix--all">
+                <div class="page-section_row page-section_row--inner row">
+                    <div class="page-section_column page-section_column--inner col pad-fix--none" id="news-tweets_title-container">
+                        <h2 class="page-section_title">Latest tweets</h2>
+
+                        <div class="border-fake border-fake--left"></div>
+                    </div>
+                </div>
+
+                <div class="page-section_row page-section_row--inner row">
+                    <div id="twitter-widget-container" class="page-section_column page-section_column--inner col pad-fix--none">
+
+                        <a class="twitter-timeline" 
+                           data-chrome="noheader nofooter noborders" 
+                           data-tweet-limit="3"
+                           data-style="background: blue;" data-csp-fix="true"
+                           href="https://twitter.com/dotnetfdn/likes?ref_src=twsrc%5Etfw">Tweets Liked by @@dotnetfdn</a>
+                        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+                    </div>
+                </div>
+
+                <div class="page-section_row page-section_row--inner row">
+                    <div class="page-section_column page-section_column--inner col pad-fix--md text-right" id="news-tweets_more-container">
+                        <a href="#">More from Twitter ></a>
+                    </div>
+                </div>
+
+                <div class="page-section_row page-section_row--inner row">
+                    <div class="page-section_column page-section_column--inner col pad-fix--none" id="news-events">
+                        <h2 class="page-section_title">Events and Meetups</h2>
+
+                        <hr class="page-section_hr">
+
+                        <vc:meetup quantity="5"></vc:meetup>
+                    </div>
+                </div>
+
+                <div class="page-section_row page-section_row--inner row">
+                    <div class="page-section_column page-section_column--inner col pad-fix--md text-right" id="news-latest_more-container">
+                        <a href="#">Find more events and Meetups ></a>
+                    </div>
+                </div>
+
+                <div class="page-section_row page-section_row--inner row">
+                    <div class="page-section_column page-section_column--inner col pad-fix--none">
+                        <h2 class="page-section_title">Featured Project</h2>
+
+                        <div class="project">
+                            <figure class="project_image">
+                                <img src="/assets/img/logo_microsoft.png">
+                            </figure>
+
+                            <div class="project_content">
+                                <h3 class="project_title">Microsoft Azure WebJobs SDK</h3>
+                                <p>
+                                    The Azure WebJobs SDK is a framework that simplifies the task of writing background processing code that...
+                                </p>
+                            </div>
+
+                            <div class="project_meta d-flex justify-content-center">
+                                <p>
+                                    <i class="fa fa-star" aria-hidden="true"></i> 34,122
+                                </p>
+                                <p>
+                                    <i class="fa fa-comment" aria-hidden="true"></i> 8,452
+                                </p>
+                                <p>
+                                    <i class="fas fa-code-branch" " aria-hidden="true"></i> 447
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="page-section_row page-section_row--inner row">
+                    <div class="page-section_column page-section_column--inner col text-right aside_divider">
+                        <a href="#">Find more projects ></a>
+                    </div>
+                </div>
+
+                <div class="page-section_row page-section_row--inner row">
+                    <div class="page-section_column page-section_column--inner col pad-fix--none" id="news-jobs">
+                        <h2 class="page-section_title">Job opportunities</h2>
+
+                        <hr class="page-section_hr">
+
+                        <h3 class="p-title"><a href="">Title of job listing</a></h3>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing el labore et dolore magnam aliquam quaerat voluptatem.
+                        </p>
+
+                        <h3 class="p-title"><a href="">Title of job listing</a></h3>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing el labore et dolore magnam aliquam quaerat voluptatem.
+                        </p>
+
+                        <h3 class="p-title"><a href="">Title of job listing</a></h3>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing el labore et dolore magnam aliquam quaerat voluptatem.
+                        </p>
+                    </div>
+                </div>
+
+            </aside>
+
         </div>
     </div>
 </section>
 
-<section id="swag-store" class="page-section page-section--purple">
-    <div class="page-section_container container">
-        <div class="page-section_row row">
-            <div class="page-section_column col-4 text-left">
-                <h2>
-                    Merch, gear, and swag.
-                </h2>
-                <p>
-                    Show off your nerd side&mdash;with pride! Support the .NET Foundation by rocking some gear and gifting it to your event attendees. And of course, since we&apos;re all about the open-source, you can totally make your own. Use our project artwork (creative commons, so no worries there) to get started, then show off your stuff with photos tagged with #dotnetpride. We&apos;d love to see what you make.
-                </p>
-            </div>
-            <div class="col-8 text-center align-middle">
-                <img src="~/img/swag.png" class="img-responsive" />
-                <a href="https://stores.kotisdesign.com/dotnetconf" class="site-button site-button--pink">Get stuff</a>
-            </div>
-        </div>
-    </div>
-</section>
+@section Scripts {
+    <script>
+        /* Kinda hacky, but Twitter widget doesn't allow CSS customization. May eventually render server-side, but this works. */
+        $(function () {
+            window.setTimeout(function () {
+                var $head = $(".twitter-timeline").contents().find("head");
+                $head.append($("<link/>",
+                    { rel: "stylesheet", href: "https://fonts.googleapis.com/css?family=Lato", type: "text/css" }
+                ));   
+                $(".twitter-timeline").contents().find(".timeline-Tweet-text").css({
+                    'font-size': '16px',
+                    'font-family': 'Lato'
+                });;
+            }, 1000);
+        });
+    </script>
+}
