@@ -1,7 +1,10 @@
-﻿using dotnetfoundation.Services;
+﻿using dotnetfoundation.Models;
+using dotnetfoundation.Services;
 using dotnetfoundation.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,27 +16,31 @@ namespace dotnetfoundation.Controllers
     {
         public ProjectsController(
             ProjectService projectService,
-            ILogger<ProjectsController> logger
+            ILogger<ProjectsController> logger,
+            IOptions<ProjectsConfig> configOptionsAccessor
             )
         {
             _projectService = projectService;
             _log = logger;
+
+            _configuration = configOptionsAccessor.Value;
         }
 
         private readonly ProjectService _projectService;
-        private ILogger _log;
+        private readonly ILogger _log;
+        private readonly ProjectsConfig _configuration;
 
         // TODO: would we want a different default page size for projects vs repos since projects shows details?
 
         public async Task<IActionResult> Index(string q = "", string type = "project", int pn = 1, int ps = 10)
         {
-            var maxPageSize = 50; //TODO: make this configurable?
-            if (ps > maxPageSize) ps = maxPageSize;
+            ps = Math.Min(ps, _configuration.MaxPageSize);
 
-            var model = new ProjectListViewModel();
-            model.Q = q;
-            model.Type = type;
-            model.Summary = await _projectService.GetRepoSummary();
+            var model = new ProjectListViewModel {
+                Q = q,
+                Type = type,
+                Summary = await _projectService.GetRepoSummary()
+            };
 
             if (type == "project")
             {
@@ -41,12 +48,9 @@ namespace dotnetfoundation.Controllers
             }
             else
             {
-                
                 model.ProjectRepos = await _projectService.SearchRepos(q, pn, ps);
             }
             
-
-
             return View(model);
         }
 
