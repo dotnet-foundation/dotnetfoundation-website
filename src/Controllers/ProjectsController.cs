@@ -32,23 +32,22 @@ namespace dotnetfoundation.Controllers
 
         // TODO: would we want a different default page size for projects vs repos since projects shows details?
 
-        public async Task<IActionResult> Index(string q = "", string type = "project", int pn = 1, int ps = 10)
+        public async Task<IActionResult> Index(string searchquery = "", string type = "project", int pn = 1, int ps = 10)
         {
             ps = Math.Min(ps, _configuration.MaxPageSize);
 
-            var model = new ProjectListViewModel {
-                Q = q,
-                Type = type,
-                Summary = await _projectService.GetRepoSummary()
-            };
+            var model = new ProjectListViewModel();
+            model.SearchQuery = searchquery;
+            model.Type = type;
+            model.Summary = await _projectService.GetRepoSummary();
 
             if (type == "project")
             {
-                model.Projects = await _projectService.SearchProjects(q, pn, ps);
+                model.Projects = await _projectService.SearchProjects(searchquery, pn, ps);
             }
             else
             {
-                model.ProjectRepos = await _projectService.SearchRepos(q, pn, ps);
+                model.ProjectRepos = await _projectService.SearchRepos(searchquery, pn, ps);
             }
             
             return View(model);

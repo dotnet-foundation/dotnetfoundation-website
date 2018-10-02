@@ -34,7 +34,7 @@
                     <form id="search" method="get">
                         <div class="form-group col-6 offset-3">
                             <div class="input-group">
-                                <input class="form-control" id="q" name="q" type="text" value="@Model.Q" />
+                                <input class="form-control" id="q" name="q" type="text" value="@Model.SearchQuery" />
                                 <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i></button>
                             </div>
                         </div>
@@ -133,7 +133,7 @@
                     }
                     <div>
                         <cs-pager asp-action="Index" asp-controller="Projects"
-                                  asp-route-q="@Model.Q"
+                                  asp-route-q="@Model.SearchQuery"
                                   asp-route-type="@Model.Type"
                                   asp-route-ps="@Model.ProjectRepos.PageSize"
                                   cs-paging-pagenumber="@Model.ProjectRepos.PageNumber"
@@ -176,7 +176,7 @@
                     }
                     <div>
                         <cs-pager asp-action="Index" asp-controller="Projects"
-                                  asp-route-q="@Model.Q"
+                                  asp-route-q="@Model.SearchQuery"
                                   asp-route-type="@Model.Type"
                                   asp-route-ps="@Model.Projects.PageSize"
                                   cs-paging-pagenumber="@Model.Projects.PageNumber"
