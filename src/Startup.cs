@@ -104,6 +104,7 @@ namespace DotNetFoundationWebsite
             services.Configure<MeetupFeedConfig>(_configuration.GetSection("MeetupFeedConfig"));
             services.AddScoped<MeetupFeedService>();
             services.Configure<NewsFeedService>(_configuration.GetSection("NewsFeedConfig"));
+            services.Configure<ProjectsConfig>(_configuration.GetSection("ProjectsConfig"));
             services.AddSingleton<NewsFeedService>();
             services.Configure<ForwardedHeadersOptions>(options =>
             {
