@@ -17,7 +17,7 @@ namespace dotnetfoundation.ViewModels
         }
 
 
-        public string Q { get; set; }
+        public string SearchQuery { get; set; }
         public string Type { get; set; }
         public ProjectRepoSummary Summary { get; set; }
         public PagedResult<ProjectRepo> ProjectRepos { get; set; }
