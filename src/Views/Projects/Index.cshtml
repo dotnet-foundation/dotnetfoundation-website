@@ -1,16 +1,18 @@
 ﻿@model dotnetfoundation.ViewModels.ProjectListViewModel
 @{
-    ViewData["Title"] = "Projects";
-    string repoChecked = null;
-    string projectChecked = null;
-    if (Model.Type == "repository")
-    {
-        repoChecked = "checked";
-    }
-    else
-    {
-        projectChecked = "checked";
-    }
+	ViewData["Title"] = "Projects";
+	ViewData["BodyClass"] = "pages";
+
+	string repoChecked = null;
+	string projectChecked = null;
+	if (Model.Type == "repository")
+	{
+		repoChecked = "checked";
+	}
+	else
+	{
+		projectChecked = "checked";
+	}
 
 }
 
