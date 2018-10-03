@@ -331,17 +331,17 @@ img {
         transition: all ease .3s;
     }
 
-.site-social_icon--users:hover {
+.site-social_icon--meetup:hover {
     background-color: #68217a;
 }
 
-    .site-social_icon--users:hover svg {
-        fill: #ffffff;
-    }
+	.site-social_icon--meetup:hover svg {
+		fill: #ffffff;
+	}
 
-    .site-social_icon--users:hover .fas:before, .site-social_icon--users:hover .fab:before {
-        color: #ffffff;
-    }
+	.site-social_icon--meetup:hover .fas:before, .site-social_icon--meetup:hover .fab:before {
+		color: #ffffff;
+	}
 
 .site-social_icon--rss:hover {
     background-color: #ef922f;
