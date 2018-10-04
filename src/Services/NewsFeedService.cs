@@ -7,6 +7,7 @@ using Microsoft.SyndicationFeed.Rss;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
@@ -18,18 +19,21 @@ namespace dotnetfoundation.Services
         public NewsFeedService(
             IOptions<NewsFeedConfig> configOptionsAccessor,
             IMemoryCache cache,
-            ILogger<NewsFeedService> log
+            ILogger<NewsFeedService> log,
+			IHttpClientFactory httpClientFactory
             )
         {
             _config = configOptionsAccessor.Value;
             _cache = cache;
             _log = log;
+			_httpClientFactory = httpClientFactory;
         }
 
         private NewsFeedConfig _config;
         private IMemoryCache _cache;
         private ILogger<NewsFeedService> _log;
-        private List<NewsItem> _feed = null;
+		private IHttpClientFactory _httpClientFactory;
+		private List<NewsItem> _feed = null;
 
         private async Task<List<NewsItem>> GetFeedInternal()
         {
@@ -40,46 +44,47 @@ namespace dotnetfoundation.Services
                                Source = (string)item.Attribute("title"),
                                XmlUrl = (string)item.Attribute("xmlUrl")
                            };
-
-            var feed = new List<NewsItem>();
+			var http = _httpClientFactory.CreateClient();
+			var feed = new List<NewsItem>();
             foreach (var currentFeed in feedData)
             {
-                using (var xmlReader = XmlReader.Create(currentFeed.XmlUrl, new XmlReaderSettings() { Async = true }))
-                {
-                    var feedReader = new RssFeedReader(xmlReader);
+				using(var stream = http.GetStreamAsync(currentFeed.XmlUrl).Result)
+				using (var xmlReader = XmlReader.Create(stream))
+				{
+					var feedReader = new RssFeedReader(xmlReader);
 
-                    while (await feedReader.Read())
-                    {
-                        if (feedReader.ElementType == SyndicationElementType.Item)
-                        {
-                            ISyndicationItem item = await feedReader.ReadItem();
+					while (await feedReader.Read())
+					{
+						if (feedReader.ElementType == SyndicationElementType.Item)
+						{
+							ISyndicationItem item = await feedReader.ReadItem();
 
-                            if (string.IsNullOrWhiteSpace(item.Description) ||
-                                !item.Links.First().Uri.IsAbsoluteUri)
-                            {
-                                continue;
-                            }
+							if (string.IsNullOrWhiteSpace(item.Description) ||
+								!item.Links.First().Uri.IsAbsoluteUri)
+							{
+								continue;
+							}
 
-                            var uri = item.Links.First().Uri.AbsoluteUri;
-                            try
-                            {
-                                feed.Add(new NewsItem
-                                {
-                                    Title = item.Title,
-                                    Uri = uri,
-                                    Excerpt = item.Description.PlainTextTruncate(120),
-                                    PublishDate = item.Published.UtcDateTime,
-                                    Source = currentFeed.Source ?? item.Contributors.First().Name ?? item.Contributors.First().Email,
-                                    NewsType = GetNewsTypeForUri(uri)
-                                });
-                            }
-                            catch (Exception ex)
-                            {
-                                _log.LogError(ex.ToString());
-                            }
-                        }
-                    }
-                }
+							var uri = item.Links.First().Uri.AbsoluteUri;
+							try
+							{
+								feed.Add(new NewsItem
+								{
+									Title = item.Title,
+									Uri = uri,
+									Excerpt = item.Description.PlainTextTruncate(120),
+									PublishDate = item.Published.UtcDateTime,
+									Source = currentFeed.Source ?? item.Contributors.First().Name ?? item.Contributors.First().Email,
+									NewsType = GetNewsTypeForUri(uri)
+								});
+							}
+							catch (Exception ex)
+							{
+								_log.LogError(ex.ToString());
+							}
+						}
+					}
+				}
             }
             return feed.OrderByDescending(f => f.PublishDate).ToList();
         }
