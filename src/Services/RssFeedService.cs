@@ -14,11 +14,11 @@ using System.Xml.Linq;
 
 namespace dotnetfoundation.Services
 {
-    public class GenericFeedService
+    public class RssFeedService
     {
-        public GenericFeedService(
+        public RssFeedService(
             IMemoryCache cache,
-            ILogger<GenericFeedService> log,
+            ILogger<RssFeedService> log,
 			IHttpClientFactory httpClientFactory
             )
         {
@@ -28,7 +28,7 @@ namespace dotnetfoundation.Services
         }
 
         private IMemoryCache _cache;
-        private ILogger<GenericFeedService> _log;
+        private ILogger<RssFeedService> _log;
 		private IHttpClientFactory _httpClientFactory;
 		private List<ISyndicationItem> _feed = null;
 
