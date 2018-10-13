@@ -10,9 +10,9 @@ namespace dotnetfoundation.ViewComponents
 {
     public class FeedViewComponent : ViewComponent
     {
-        private readonly GenericFeedService feedService;
+        private readonly RssFeedService feedService;
 
-        public FeedViewComponent(GenericFeedService feedService)
+        public FeedViewComponent(RssFeedService feedService)
         {
             this.feedService = feedService;
         }
