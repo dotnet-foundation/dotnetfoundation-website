@@ -26,105 +26,85 @@
     <div class="page-section_container container">
         <div class="page-section_row row">
 
-            <article class="col-md-8">
-                <h2>Community News</h2>
+			<article class="col-md-8">
+				<h2>Community News</h2>
+				<hr class="page-section_hr">
 
-                <div>
-                    <vc:news quantity="15"></vc:news>
-                </div>
-            </article>
+				<div class="media-list">
+					<vc:news quantity="10"></vc:news>
+				</div>
+			</article>
 
-            <aside class="col-md-4">
-                <h2>Latest tweets</h2>
+			<aside class="col-md-4">
+				<h2 class="mb-3">Latest tweets</h2>
 
-                <div id="twitter-widget-container">
-                    <a class="twitter-timeline"
-                       style="display:block;min-height:400px;"
-                       data-chrome="noheader nofooter"
-                       data-tweet-limit="3"
-                       href="https://twitter.com/dotnetfdn/likes?ref_src=twsrc%5Etfw">
-                    </a>
-                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-                    <div class="text-right">
-                        <h4>
-                            <a href="https://twitter.com/dotnetfdn">More from Twitter ></a>
-                        </h4>
-                    </div>
-                </div>
+				<div id="twitter-widget-container">
+					<a class="twitter-timeline"
+					   style="display:block;min-height:400px;"
+					   data-chrome="noheader nofooter"
+					   data-tweet-limit="2"
+					   href="https://twitter.com/dotnetfdn/likes?ref_src=twsrc%5Etfw">
+					</a>
+					<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+					<div class="text-right">
+						<h4>
+							<a href="https://twitter.com/dotnetfdn">More from Twitter ></a>
+						</h4>
+					</div>
+				</div>
 
-                <div>
-                    <h2 class="page-section_title">Events and Meetups</h2>
-                    <hr class="page-section_hr">
-                    <vc:meetup quantity="5"></vc:meetup>
-                </div>
+				<div>
+					<h2 class="page-section_title">Events and Meetups</h2>
+					<hr class="page-section_hr">
+					<div class="media-list">
+						<vc:meetup quantity="3" description-length="120"></vc:meetup>
+					</div>
+				</div>
 
-                <div class="text-right">
-                    <h4>
-                        <a href="https://www.meetup.com/pro/dotnet/">Find more events and Meetups ></a>
-                    </h4>
-                </div>
-                <!--
-                    <div class="page-section_row page-section_row--inner row">
-                        <div class="page-section_column page-section_column--inner col pad-fix--none">
-                            <h2 class="page-section_title">Featured Project</h2>
+				<div class="text-right">
+					<h4>
+						<a href="https://www.meetup.com/pro/dotnet/">Find more events and Meetups ></a>
+					</h4>
+				</div>
 
-                            <div class="project">
-                                <figure class="project_image">
-                                    <img src="/assets/img/logo_microsoft.png">
-                                </figure>
+				<div>
+					<h2 class="page-section_title">Featured Project</h2>
+					<hr class="page-section_hr">
+					<vc:feed quantity="1" url="https://builtwithdot.net/feed/featured?truncateBody=false" view="project"></vc:feed>
+				</div>
 
-                                <div class="project_content">
-                                    <h3 class="project_title">Microsoft Azure WebJobs SDK</h3>
-                                    <p>
-                                        The Azure WebJobs SDK is a framework that simplifies the task of writing background processing code that...
-                                    </p>
-                                </div>
+				<div class="text-right">
+					<h4>
+						<a href="https://builtwithdotnet.com">More on BuiltWithDotNet.com ></a>
+					</h4>
+				</div>
 
-                                <div class="project_meta d-flex justify-content-center">
-                                    <p>
-                                        <i class="fa fa-star" aria-hidden="true"></i> 34,122
-                                    </p>
-                                    <p>
-                                        <i class="fa fa-comment" aria-hidden="true"></i> 8,452
-                                    </p>
-                                    <p>
-                                        <i class="fas fa-code-branch" " aria-hidden="true"></i> 447
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+				<!--
 
-                    <div class="page-section_row page-section_row--inner row">
-                        <div class="page-section_column page-section_column--inner col text-right aside_divider">
-                            <a href="#">Find more projects ></a>
-                        </div>
-                    </div>
+				<div class="page-section_row page-section_row--inner row">
+					<div class="page-section_column page-section_column--inner col pad-fix--none" id="news-jobs">
+						<h2 class="page-section_title">Job opportunities</h2>
 
-                    <div class="page-section_row page-section_row--inner row">
-                        <div class="page-section_column page-section_column--inner col pad-fix--none" id="news-jobs">
-                            <h2 class="page-section_title">Job opportunities</h2>
+						<hr class="page-section_hr">
 
-                            <hr class="page-section_hr">
+						<h3 class="p-title"><a href="">Title of job listing</a></h3>
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipisicing el labore et dolore magnam aliquam quaerat voluptatem.
+						</p>
 
-                            <h3 class="p-title"><a href="">Title of job listing</a></h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing el labore et dolore magnam aliquam quaerat voluptatem.
-                            </p>
+						<h3 class="p-title"><a href="">Title of job listing</a></h3>
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipisicing el labore et dolore magnam aliquam quaerat voluptatem.
+						</p>
 
-                            <h3 class="p-title"><a href="">Title of job listing</a></h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing el labore et dolore magnam aliquam quaerat voluptatem.
-                            </p>
-
-                            <h3 class="p-title"><a href="">Title of job listing</a></h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing el labore et dolore magnam aliquam quaerat voluptatem.
-                            </p>
-                        </div>
-                    </div>
-        -->
-            </aside>
+						<h3 class="p-title"><a href="">Title of job listing</a></h3>
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipisicing el labore et dolore magnam aliquam quaerat voluptatem.
+						</p>
+					</div>
+				</div>
+	-->
+			</aside>
 
         </div>
     </div>

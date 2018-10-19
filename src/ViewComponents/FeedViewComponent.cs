@@ -17,12 +17,12 @@ namespace dotnetfoundation.ViewComponents
             this.feedService = feedService;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(string url, int quantity)
+        public async Task<IViewComponentResult> InvokeAsync(string url, string view, int quantity)
         {
             var feed = await feedService.GetFeed(url);
             var items = feed.Take(quantity);
 
-            return View(items);
+            return View(view, items);
         }
     }
 }

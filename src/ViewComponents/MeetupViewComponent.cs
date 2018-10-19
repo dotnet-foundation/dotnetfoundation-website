@@ -17,12 +17,13 @@ namespace dotnetfoundation.ViewComponents
             this.meetupService = meetupService;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(int quantity)
+        public async Task<IViewComponentResult> InvokeAsync(int quantity, int descriptionLength)
         {
             var feed = await meetupService.GetFeed();
             var items = feed.Events.Take(quantity);
 
-            return View(items);
+			var model = (items, descriptionLength);
+            return View(model);
         }
     }
 }

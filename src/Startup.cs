@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -106,7 +106,8 @@ namespace DotNetFoundationWebsite
             services.Configure<NewsFeedService>(_configuration.GetSection("NewsFeedConfig"));
             services.Configure<ProjectsConfig>(_configuration.GetSection("ProjectsConfig"));
             services.AddSingleton<NewsFeedService>();
-            services.Configure<ForwardedHeadersOptions>(options =>
+			services.AddSingleton<RssFeedService>();
+			services.Configure<ForwardedHeadersOptions>(options =>
             {
                 options.ForwardedHeaders = Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.XForwardedProto;
             });
