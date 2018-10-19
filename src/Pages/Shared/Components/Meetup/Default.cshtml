@@ -1,6 +1,6 @@
-﻿@model IEnumerable<dotnetfoundation.Models.MeetupEvent>
+﻿@model (IEnumerable<dotnetfoundation.Models.MeetupEvent> Events, int DescriptionLength)
 
-@foreach (var item in Model)
+@foreach (var item in Model.Events)
 {
     <div class="latest_container latest_container--event">
         <div class="latest_date d-flex align-items-center justify-content-center text-center">@item.Date.ToString("MMM") @item.Date.Day</div>
@@ -10,7 +10,7 @@
             <p class="latest_copy">
                 @if (!String.IsNullOrEmpty(item.Description))
                 {
-                    @item.Description.PlainTextTruncate(175)
+                    @item.Description.PlainTextTruncate(Model.DescriptionLength)
                 }
                 else
                 {

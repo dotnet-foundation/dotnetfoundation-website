@@ -163,6 +163,10 @@ p {
     margin-bottom: 0;
 }
 
+.page-section .media-list > * + * {
+	margin-top: 2rem;
+}
+
 @font-face {
     font-family: 'Bree Serif'
 }
