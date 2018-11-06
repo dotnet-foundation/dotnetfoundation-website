@@ -22,41 +22,39 @@
         "content": {
         "href": "https://dotnetfoundation.org/privacy-policy"
         },
-        onInitialise: function (status) {
-            var type = this.options.type;
-            var didConsent = this.hasConsented();
-            if (type == 'opt-in' && didConsent) {
-            // enable cookies
-            ga('require', 'displayfeatures');
-            ga('set', 'anonymizeIp', undefined);
-            ga('set', '&uid', '1234567');
-            ga('create', 'UA-57261022-1', 'auto');
-            ga('set', 'forceSSL', true);        
-        }
-            if (type == 'opt-out' && !didConsent) {
-            // disable cookies
-            ga('set', 'displayFeaturesTask', null);
-            ga('set', 'anonymizeIp', true);                
-            }
-            ga('send', 'pageview');
+		onInitialise: function (status) {
+			var type = this.options.type;
+			var didConsent = this.hasConsented();
+			if (didConsent) {
+				// enable cookies
+				ga('require', 'displayfeatures');
+				ga('set', 'anonymizeIp', undefined);
+				ga('set', '&uid', '1234567');
+				ga('create', 'UA-57261022-1', 'auto');
+				ga('set', 'forceSSL', true);
+			} else {
+				// disable cookies
+				ga('set', 'displayFeaturesTask', null);
+				ga('set', 'anonymizeIp', true);
+			}
+			ga('send', 'pageview');
         },
             
         onStatusChange: function(status, chosenBefore) {
             var type = this.options.type;
             var didConsent = this.hasConsented();
-            if (type == 'opt-in' && didConsent) {
-            // enable cookies
-            ga('require', 'displayfeatures');
-            ga('set', 'anonymizeIp', undefined);
-            ga('set', '&uid', '1234567');
-            ga('create', 'UA-57261022-1', 'auto');
-            ga('set', 'forceSSL', true);        
-            }
-            if (type == 'opt-out' && !didConsent) {
-            // disable cookies
-            ga('set', 'displayFeaturesTask', null);
-            ga('set', 'anonymizeIp', true);                
-            }
+			if (didConsent) {
+				// enable cookies
+				ga('require', 'displayfeatures');
+				ga('set', 'anonymizeIp', undefined);
+				ga('set', '&uid', '1234567');
+				ga('create', 'UA-57261022-1', 'auto');
+				ga('set', 'forceSSL', true);
+			} else {
+				// disable cookies
+				ga('set', 'displayFeaturesTask', null);
+				ga('set', 'anonymizeIp', true);
+			}
             ga('send', 'pageview');
         },
             
