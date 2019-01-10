@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://dotnetfoundation.org/</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/Get-Involved</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/Projects</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/About</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/News</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/Privacy-Policy</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/Code-Of-Conduct</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/api/rss</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/projects?type=project&amp;ps=10&amp;pn=2</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/projects?type=project&amp;ps=10&amp;pn=3</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/projects?type=project&amp;ps=10&amp;pn=4</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/projects?type=project&amp;ps=10&amp;pn=5</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/projects?type=project&amp;ps=10&amp;pn=6</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2019/01/09/check-out-net-foundation-on-net-rocks</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2019/01/01/net-foundation-december-update</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2018/12/04/announcing-net-foundation-open-membership</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/become-a-member</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2018/11/30/net-foundation-november-update</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2018/11/27/welcome-jsonnet-to-the-net-foundation</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2018/07/03/new-community-director-oren-novotny</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/projects?type=project&amp;ps=10&amp;pn=1</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2018/11/01/net-foundation-october-update</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2018/06/29/net-foundation-june-update</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2018/08/01/net-foundation-july-update</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2016/07/21/welcome-rachel</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2018/10/08/welcoming-infernet-to-the-net-foundation</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2018/10/01/microsoft-hacktoberfest-2018-celebration-starting-today</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2018/09/28/net-foundation-september-update</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2018/08/30/net-foundation-august-update</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2018/05/01/welcoming-symbolsource-to-the-net-foundation</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2018/04/30/net-foundation-april-update</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2018/03/29/net-foundation-march-update</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2018/02/16/net-foundation-february-update</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2018/01/17/net-foundation-update-newsletter-project-updates-and-links</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2017/11/16/welcome-dnn-nunit-ironpython-mvvmcross-sourcelink-ilmerge-and-humanizer-to-the-net-foundation</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/team</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2017/11/15/welcome-steeltoe-to-the-net-foundation</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2017/08/23/net-summer-hackfest-update-session-3-underway</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2017/08/23/net-summer-hackfest-update-session-2-wrap-up</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2017/08/17/welcome-telerik-ui-for-uwp</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2017/08/11/welcome-akka-net</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2017/08/08/welcome-reactiveui-to-the-net-foundation</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2017/07/25/welcome-peachpie-compiler-platform-to-the-net-foundation</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2017/07/21/welcome-windows-template-studio</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2017/07/19/net-summer-hackfest-update-1-session-project-announcements</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2017/07/07/announcing-net-summer-hackfest-2017</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2017/02/13/welcoming-jon-galloway-as-the-new-executive-director-of-the-net-foundation</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2017/02/01/tizen-tools-preview-2</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2016/11/16/google-join-tsg</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2016/06/27/samsung-join-tsg</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2016/11/10/welcome-benchmarkdotnet</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2016/11/04/wwt-competition-2016</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2016/10/25/welcome-polly</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2016/06/16/rx-net-welcome</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2016/06/09/cake-welcome</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2016/05/11/protobuild-welcome</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2016/05/04/wix-toolset-welcome</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2016/04/27/welcoming-xamarin-to-the-net-foundation</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2016/03/31/tsg-welcome</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2015/12/09/open-live-writer</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2015/07/16/meet-your-advisory-council-daniel-roth</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2015/07/07/meet-your-advisory-council-bill-wagner</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2015/07/02/welcomeworldwidetelescope</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2015/07/01/meet-your-advisory-council-phil-haack</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2015/06/26/meet-your-advisory-council-shaun-walker</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2015/05/20/wcf-is-open-source</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2015/05/04/channel-9-interview-net-open-source-initiative</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2015/04/14/announcing-llilc-llvm-for-dotnet</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2015/04/03/net-foundation-welcomes-executive-director-martin-woodward</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2015/03/18/microsoft-contributes-msbuild-engine-to-the-net-foundation</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2015/02/23/welcoming-the-newly-minted-advisory-net-foundation-advisory-council-members</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2014/11/21/advisory-council-proposal-call-for-community-feedback-extended-to-december-5th</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2014/11/12/announcing-new-governance-model-and-project-contributions-to-the-net-foundation</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/projects</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2014/10/14/net-foundation-advisory-council-call-for-public-comment</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2014/06/25/the-net-foundation-adds-three-new-projects</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2014/05/12/the-net-foundation-adds-asp-net-vnext-to-its-stewardship</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2014/04/03/net-foundation-established-to-foster-open-development</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2017/08/02/net-summer-hackfest-update-session-1-progress-session-2-announcements</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://dotnetfoundation.org/blog/2017/08/02/welcome-automapper-to-the-net-foundation</loc>
+  <lastmod>2019-01-10T21:14:33+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+
+
+</urlset>
