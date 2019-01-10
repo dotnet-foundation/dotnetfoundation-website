@@ -2,12 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <OutputType>Exe</OutputType>
     <LangVersion>latest</LangVersion>    
-    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
     <UserSecretsId>aspnet-WebApp-0353CAB0-205A-4FCD-9626-1282ECF47059</UserSecretsId>
-    <RetryAttemptsForDeployment>10</RetryAttemptsForDeployment>    
-    <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>    
     <AssemblyName>dotnetfoundation-website</AssemblyName>    
   </PropertyGroup>
 
@@ -47,6 +43,7 @@
     <PackageReference Include="cloudscribe.Logging.EFCore.MSSQL" Version="3.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.Azure.Search" Version="5.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.1.4" />
     <PackageReference Include="Microsoft.Extensions.Logging.AzureAppServices" Version="2.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.3">
