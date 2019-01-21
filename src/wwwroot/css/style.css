@@ -73,6 +73,10 @@ p {
     color: #fff;
 }
 
+.page-section--purple a {
+    color: #fff;
+}
+
 .page-section_column {
     padding-top: 6rem;
     padding-bottom: 6rem;
