@@ -205,6 +205,10 @@ p > a {
         color: #e2068c;
     }
 
+    .page-section--purple p > a, .page-section--purple p > a:visited {
+        color: #fff;
+    }
+
 img {
     max-width: 100%;
 }
@@ -585,8 +589,6 @@ body.pages main.col {
     padding-right: 0;
     padding-left: 0;
 }
-
-/* end JA adjustments */
 
 #newPostLink {
     position: absolute;
