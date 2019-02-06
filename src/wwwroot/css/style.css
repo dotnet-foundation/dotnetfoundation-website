@@ -118,6 +118,9 @@ p {
     .page-section_column.pad-fix--sm {
         padding-top: 0;
     }
+    .site-button_row {
+        flex-direction: column;
+    }
 }
 
 .page-section_column.pad-fix_add--md {
