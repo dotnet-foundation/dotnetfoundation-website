@@ -53,9 +53,8 @@
 #home-hero_copy {
   max-width: 75rem;
   font-size: 1.8rem; }
-#home-hero_buttons {
-  width: 600px; }
-  @media screen and (max-width: 615px) {
+  
+@media screen and (max-width: 615px) {
     #home-hero_buttons {
       width: 100%;
       flex-direction: column;
