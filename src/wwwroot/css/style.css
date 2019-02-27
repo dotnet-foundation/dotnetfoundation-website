@@ -165,7 +165,11 @@ p {
     font-size: 2rem;
 }
 
-.page-section p, ul li {
+.page-section p {
+    font-size: 16px;
+}
+
+.page-section ul li {
     font-size: 16px;
     margin-bottom: 0;
 }
