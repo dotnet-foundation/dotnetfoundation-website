@@ -48,6 +48,8 @@
 
 .navbar-brand {
     padding: 0;
+	height: 93px;
+	width: 259px;
 }
 
 @media screen and (max-width: 1200px) {

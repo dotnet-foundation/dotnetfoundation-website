@@ -32,6 +32,7 @@
 
 #home-hero_container {
   background-image: url("/img/home_hero.jpg");
+  background-image: url("/img/home_hero.webp");
   padding-top: 13vw;
   padding-bottom: 8vw;
   background-size: cover;
@@ -66,6 +67,7 @@
 
 #home-meetup {
   background: url("/img/ladies_bg.png");
+  background: url("/img/ladies_bg.webp");
   background-size: cover;
   background-position: center 30%;
   position: relative; }
@@ -94,6 +96,7 @@
 
 #home-whiteboard {
   background-image: url("/img/whiteboard_guy_with_dotbot_.png");
+  background-image: url("/img/whiteboard_guy_with_dotbot_.webp");
   background-size: cover;
   background-position: center 60%;
   position: relative; }
