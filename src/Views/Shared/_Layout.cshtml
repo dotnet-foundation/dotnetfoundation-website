@@ -51,7 +51,7 @@
     <partial name="_CookieConsent" />
     @RenderSection("Styles", required: false)
 </head>
-<body class="d-flex flex-column @ViewData["BodyClass"]">
+<body class="d-flex flex-column @ViewData[" BodyClass"]">
 	<header class="page-header_wrapper" role="banner">
 		<section class="flash justify-content-center align-items-center">
 			<div class="alert alert-info alert-dismissible fade show w-100 text-center" role="alert">
@@ -109,10 +109,10 @@
 	</header>
 
 	@*<main id="site_wrapper">
-			<div id="site_container" class="">
-				@RenderBody()
-			</div>
-		</main>*@
+		<div id="site_container" class="">
+			@RenderBody()
+		</div>
+	</main>*@
 	<div id="site_wrapper" class="container-fluid cs-container flex-fill">
 
 		<div class="row">
@@ -122,23 +122,23 @@
 			</main>
 			@if (sideNavVisible)
 			{
-				<nav id="sidenavmenu" class=" col col-3 order-1 @sideNavToggleClass">
-					@RenderSection("SideNav", required: false)
-				</nav>
+			<nav id="sidenavmenu" class=" col col-3 order-1 @sideNavToggleClass">
+				@RenderSection("SideNav", required: false)
+			</nav>
 
 			}
 			@if (asideSecondaryVisible)
 			{
-				<aside id="asideSecondary" class="col col-1 order-2">
-					@RenderSection("AsideSecondary", required: false)
-				</aside>
+			<aside id="asideSecondary" class="col col-1 order-2">
+				@RenderSection("AsideSecondary", required: false)
+			</aside>
 
 			}
 			@if (asidePrimaryVisible)
 			{
-				<aside id="asidePrimary" class="col-12 col-md-2 col-sm-12  col-sm-12 order-4">
-					@RenderSection("AsidePrimary", required: false)
-				</aside>
+			<aside id="asidePrimary" class="col-12 col-md-2 col-sm-12  col-sm-12 order-4">
+				@RenderSection("AsidePrimary", required: false)
+			</aside>
 
 			}
 		</div>
@@ -242,6 +242,6 @@
 	</footer>
 
 	@RenderSection("Toolbar", required: false)
-	<script src="//instant.page/1.2.1" type="module" integrity="sha384-/IkE5iZAM/RxPto8B0nvKlMzIyCWtYocF01PbGGp1qElJuxv9J4whdWBRtzZltWn"></script>
+	<script src="//instant.page/1.2.2" type="module" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
 </body>
 </html>
