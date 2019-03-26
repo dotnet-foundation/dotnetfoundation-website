@@ -222,12 +222,16 @@ img {
     max-width: 100%;
 }
 
+svg.svg-inline--fa {
+	color: #666666; 
+}
+
 .site-button {
-    font-size: 2rem;
-    padding: .5em 1em;
-    display: inline-block;
-    transition: all ease .3s;
-    text-decoration: none;
+	font-size: 2rem;
+	padding: .5em 1em;
+	display: inline-block;
+	transition: all ease .3s;
+	text-decoration: none;
 }
 
 .site-button_row {

@@ -38,13 +38,21 @@
         "jquery.min.map"
       ]
     },
-    {
-      "library": "waypoints@4.0.1",
-      "destination": "wwwroot/lib/waypoints/",
-      "files": [
-        "jquery.waypoints.js",
-        "jquery.waypoints.min.js"
-      ]
-    }
+		{
+			"library": "waypoints@4.0.1",
+			"destination": "wwwroot/lib/waypoints/",
+			"files": [
+				"jquery.waypoints.js",
+				"jquery.waypoints.min.js"
+			]
+		},
+		{
+			"library": "font-awesome@5.8.1",
+			"destination": "wwwroot/lib/font-awesome/",
+			"files": [
+				"js/all.min.js",
+				"sprites/solid.svg"
+			]
+		}
   ]
 }
