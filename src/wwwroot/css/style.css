@@ -577,6 +577,7 @@ svg.svg-inline--fa {
 
 #swag-store {
     background-image: url(/img/swag_background.png);
+	background-image: url(/img/swag_background.webp);
     background-size: cover;
 }
 
