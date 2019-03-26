@@ -596,7 +596,7 @@ svg.svg-inline--fa {
     border-color: #e2068c;
 }
 
-body.pages .container-fluid {
+.container-fluid {
     padding: 0;
 }
 body.pages .row {
