@@ -67,7 +67,11 @@
 		{
 			"library": "waypoints@4.0.1",
 			"destination": "wwwroot/lib/waypoints/",
-			"files": ["jquery.waypoints.min.js"]
+			"files": [ "jquery.waypoints.min.js" ]
+		},
+		{
+			"library": "webfont@1.6.28",
+			"destination": "wwwroot/lib/webfont"
 		}
   ]
 }

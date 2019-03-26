@@ -1,4 +1,4 @@
-/* Variables */
+﻿/* Variables */
 /* Animations */
 @-webkit-keyframes zoomInUp {
     0% {
@@ -181,7 +181,8 @@ p {
 }
 
 @font-face {
-    font-family: 'Bree Serif'
+    font-family: 'Bree Serif';
+	font-display: swap;
 }
 
 html {
@@ -189,8 +190,12 @@ html {
 }
 
 body {
-    font-family: 'Lato', sans-serif;
-    font-size:1.5rem;
+	font-family: 'Avenir', 'Adobe Heiti Std', 'Segoe UI', 'Trebuchet MS', sans-serif;
+	font-size: 1.5rem;
+}
+
+.wf-active body {
+	font-family: 'Lato', 'Avenir', 'Adobe Heiti Std', 'Segoe UI', 'Trebuchet MS', sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
