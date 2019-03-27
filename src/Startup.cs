@@ -193,8 +193,17 @@ namespace DotNetFoundationWebsite
 				.Add(new UrlStandardizationRule()));
 
 			app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            app.UseCloudscribeCommonStaticFiles();
+
+			var cachePeriod = env.IsDevelopment() ? "60" : "86400";
+			app.UseStaticFiles(new StaticFileOptions
+			{
+				OnPrepareResponse = ctx =>
+				{
+					ctx.Context.Response.Headers.Append("Cache-Control", $"public, max-age={cachePeriod}");
+				}
+			});
+
+			app.UseCloudscribeCommonStaticFiles();
             app.UseCookiePolicy();
             //app.UseSession();
 
