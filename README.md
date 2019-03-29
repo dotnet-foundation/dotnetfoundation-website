@@ -8,7 +8,7 @@ This website powers <http://dotnetfoundation.org>.
 
 * You'll need something that can build .NET Core projects
 * You'll need an IDE of some kind (Visual Studio or VSCode works well)
-* You'll need SQL Server with localDB so that the localDB will work
+* You'll need SQL Server with LocalDB installed so that the CloudScribe CMS will automatically set itself up.
 
 ### Getting the site code
 
@@ -19,14 +19,16 @@ This website powers <http://dotnetfoundation.org>.
 
 Open the project in the editor of your choice
 
-### Installing the DB Context (TODO: Finish this section)
-
-The site relies on a local db, so you'll need to install that to get up and running.
-
 #### How to Build
 
 * If you're in Visual Studio, build as you would a normal project.
 * If you're on the command line, run `dotnet restore` and then `dotnet build`
+
+#### How to run
+
+* You should be able to run the site with `dotnet run` or the classic `F5` or run commands within Visual Studio.
+
+NOTE: When running, the site will attempt to set up the localDB automatically, assuming you have a functioning installation of LocalDB.
 
 ## Any Trouble?
 
