@@ -1,4 +1,4 @@
-/* Variables */
+﻿/* Variables */
 /* Animations */
 @-webkit-keyframes zoomInUp {
     0% {
@@ -48,6 +48,8 @@
 
 .navbar-brand {
     padding: 0;
+	height: 93px;
+	width: 259px;
 }
 
 @media screen and (max-width: 1200px) {
@@ -70,6 +72,10 @@ p {
 
 .page-section--purple {
     background-color: #68217a;
+    color: #fff;
+}
+
+.page-section--purple a {
     color: #fff;
 }
 
@@ -113,6 +119,9 @@ p {
 @media screen and (max-width: 576px) {
     .page-section_column.pad-fix--sm {
         padding-top: 0;
+    }
+    .site-button_row {
+        flex-direction: column;
     }
 }
 
@@ -158,7 +167,11 @@ p {
     font-size: 2rem;
 }
 
-.page-section p, ul li {
+.page-section p {
+    font-size: 16px;
+}
+
+.page-section ul li {
     font-size: 16px;
     margin-bottom: 0;
 }
@@ -168,7 +181,8 @@ p {
 }
 
 @font-face {
-    font-family: 'Bree Serif'
+    font-family: 'Bree Serif';
+	font-display: swap;
 }
 
 html {
@@ -176,8 +190,12 @@ html {
 }
 
 body {
-    font-family: 'Lato', sans-serif;
-    font-size:1.5rem;
+	font-family: 'Avenir', 'Adobe Heiti Std', 'Segoe UI', 'Trebuchet MS', sans-serif;
+	font-size: 1.5rem;
+}
+
+.wf-active body {
+	font-family: 'Lato', 'Avenir', 'Adobe Heiti Std', 'Segoe UI', 'Trebuchet MS', sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -201,16 +219,24 @@ p > a {
         color: #e2068c;
     }
 
+    .page-section--purple p > a, .page-section--purple p > a:visited {
+        color: #fff;
+    }
+
 img {
     max-width: 100%;
 }
 
+svg.svg-inline--fa {
+	color: #666666; 
+}
+
 .site-button {
-    font-size: 2rem;
-    padding: .5em 1em;
-    display: inline-block;
-    transition: all ease .3s;
-    text-decoration: none;
+	font-size: 2rem;
+	padding: .5em 1em;
+	display: inline-block;
+	transition: all ease .3s;
+	text-decoration: none;
 }
 
 .site-button_row {
@@ -335,17 +361,17 @@ img {
         transition: all ease .3s;
     }
 
-.site-social_icon--users:hover {
-    background-color: #68217a;
+.site-social_icon--meetup:hover {
+	background-color: #e0393e;
 }
 
-    .site-social_icon--users:hover svg {
-        fill: #ffffff;
-    }
+	.site-social_icon--meetup:hover svg {
+		fill: #ffffff;
+	}
 
-    .site-social_icon--users:hover .fas:before, .site-social_icon--users:hover .fab:before {
-        color: #ffffff;
-    }
+	.site-social_icon--meetup:hover .fas:before, .site-social_icon--meetup:hover .fab:before {
+		color: #ffffff;
+	}
 
 .site-social_icon--rss:hover {
     background-color: #ef922f;
@@ -556,6 +582,7 @@ img {
 
 #swag-store {
     background-image: url(/img/swag_background.png);
+	background-image: url(/img/swag_background.webp);
     background-size: cover;
 }
 
@@ -569,7 +596,7 @@ img {
     border-color: #e2068c;
 }
 
-body.pages .container-fluid {
+.container-fluid {
     padding: 0;
 }
 body.pages .row {
@@ -581,8 +608,6 @@ body.pages main.col {
     padding-right: 0;
     padding-left: 0;
 }
-
-/* end JA adjustments */
 
 #newPostLink {
     position: absolute;

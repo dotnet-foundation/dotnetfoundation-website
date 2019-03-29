@@ -18,6 +18,8 @@ using dotnetfoundation.Data;
 using Microsoft.AspNetCore.Http;
 using IProjectQueries = dotnetfoundation.Data.IProjectQueries;
 using Microsoft.Azure.Search;
+using dotnetfoundation.Helpers;
+using Microsoft.AspNetCore.Rewrite;
 
 namespace DotNetFoundationWebsite
 {
@@ -44,7 +46,13 @@ namespace DotNetFoundationWebsite
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<CookiePolicyOptions>(options =>
+			services.Configure<RouteOptions>(options =>
+			{
+				options.AppendTrailingSlash = false;
+				options.LowercaseUrls = true;
+			});
+
+			services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
@@ -181,10 +189,21 @@ namespace DotNetFoundationWebsite
                 app.UseHsts();
             }
 
-            
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            app.UseCloudscribeCommonStaticFiles();
+			app.UseRewriter(new RewriteOptions()
+				.Add(new UrlStandardizationRule()));
+
+			app.UseHttpsRedirection();
+
+			var cachePeriod = env.IsDevelopment() ? "60" : "86400";
+			app.UseStaticFiles(new StaticFileOptions
+			{
+				OnPrepareResponse = ctx =>
+				{
+					ctx.Context.Response.Headers.Append("Cache-Control", $"public, max-age={cachePeriod}");
+				}
+			});
+
+			app.UseCloudscribeCommonStaticFiles();
             app.UseCookiePolicy();
             //app.UseSession();
 
@@ -197,10 +216,10 @@ namespace DotNetFoundationWebsite
                     multiTenantOptions,
                     _sslIsAvailable);
 
-            // JA comment not sure why you did this, can't even login since login page is not found
             //app.UseMvc(
             //    routes => routes.AddBlogRoutesForSimpleContent()
             //    );
+
             app.UseMvc(
                 routes => routes.UseCustomRoutes()
                 );
