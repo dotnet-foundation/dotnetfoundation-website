@@ -569,10 +569,14 @@ svg.svg-inline--fa {
     background-color: #68217a;
 }
 
-#site-footer_copyright {
+.site-footer_textSection {
     color: #fff;
     font-size: 14px;
     margin-bottom: 0;
+}
+
+p.site-footer_textSection > a, a:hover, a:visited {
+	color: #fff;
 }
 
 .site-footer_row {
