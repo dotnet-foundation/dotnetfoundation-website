@@ -575,7 +575,9 @@ svg.svg-inline--fa {
     margin-bottom: 0;
 }
 
-p.site-footer_textSection > a, a:hover, a:visited {
+p.site-footer_textSection > a, 
+p.site-footer_textSection > a:hover, 
+p.site-footer_textSection > a:visited {
 	color: #fff;
 }
 
