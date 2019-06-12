@@ -615,6 +615,11 @@ body.pages main.col {
     padding-left: 0;
 }
 
+div.blogroot {
+	max-width: 1200px;
+	margin: auto;
+}
+
 #newPostLink {
     position: absolute;
     top: 70px;
