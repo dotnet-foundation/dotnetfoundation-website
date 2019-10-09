@@ -199,6 +199,11 @@
 </section>
 
 @section Scripts {
-    <script src="~/js/showdown.min.js"></script>
-    <script src="~/js/showdown-unobtrusive.js" asp-append-version="true"></script>
+	<environment names="Development">
+		<script src="~/lib/showdown/showdown.min.js"></script>
+	</environment>
+	<environment names="Staging,Production">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.min.js" integrity="sha256-LSUpTY0kkXGKvcBC9kbmgibmx3NVVgJvAEfTZbs51mU=" crossorigin="anonymous"></script>
+	</environment>
+    <script src="~/lib/showdown-unobtrusive/showdown-unobtrusive.js" asp-append-version="true"></script>
 }
