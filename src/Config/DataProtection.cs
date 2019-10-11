@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Azure.Storage.Blob;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using System.IO;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -10,7 +12,7 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection SetupDataProtection(
             this IServiceCollection services,
             IConfiguration config,
-            IHostingEnvironment environment
+            IWebHostEnvironment environment
             )
         {
 
@@ -36,8 +38,9 @@ namespace Microsoft.Extensions.DependencyInjection
                 var storageConnectionString = config["AppSettings:DataProtectionBlobStorageConnectionString"];
                 if (useBlobStorageForDataProtection && !string.IsNullOrWhiteSpace(storageConnectionString))
                 {
-                    var storageAccount = Microsoft.WindowsAzure.Storage.CloudStorageAccount.Parse(storageConnectionString);
+                    var storageAccount = Microsoft.Azure.Storage.CloudStorageAccount.Parse(storageConnectionString);
                     var client = storageAccount.CreateCloudBlobClient();
+
                     var container = client.GetContainerReference("key-container");
                     // The container must exist before calling the DataProtection APIs.
                     // The specific file within the container does not have to exist,

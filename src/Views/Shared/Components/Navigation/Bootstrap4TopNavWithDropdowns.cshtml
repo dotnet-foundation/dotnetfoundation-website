@@ -6,12 +6,12 @@
 
 <ul id="main-menu" class="navbar-nav ml-auto" role="menubar">
     
-    @if (Model.HasVisibleChildren(Model.RootNode))
+    @if (await Model.HasVisibleChildren(Model.RootNode))
     {
         @foreach (var node in Model.RootNode.Children)
         {
-            if (!Model.ShouldAllowView(node)) { continue; }
-            if (!Model.HasVisibleChildren(node))
+            if (!await Model.ShouldAllowView(node)) { continue; }
+            if (!await Model.HasVisibleChildren(node))
             {
                 <li class='@Model.GetClass(node.Value, "main-menu_item nav-item")'><a class="nav-link" href="@Url.Content(Model.AdjustUrl(node))">@Html.Raw(Model.GetIcon(node.Value))@Model.AdjustText(node)</a></li>
             }

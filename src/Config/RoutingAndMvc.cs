@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -7,31 +6,34 @@ namespace Microsoft.AspNetCore.Builder
 {
     public static class RoutingAndMvc
     {
-        public static IRouteBuilder UseCustomRoutes(this IRouteBuilder routes)
+        public static IEndpointRouteBuilder UseCustomRoutes(this IEndpointRouteBuilder routes)
         {
             routes.AddBlogRoutesForSimpleContent();
             routes.AddSimpleContentStaticResourceRoutes();
             routes.AddCloudscribeFileManagerRoutes();
-            routes.MapRoute(
+            routes.MapControllerRoute(
                 name: "errorhandler",
-                template: "oops/error/{statusCode?}",
+                pattern: "oops/error/{statusCode?}",
                 defaults: new { controller = "Oops", action = "Error" }
                 );
 
 
-            routes.MapRoute(
+            routes.MapControllerRoute(
                 name: "sitemap",
-                template: "sitemap"
-                , defaults: new { controller = "Page", action = "SiteMap" }
+                pattern: "sitemap",
+                defaults: new { controller = "Page", action = "SiteMap" }
                 );
-            routes.MapRoute(
+
+            IRouteBuilder route;
+
+            routes.MapControllerRoute(
                 name: "def",
-                template: "{controller}/{action}"
-                , defaults: new { action = "Index" }
+                "{controller}/{action}",
+                 defaults: new { action = "Index" }
                 );
             //routes.AddDefaultPageRouteForSimpleContent();
 
-            
+
             return routes;
         }
 
@@ -40,7 +42,7 @@ namespace Microsoft.AspNetCore.Builder
             bool sslIsAvailable
             )
         {
-            
+
             services.Configure<MvcOptions>(options =>
             {
                 if (sslIsAvailable)
@@ -67,12 +69,12 @@ namespace Microsoft.AspNetCore.Builder
                 options.LowercaseUrls = true;
             });
 
+            services.AddRazorPages();
             services.AddMvc()
                 .AddRazorOptions(options =>
                 {
                     options.ViewLocationExpanders.Add(new cloudscribe.Core.Web.Components.SiteViewLocationExpander());
-                })
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+                });
 
             return services;
         }

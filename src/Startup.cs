@@ -1,25 +1,23 @@
 ﻿using System;
 using System.IO;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Routing;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.DataProtection;
-using System.Globalization;
-using Microsoft.AspNetCore.Localization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
+using dotnetfoundation.Data;
+using dotnetfoundation.Helpers;
 using dotnetfoundation.Models;
 using dotnetfoundation.Services;
-using dotnetfoundation.Data;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using IProjectQueries = dotnetfoundation.Data.IProjectQueries;
-using Microsoft.Azure.Search;
-using dotnetfoundation.Helpers;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Rewrite;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.Azure.Search;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using IProjectQueries = dotnetfoundation.Data.IProjectQueries;
 
 namespace DotNetFoundationWebsite
 {
@@ -27,7 +25,7 @@ namespace DotNetFoundationWebsite
     {
         public Startup(
             IConfiguration configuration,
-            IHostingEnvironment env,
+            IWebHostEnvironment env,
             ILogger<Startup> logger
             )
         {
@@ -39,20 +37,20 @@ namespace DotNetFoundationWebsite
         }
 
         private readonly IConfiguration _configuration;
-        private readonly IHostingEnvironment _environment;
+        private readonly IWebHostEnvironment _environment;
         private readonly bool _sslIsAvailable;
         private readonly ILogger _log;
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-			services.Configure<RouteOptions>(options =>
-			{
-				options.AppendTrailingSlash = false;
-				options.LowercaseUrls = true;
-			});
+            services.Configure<RouteOptions>(options =>
+            {
+                options.AppendTrailingSlash = false;
+                options.LowercaseUrls = true;
+            });
 
-			services.Configure<CookiePolicyOptions>(options =>
+            services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
@@ -114,8 +112,8 @@ namespace DotNetFoundationWebsite
             services.Configure<NewsFeedService>(_configuration.GetSection("NewsFeedConfig"));
             services.Configure<ProjectsConfig>(_configuration.GetSection("ProjectsConfig"));
             services.AddSingleton<NewsFeedService>();
-			services.AddSingleton<RssFeedService>();
-			services.Configure<ForwardedHeadersOptions>(options =>
+            services.AddSingleton<RssFeedService>();
+            services.Configure<ForwardedHeadersOptions>(options =>
             {
                 options.ForwardedHeaders = Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.XForwardedProto;
             });
@@ -170,14 +168,13 @@ namespace DotNetFoundationWebsite
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(
             IApplicationBuilder app,
-            IHostingEnvironment env,
+            IWebHostEnvironment env,
             ILoggerFactory loggerFactory,
             IOptions<cloudscribe.Core.Models.MultiTenantOptions> multiTenantOptionsAccessor,
             IServiceProvider serviceProvider,
             IOptions<RequestLocalizationOptions> localizationOptionsAccessor
             )
         {
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -189,21 +186,24 @@ namespace DotNetFoundationWebsite
                 app.UseHsts();
             }
 
-			app.UseRewriter(new RewriteOptions()
-				.Add(new UrlStandardizationRule()));
+            app.UseRewriter(new RewriteOptions()
+                .Add(new UrlStandardizationRule()));
 
-			app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
 
-			var cachePeriod = env.IsDevelopment() ? "60" : "86400";
-			app.UseStaticFiles(new StaticFileOptions
-			{
-				OnPrepareResponse = ctx =>
-				{
-					ctx.Context.Response.Headers.Append("Cache-Control", $"public, max-age={cachePeriod}");
-				}
-			});
+            var cachePeriod = env.IsDevelopment() ? "60" : "86400";
 
-			app.UseCloudscribeCommonStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                OnPrepareResponse = ctx =>
+                {
+                    ctx.Context.Response.Headers.Append("Cache-Control", $"public, max-age={cachePeriod}");
+                }
+            });
+
+            app.UseRouting();
+
+            app.UseCloudscribeCommonStaticFiles();
             app.UseCookiePolicy();
             //app.UseSession();
 
@@ -220,8 +220,12 @@ namespace DotNetFoundationWebsite
             //    routes => routes.AddBlogRoutesForSimpleContent()
             //    );
 
-            app.UseMvc(
-                routes => routes.UseCustomRoutes()
+            app.UseEndpoints(
+                endpoint =>
+                {
+                    endpoint.UseCustomRoutes();
+                    endpoint.MapRazorPages();
+                }
                 );
         }
     }

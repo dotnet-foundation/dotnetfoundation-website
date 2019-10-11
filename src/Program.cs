@@ -1,12 +1,12 @@
 ﻿using cloudscribe.Logging.Models;
 using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Hosting;
 
 namespace DotNetFoundationWebsite
 {
@@ -33,7 +33,7 @@ namespace DotNetFoundationWebsite
                 }
             }
 
-            var env = host.Services.GetRequiredService<IHostingEnvironment>();
+            var env = host.Services.GetRequiredService<IWebHostEnvironment>();
             var loggerFactory = host.Services.GetRequiredService<ILoggerFactory>();
             var config = host.Services.GetRequiredService<IConfiguration>();
             ConfigureLogging(env, loggerFactory, host.Services, config);
@@ -56,7 +56,7 @@ namespace DotNetFoundationWebsite
         }
 
         private static void ConfigureLogging(
-            IHostingEnvironment env,
+            IWebHostEnvironment env,
             ILoggerFactory loggerFactory,
             IServiceProvider serviceProvider,
             IConfiguration config
