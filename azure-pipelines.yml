@@ -1,0 +1,35 @@
+trigger:
+  branches:
+    include:
+      - master
+
+pr:
+  branches:
+    include:
+      - master
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  BuildConfiguration: 'Release'
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+
+steps:
+- task: UseDotNet@2
+  displayName: 'Use .NET Core SDK 3.0.x'
+  inputs:
+    version: 3.0.x
+
+- task: DotNetCoreCLI@2
+  displayName: Build and Publish
+  inputs:
+    command: publish
+    publishWebProjects: false
+    projects: src/dotnetfoundation-website.csproj
+    arguments: '-c $(BuildConfiguration) --output $(build.artifactstagingdirectory)\website\ '
+    zipAfterPublish: True
+
+- publish: $(Build.ArtifactStagingDirectory)\website
+  displayName: Publish website artifact
+  artifact: website 
