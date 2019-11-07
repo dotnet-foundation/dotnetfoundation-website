@@ -27,7 +27,7 @@ steps:
     command: publish
     publishWebProjects: false
     projects: src/dotnetfoundation-website.csproj
-    arguments: '-c $(BuildConfiguration) --output $(build.artifactstagingdirectory)\website\ '
+    arguments: '-c $(BuildConfiguration) --output $(build.artifactstagingdirectory)\website\ -r win-x64 -p:SelfContained=true'
     zipAfterPublish: True
 
 - publish: $(Build.ArtifactStagingDirectory)\website
