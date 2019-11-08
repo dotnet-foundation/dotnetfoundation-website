@@ -110,7 +110,7 @@ namespace DotnetFoundationSearchIndexer
 
         private static async Task<IEnumerable<Project>> GetProjects(ILogger log)
         {
-            var projectJsonUrl = Env("PROJECT_JSON_URL", "https://raw.githubusercontent.com/dotnet/home/master/projects/projects.json");
+            var projectJsonUrl = Env("PROJECT_JSON_URL", "https://raw.githubusercontent.com/dotnet/foundation/master/projects/projects.json");
 
             ProjectList projectList;
             using (var stream = await httpClient.GetStreamAsync(projectJsonUrl))
@@ -131,7 +131,7 @@ namespace DotnetFoundationSearchIndexer
                 }
                 project.ContributorInfo = contributor;
 
-                var response = await httpClient.GetAsync($"https://raw.githubusercontent.com/dotnet/home/master/projects/{project.Name}");
+                var response = await httpClient.GetAsync($"https://raw.githubusercontent.com/dotnet/foundation/master/projects/{project.Name}");
                 if (!response.IsSuccessStatusCode)
                 {
                     log.LogError(
