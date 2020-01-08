@@ -1,10 +1,6 @@
 ﻿@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment HostingEnvironment
 @inject ISiteContextResolver siteResolver
 @{
-    bool sideNavVisible = true.Equals(ViewData["SideNavVisible"]);
-    string sideNavToggleClass = ViewData["SideNavToggle"]?.ToString() ?? "collapse";
-    bool asidePrimaryVisible = true.Equals(ViewData["AsidePrimaryVisible"]);
-    bool asideSecondaryVisible = true.Equals(ViewData["AsideSecondaryVisible"]);
     var Tenant = await siteResolver.ResolveSite(Context.Request.Host.Host, Context.Request.Path);
 }
 <!DOCTYPE html>
@@ -98,42 +94,12 @@
 		</div>
 	</header>
 
-	@*<main id="site_wrapper">
-		<div id="site_container" class="">
-			@RenderBody()
-		</div>
-	</main>*@
 	<div id="site_wrapper" class="container-fluid cs-container flex-fill">
-
-		<div class="row">
-			<main id="site_container" role="main" class="col order-3">
-				@await Html.PartialAsync("AlertsPartial")
-				@RenderBody()
-			</main>
-			@if (sideNavVisible)
-			{
-			<nav id="sidenavmenu" class=" col col-3 order-1 @sideNavToggleClass">
-				@RenderSection("SideNav", required: false)
-			</nav>
-
-			}
-			@if (asideSecondaryVisible)
-			{
-			<aside id="asideSecondary" class="col col-1 order-2">
-				@RenderSection("AsideSecondary", required: false)
-			</aside>
-
-			}
-			@if (asidePrimaryVisible)
-			{
-			<aside id="asidePrimary" class="col-12 col-md-2 col-sm-12  col-sm-12 order-4">
-				@RenderSection("AsidePrimary", required: false)
-			</aside>
-
-			}
-		</div>
+		<main id="site_container" role="main" class="w-100 order-3">
+			@await Html.PartialAsync("AlertsPartial")
+			@RenderBody()
+		</main>
 	</div>
-
 
 	<footer id="site-footer" class="sticky-bottom h-card">
 		<data class="u-url" href="/"></data>
