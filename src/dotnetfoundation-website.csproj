@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <LangVersion>latest</LangVersion>
     <UserSecretsId>aspnet-WebApp-0353CAB0-205A-4FCD-9626-1282ECF47059</UserSecretsId>
     <AssemblyName>dotnetfoundation-website</AssemblyName>
@@ -27,33 +27,33 @@
 
   <ItemGroup>
     <PackageReference Include="cloudscribe.Web.StaticFiles" Version="3.0.0" />
-    <PackageReference Include="cloudscribe.Core.Web" Version="4.0.0" />
+    <PackageReference Include="cloudscribe.Core.Web" Version="4.0.4" />
     <PackageReference Include="cloudscribe.Core.CompiledViews.Bootstrap4" Version="4.0.0" />
-    <PackageReference Include="cloudscribe.Core.Storage.EFCore.MSSQL" Version="4.0.0" />
-    <PackageReference Include="cloudscribe.Core.SimpleContent" Version="5.0.0" />
-    <PackageReference Include="cloudscribe.SimpleContent.Web" Version="5.0.0" />
+    <PackageReference Include="cloudscribe.Core.Storage.EFCore.MSSQL" Version="4.0.2" />
+    <PackageReference Include="cloudscribe.Core.SimpleContent" Version="5.0.2" />
+    <PackageReference Include="cloudscribe.SimpleContent.Web" Version="5.0.3" />
     <PackageReference Include="cloudscribe.Core.SimpleContent.CompiledViews.Bootstrap4" Version="5.0.0" />
-    <PackageReference Include="cloudscribe.SimpleContent.CompiledViews.Bootstrap4" Version="5.0.0" />
-    <PackageReference Include="cloudscribe.SimpleContent.MetaWeblog" Version="5.0.0" />
-    <PackageReference Include="cloudscribe.SimpleContent.Syndication" Version="5.0.0" />
-    <PackageReference Include="cloudscribe.SimpleContent.Storage.EFCore.MSSQL" Version="5.0.0" />
-    <PackageReference Include="cloudscribe.Syndication.Web" Version="3.0.0" />
-    <PackageReference Include="cloudscribe.Web.Localization" Version="3.0.0" />
+    <PackageReference Include="cloudscribe.SimpleContent.CompiledViews.Bootstrap4" Version="5.0.1" />
+    <PackageReference Include="cloudscribe.SimpleContent.MetaWeblog" Version="5.0.2" />
+    <PackageReference Include="cloudscribe.SimpleContent.Syndication" Version="5.0.1" />
+    <PackageReference Include="cloudscribe.SimpleContent.Storage.EFCore.MSSQL" Version="5.0.1" />
+    <PackageReference Include="cloudscribe.Syndication.Web" Version="3.0.1" />
+    <PackageReference Include="cloudscribe.Web.Localization" Version="3.0.2" />
     <PackageReference Include="cloudscribe.Logging.Web" Version="4.0.0" />
     <PackageReference Include="cloudscribe.Logging.EFCore.MSSQL" Version="4.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.0.0" />
-    <PackageReference Include="Microsoft.Azure.Search" Version="10.0.1" />
-    <PackageReference Include="Microsoft.Azure.Storage.Blob" Version="11.1.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.AzureAppServices" Version="3.0.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0">
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Azure.Search" Version="10.1.0" />
+    <PackageReference Include="Microsoft.Azure.Storage.Blob" Version="11.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.AzureAppServices" Version="3.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.SyndicationFeed.ReaderWriter" Version="1.0.2" />
-    <PackageReference Include="Microsoft.AspNetCore.DataProtection.AzureStorage" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.AzureStorage" Version="3.1.1" />
   </ItemGroup>
 
   <ItemGroup>
