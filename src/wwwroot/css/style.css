@@ -149,13 +149,13 @@ p {
     margin-bottom: 0;
 }
 
-.page-section h2, h3, h4 {
+.page-section h1, h2, h3, h4 {
     margin-top: 2rem;
     margin-bottom: 0;
     font-family: 'Bree Serif', serif;
 }
 
-.page-section h2 {
+.page-section h1, h2 {
     font-size: 3rem;
 }
 
