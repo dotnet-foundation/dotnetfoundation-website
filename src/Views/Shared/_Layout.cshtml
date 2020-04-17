@@ -8,13 +8,13 @@
     var Tenant = await siteResolver.ResolveSite(Context.Request.Host.Host, Context.Request.Path);
 }
 <!DOCTYPE html>
-<html class="sb-init">
+<html lang="en" class="sb-init">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="@ViewData["MetaDescription"]" />
-    <title>.NET Foundation</title>
+    <title>@ViewData["Title"]</title>
     <link rel="apple-touch-icon" sizes="57x57" href="~/img/favicon/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="~/img/favicon/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="~/img/favicon/apple-icon-72x72.png">
@@ -72,6 +72,9 @@
 						</li>
 						<li class="main-menu_item nav-item">
 							<a class="nav-link" href="/about">About</a>
+						</li>
+						<li class="main-menu_item nav-item">
+							<a class="nav-link" href="/blog">Blogs</a>
 						</li>
 						<li class="main-menu_item nav-item">
 							<a class="nav-link" href="/news">News</a>
