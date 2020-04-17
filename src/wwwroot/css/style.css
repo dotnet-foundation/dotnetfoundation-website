@@ -602,6 +602,11 @@ p.site-footer_textSection > a:visited {
     border-color: #e2068c;
 }
 
+#search .btn-primary svg.svg-inline--fa {
+	color: #fff;
+	vertical-align: 0;
+}
+
 .container-fluid {
     padding: 0;
 }
