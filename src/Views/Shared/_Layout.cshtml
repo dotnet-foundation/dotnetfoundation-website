@@ -101,14 +101,9 @@
 		</div>
 	</header>
 
-	@*<main id="site_wrapper">
-		<div id="site_container" class="">
-			@RenderBody()
-		</div>
-	</main>*@
 	<div id="site_wrapper" class="container-fluid cs-container flex-fill">
 
-		<div class="row">
+		<div class="row w-100">
 			<main id="site_container" role="main" class="col order-3">
 				@await Html.PartialAsync("AlertsPartial")
 				@RenderBody()
